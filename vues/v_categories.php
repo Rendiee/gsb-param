@@ -1,4 +1,4 @@
-<ul id="categories">
+<ul id="categories" class="list-group">
 <?php
 foreach( $lesCategories as $uneCategorie) 
 {

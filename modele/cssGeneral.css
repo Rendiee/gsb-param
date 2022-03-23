@@ -5,7 +5,6 @@ body{
 	padding : 0% 5%;
 }
 #accueil{
-	width=60%;
 	text-align: center;
 	padding-top: 7%;
 	color: #33d64c ;
@@ -155,4 +154,9 @@ div.prixCard{
 div.imgCard{
     position:absolute;
     bottom:5px;
+}
+
+#img-size-header {
+	height: auto;
+	width: 100px;
 }

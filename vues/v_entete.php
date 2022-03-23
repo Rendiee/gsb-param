@@ -8,23 +8,20 @@
 </head>
 <body >
     <div class="container">
-        <?php ?>
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <header>
+        <div class="d-xl-flex d-none align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
           <a href="index.php?uc=accueil" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-            <img src="images/logo.jpg"	alt="GsbLogo" title="GsbLogo"/>
-          </a>
-    
+            <img src="images/logo.jpg" id="img-size-header"	alt="GsbLogo" title="GsbLogo"/>
+          </a>    
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="index.php?uc=accueil" class="nav-link px-2 link-secondary">Accueil</a></li>
             <li><a href="index.php?uc=voirProduits&categorie=CH&action=voirProduits" class="nav-link px-2 link-dark">Nos produits par catégorie</a></li>
             <li><a href="index.php?uc=voirProduits&action=nosProduits" class="nav-link px-2 link-dark">Nos produits</a></li>
             <li><a href="index.php?uc=gererPanier&action=voirPanier" class="nav-link px-2 link-dark">Voir son panier</a></li>
-          </ul>
-    
+          </ul>    
           <div class="col-md-3 text-end">
             <button type="button" class="btn btn-outline-primary me-2">Se connecter</button>
             <button type="button" class="btn btn-primary">S'inscrire</button>
           </div>
-        </header>
-    </div>
-        
+        </div>
+      </header><!-- <MANQUE LE MENU HAMBURGER -->
