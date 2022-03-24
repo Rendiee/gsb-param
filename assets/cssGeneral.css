@@ -160,3 +160,20 @@ div.imgCard{
 	height: auto;
 	width: 100px;
 }
+
+.nav-link{	
+	border: 1px solid transparent;
+}
+
+.nav-link:hover{
+	background-color: white;
+	border: 1px solid blue;
+}
+
+.navbar.navbar-2 .navbar-toggler-icon {
+	background-image: url('https://mdbootstrap.com/img/svg/hamburger2.svg?color=fff');
+}
+
+.fit{
+	width: fit-content;
+}
