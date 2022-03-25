@@ -1,4 +1,4 @@
-<div><img src="images/panier.gif"	alt="Panier" title="panier"/></div>
+<div><img src="assets/images/panier.gif"	alt="Panier" title="panier"/></div>
 <div id="produits">
 <?php
 
@@ -16,13 +16,13 @@ foreach( $lesProduitsDuPanier as $unProduit)
 	<div class="descrCard"><?php echo	$description;?>	</div>
 	<div class="prixCard"><?php echo $prix."€" ?></div>
 	<div class="imgCard"><a href="index.php?uc=gererPanier&produit=<?php echo $id ?>&action=supprimerUnProduit" onclick="return confirm('Voulez-vous vraiment retirer cet article ?');">
-	<img src="images/retirerpanier.png" TITLE="Retirer du panier" alt="retirer du panier"></a></div>
+	<img src="assets/images/retirerpanier.png" TITLE="Retirer du panier" alt="retirer du panier"></a></div>
 	</div>
 	<?php
 }
 ?>
 <div class="commande">
-<a href="index.php?uc=gererPanier&action=passerCommande"><img src="images/commander.jpg" title="Passer commande" alt="Commander"></a>
+<a href="index.php?uc=gererPanier&action=passerCommande"><img src="assets/images/commander.jpg" title="Passer commande" alt="Commander"></a>
 </div>
 
 <div>

@@ -4,16 +4,9 @@ initPanier(); // se charge de réserver un emplacement mémoire pour le panier s
 $action = $_REQUEST['action'];
 switch($action)
 {
-	case 'voirCategories':
-	{
-  		$lesCategories = getLesCategories();
-		include("vues/v_categories.php");
-  		break;
-	}
 	case 'voirProduits' :
 	{
 		$lesCategories = getLesCategories();
-		include("vues/v_categories.php");
   		$categorie = $_REQUEST['categorie'];
 		$lesProduits = getLesProduitsDeCategorie($categorie);
 		include("vues/v_produitsDeCategorie.php");
