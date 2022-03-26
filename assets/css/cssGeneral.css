@@ -139,13 +139,29 @@ div.descrCard {
 	width: 100px;
 }
 
+.btn-height {
+	height: 70px;
+}
+
+#produits-commande {
+	max-height: 500px;
+}
+
+.commander {
+	box-shadow: 1px 1px 10px black;
+}
+
+#divider {
+	height: 1px;
+}
+
 .nav-link {
 	border: 1px solid transparent;
 }
 
 .nav-link:hover {
 	background-color: white;
-	border: 1px solid blue;
+	border: 1px solid #198754;
 }
 
 .navbar.navbar-2 .navbar-toggler-icon {
@@ -154,4 +170,29 @@ div.descrCard {
 
 .fit {
 	width: fit-content;
+}
+
+input[type="submit"] {
+	border: #198754 1px solid !important;
+	width: 41.66666667%;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+#produits-commande {
+	overflow: overlay;
+	scrollbar-width: auto;
+	scrollbar-color: #aaaaaa #ffffff;
+}
+/* Chrome, Edge, and Safari */
+#produits-commande::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+#produits-commande::-webkit-scrollbar-track {
+	background: transparent;
+}
+#produits-commande::-webkit-scrollbar-thumb {
+	background-color: #aaaaaa;
+	border-radius: 8px;
 }

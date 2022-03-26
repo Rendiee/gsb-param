@@ -8,7 +8,7 @@
 	else
 		$uc = $_REQUEST['uc'];
 
-	include("vues/v_entete.php");
+	include("vues/v_header.php");
 	echo '<div class="container my-4">';
 	switch($uc)
 	{
@@ -30,6 +30,6 @@
 		}
 	}
 	echo '</div>';
-	include("vues/v_pied.php") ;
+	include("vues/v_footer.php") ;
 ?>
 

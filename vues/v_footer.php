@@ -1,7 +1,7 @@
-        <div id="foot" class="bg-primary">
+        <div id="foot" class="bg-success">
             <footer class="container d-flex flex-column justify-content-between text-center">
                 <div class="pt-3 d-flex flex-column justify-content-center">
-                    <a class="navbar-brand m-auto col-5" href="index.php?uc=accueil">
+                    <a class="navbar-brand m-auto fit" href="index.php?uc=accueil">
                         <span class="text-light h5"><u>Projet GSB</u></span>
                     </a>
                     <p class="text-light my-2 m-auto col-5">

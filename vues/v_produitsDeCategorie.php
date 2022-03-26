@@ -1,4 +1,4 @@
-<div class="w-100 text-center h3 fw-bold">
+<div class="w-100 text-center h2 text-success fw-bold">
 	<?php
 	$titre = getTitreCategorie($_REQUEST['categorie']);
 	echo 'Produit de la catégorie : '.$titre['libelle'];
