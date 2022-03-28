@@ -13,8 +13,8 @@ switch($action)
 		}
 		else
 		{
-			$message = "panier vide !!";
-			include ("vues/v_message.php");
+			$message = "Votre panier est vide !";
+			include("vues/v_panier.php");
 		}
 		break;
 	}
@@ -37,8 +37,8 @@ switch($action)
 		}
 		else
 		{
-			$message = "panier vide !!";
-			include ("vues/v_message.php");
+			$message = "Votre panier est vide !";
+			include("vues/v_panier.php");
 		}
 		break;
 	case 'confirmerCommande'	:
@@ -56,7 +56,7 @@ switch($action)
 			creerCommande($nom,$rue,$cp,$ville,$mail, $lesIdProduit );
 			$message = "Commande enregistrée";
 			supprimerPanier();
-			include ("vues/v_message.php");
+			include("vues/v_panier.php");
 		}
 		break;
 	}
@@ -67,8 +67,8 @@ switch($action)
 			foreach($lesIdProduit as $produit){
 				retirerDuPanier($produit);
 			}
-			$message = "panier vide !";
-			include('vues/v_message.php');
+			$message = "Votre panier est vide !";
+			include("vues/v_panier.php");
 
 			break;
 		}

@@ -37,7 +37,7 @@
 				</div>
 				<div class="d-flex flex-wrap justify-content-around align-items-center">
 					<div class=""><?php echo $prix."€" ?></div>		
-					<a href="index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&produit=<?php echo $id ?>&action=ajouterAuPanier">
+					<a id="categProduit" href="index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&produit=<?php echo $id ?>&action=ajouterAuPanier">
 						<img src="assets/images/mettrepanier.png" TITLE="Ajouter au panier" alt="Mettre au panier">
 					</a>
 				</div>
@@ -47,4 +47,3 @@
 		?>
 	</div>
 </div>
-

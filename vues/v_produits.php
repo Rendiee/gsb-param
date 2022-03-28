@@ -2,7 +2,7 @@
 <div id="produits" class="d-flex flex-wrap justify-content-around col-lg-8 col-12 m-auto">
 	<?php
 	// parcours du tableau contenant les produits à afficher
-
+	if(isset($message)){echo '<div class="alert alert-danger mt-3">'.$message.'</div>';}
 	foreach( $lesProduits as $unProduit) 
 	{ 	// récupération des informations du produit
 		$id = $unProduit['id'];

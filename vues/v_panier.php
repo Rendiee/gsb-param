@@ -2,28 +2,32 @@
 <div class="d-flex flex-column align-items-center commander rounded fit m-auto col-lg-8 col-12">
 	<div id="produits-commande" class="d-flex flex-wrap justify-content-around">
 		<?php
-		foreach( $lesProduitsDuPanier as $unProduit) 
-		{
-			// récupération des données d'un produit
-			$id = $unProduit['id'];
-			$description = $unProduit['description'];
-			$image = "assets/".$unProduit['image'];
-			$prix = $unProduit['prix'];
-			// affichage
-			?>
-			<div class="card d-flex flex-column justify-content-between">
-					<div class="d-flex flex-column justify-content-center align-items-center">
-						<div class="photoCard"><img src="<?php echo $image ?>" alt=image /></div>
-						<div class="descrCard"><?php echo $description ?></div>
+		if(isset($lesProduitsDuPanier)){
+			foreach( $lesProduitsDuPanier as $unProduit) 
+			{
+				// récupération des données d'un produit
+				$id = $unProduit['id'];
+				$description = $unProduit['description'];
+				$image = "assets/".$unProduit['image'];
+				$prix = $unProduit['prix'];
+				// affichage
+				?>
+				<div class="card d-flex flex-column justify-content-between">
+						<div class="d-flex flex-column justify-content-center align-items-center">
+							<div class="photoCard"><img src="<?php echo $image ?>" alt=image /></div>
+							<div class="descrCard"><?php echo $description ?></div>
+						</div>
+						<div class="d-flex flex-wrap justify-content-around align-items-center">
+							<div class=""><?php echo $prix."€" ?></div>
+							<a href="index.php?uc=gererPanier&produit=<?php echo $id ?>&action=supprimerUnProduit" onclick="return confirm('Voulez-vous vraiment retirer cet article ?');">
+								<img src="assets/images/retirerpanier.png" TITLE="Retirer du panier" alt="retirer du panier">
+							</a>
+						</div>
 					</div>
-					<div class="d-flex flex-wrap justify-content-around align-items-center">
-						<div class=""><?php echo $prix."€" ?></div>
-						<a href="index.php?uc=gererPanier&produit=<?php echo $id ?>&action=supprimerUnProduit" onclick="return confirm('Voulez-vous vraiment retirer cet article ?');">
-							<img src="assets/images/retirerpanier.png" TITLE="Retirer du panier" alt="retirer du panier">
-						</a>
-					</div>
-				</div>
-			<?php
+				<?php
+			}
+		}else{
+			echo '<div class="alert alert-danger mt-3">'.$message.'</div>';
 		}
 		?>
 	</div>

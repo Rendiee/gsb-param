@@ -8,7 +8,7 @@
                         Projet de BTS SIO 2ème année : commande de produits sous forme d'un site Web pour l'entreprise GSB avec base de donnée.
                     </p>
                 </div>
-                <div class="w-100 footercustom pt-3">
+                <div class="w-100 footercustom py-3">
                     <small class="text-center text-light">
                         © Copyright 2022 Randy Durelle | Tristan Da Silva.
                     </small>
