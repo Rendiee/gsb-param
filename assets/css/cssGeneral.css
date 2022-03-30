@@ -112,16 +112,16 @@ input[type="submit"] {
 	bottom: 80px;
 }
 div.card {
-	width: 180px;
-	height: 250px;
+	width: 230px;
+	height: 300px;
 	padding: 10px;
 	margin: 10px;
 	background-color: white;
 	box-shadow: 1px 1px 4px #bbb;
 }
 div.photoCard > img {
-	max-width: 200px;
-	max-height: 140px;
+	max-width: 250px;
+	max-height: 190px;
 }
 div.descrCard {
 	font: 0.8em "Trebuchet MS", Arial, sans-serif;
