@@ -38,7 +38,7 @@ CREATE TABLE produit(
 CREATE TABLE contenance(
         co_id    Int NOT NULL ,
         co_qte   Int NOT NULL ,
-        co_unite Varchar (5) NOT NULL
+        co_unite Varchar (10) NOT NULL
 	,CONSTRAINT contenance_PK PRIMARY KEY (co_id)
 )ENGINE=InnoDB;
 
