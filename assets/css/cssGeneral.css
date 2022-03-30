@@ -196,3 +196,14 @@ input[type="submit"] {
 	background-color: #aaaaaa;
 	border-radius: 8px;
 }
+
+.card-product {
+	background-color: #353535;
+	border-radius: 10px;
+	margin: 10px;
+}
+
+.text-card {
+	color: white;
+	margin: 15px;
+}

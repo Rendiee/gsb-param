@@ -4,8 +4,30 @@
 			<div class="col-3">
 				<h1>Test</h1>
 			</div>
-			<div class="col-9">
-				<h1>Test</h1>
+			<div class="col-9 d-flex">
+				<?php
+				
+					foreach( $lesProduits as $unProduit) 
+					{ 
+						$description = $unProduit['description'];
+						$prix = $unProduit['prix'];
+						$image = "assets/" . $unProduit['photo'];
+						$nom = $unProduit['nom'];
+						$marque = $unProduit['marque'];
+
+				?>
+
+				<div class="card-product">
+					<p class="marque-product"><?php echo $marque ?></p>
+					<p><?php echo $nom ?></p>
+					<img src="<?php echo $image ?>" alt="image product" />
+				</div>
+
+				<?php
+				
+					}
+
+				?>
 			</div>
 		</div>
 	</div>
