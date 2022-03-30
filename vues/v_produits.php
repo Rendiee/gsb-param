@@ -1,3 +1,16 @@
+<div class="container-fluid">
+	<div class="container">
+		<div class="row">
+			<div class="col-3">
+				<h1>Test</h1>
+			</div>
+			<div class="col-9">
+				<h1>Test</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="w-100 text-center h2 text-success fw-bold">Tous les produits</div>
 <div id="produits" class="d-flex flex-wrap justify-content-around col-lg-8 col-12 m-auto">
 	<?php
@@ -8,13 +21,14 @@
 		$id = $unProduit['id'];
 		$description = $unProduit['description'];
 		$prix=$unProduit['prix'];
-		$image = "assets/" . $unProduit['image'];
+		$image = "assets/" . $unProduit['photo'];
+		$nom = $unProduit['nom'];
 		// affichage d'un produit avec ses informations
 		?>	
 		<div class="card d-flex flex-column justify-content-between">
 			<div class="d-flex flex-column justify-content-center align-items-center">
 				<div class="photoCard"><img src="<?php echo $image ?>" alt=image /></div>
-				<div class="descrCard"><?php echo $description ?></div>
+				<div class="descrCard"><?php echo $nom ?></div>
 			</div>
 			<div class="d-flex flex-wrap justify-content-around align-items-center">
 				<div class=""><?php echo $prix."€" ?></div>		

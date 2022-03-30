@@ -1,7 +1,6 @@
 <div class="w-100 text-center h2 text-success fw-bold">
 	<?php
-	$titre = getTitreCategorie($_REQUEST['categorie']);
-	echo 'Produit de la catégorie : '.$titre['libelle'];
+	
 	?>
 </div>
 <div class="d-flex flex-wrap justify-content-center">
@@ -9,8 +8,8 @@
 		<?php
 		foreach( $lesCategories as $uneCategorie) 
 		{
-			$idCategorie = $uneCategorie['id'];
-			$libCategorie = $uneCategorie['libelle'];
+			$idCategorie = $uneCategorie['ca_acronyme'];
+			$libCategorie = $uneCategorie['ca_libelle'];
 			?>
 				<a id="categorie" class="list-group-item list-group-item-action" href="index.php?uc=voirProduits&categorie=<?php echo $idCategorie ?>&action=voirProduits">
 				<?php echo $libCategorie ?></a>
@@ -25,9 +24,9 @@
 		foreach( $lesProduits as $unProduit) 
 		{ 	// récupération des informations du produit
 			$id = $unProduit['id'];
-			$description = $unProduit['description'];
+			$description = $unProduit['nom'];
 			$prix=$unProduit['prix'];
-			$image = "assets/" . $unProduit['image'];
+			$image = "assets/" . $unProduit['photo'];
 			// affichage d'un produit avec ses informations
 			?>	
 			<div class="card mt-2 d-flex flex-column justify-content-between">
