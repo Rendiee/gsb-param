@@ -5,7 +5,7 @@
                         <span class="text-light h5"><u>Projet GSB</u></span>
                     </a>
                     <p class="text-light my-2 m-auto col-5">
-                        Projet de BTS SIO 2ème année : commande de produits sous forme d'un site Web pour l'entreprise GSB avec base de donnée.
+                        Projet de BTS SIO 2ème année : boutique de produit pharmaceutique avec un système de commande de produits sous forme d'un site Web pour l'entreprise GSB avec base de donnée et des comptes utilisateurs ainsi que des habilitations.
                     </p>
                 </div>
                 <div class="w-100 footercustom py-3">
