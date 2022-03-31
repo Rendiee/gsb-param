@@ -1,8 +1,27 @@
 <div class="w-100 text-center h2 text-success fw-bold mb-3">Tous les produits</div>
 <div class="d-flex flex-wrap justify-content-center">
-	<div class="col-3 column-product pt-1">
+	<div class="col-3 column-product p-1">
 		<div class="filtre filtre-sticky rounded p-2 bg-white shadow-sm me-1">
-			<h3>Filtre</h3>
+			<h4 class="filtre-title">Filtre</h4>
+			<hr>
+			<div class="titre-sous-partie">Prix</div>
+			<div class="row">
+				<div class="col-6 d-flex flex-column">
+					<div class="text-filtre-prix">Minimum</div>
+					<input class="input-filtre-price" type="text" id="price-min" name="price-min" size="10" maxlength="3" placeholder="EUR Min">
+				</div>
+				<div class="col-6 d-flex flex-column">
+					<div class="text-filtre-prix">Maximum</div>
+					<input class="input-filtre-price" type="text" id="price-max" name="price-max" size="10" maxlength="3" placeholder="EUR Max">
+				</div>
+			</div>
+			<br />
+			<hr>
+			<div class="titre-sous-partie">Marque</div>
+			<div class="button-position">
+				<input class="input-filtre-price" type="text" id="marque" name="marque" size="20" placeholder="Marque">
+				<button type="button" class="btn btn-success button-filtre align-items-center">Filtrer</button>
+			</div>
 		</div>
 	</div>
 	<div class="col-9 column-product">

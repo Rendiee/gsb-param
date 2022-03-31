@@ -5,26 +5,39 @@
 	?>
 </div>
 <div class="d-flex flex-wrap justify-content-center">
-	<div class="col-3 pt-1">
-		<div class="filtre filtre-sticky rounded p-2 bg-white shadow-sm me-1">
-			<h3>Filtre</h3>
-			<div class="d-flex flex-column w-75 m-auto">
-				<div>Categories</div>
-				<button type=" button" class="d-flex justify-content-between align-items-center btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-					<?php echo $categorieLibelle ?>
-				</button>
-				<ul class="dropdown-menu dropdown-menu-end p-0">
-					<?php
-					foreach ($lesCategories as $uneCategorie) {
+	<div class="col-3 p-1">
+		<div class="filtre filtre-sticky rounded p-2 bg-white shadow-sm me-1 height-filtre-categorie">
+			<h4 class="filtre-title">Filtre</h4>
+			<hr>
+			<div class="d-flex flex-column m-auto align-items-center">
+			<div class="titre-sous-partie">Catégories</div>
+			<select class="list-categorie" id="list-categorie" name="list-categorie" onchange="location = this.value">
+				<?php
+				
+					foreach($lesCategories as $uneCategorie){
 						$idCategorie = $uneCategorie['ca_acronyme'];
 						$libCategorie = $uneCategorie['ca_libelle'];
-					?>
-						<li><a id="<?php echo $idCategorie ?>" class="dropdown-item" href="index.php?uc=voirProduits&categorie=<?php echo $idCategorie ?>&action=voirProduits">
-								<?php echo $libCategorie ?></a></li>
-					<?php
+
+						if($_REQUEST['categorie'] == $idCategorie){
+
+							?>
+
+							<option value="index.php?uc=voirProduits&categorie=<?php echo $idCategorie ?>&action=voirProduits" selected><?php echo $libCategorie?></option>
+
+							<?php
+
+						} else {
+
+						?>
+
+						<option value="index.php?uc=voirProduits&categorie=<?php echo $idCategorie ?>&action=voirProduits"><?php echo $libCategorie?></option>
+
+						<?php
+						}
 					}
-					?>
-				</ul>
+
+				?>
+			</select>
 			</div>
 		</div>
 	</div>
