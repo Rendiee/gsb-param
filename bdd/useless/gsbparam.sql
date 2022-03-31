@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3308
--- Généré le :  jeu. 31 mars 2022 à 10:40
+-- Généré le :  mer. 30 mars 2022 à 14:05
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -81,14 +81,27 @@ CREATE TABLE IF NOT EXISTS `commande` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `command_stock`
+--
+
+DROP TABLE IF EXISTS `command_stock`;
+CREATE TABLE IF NOT EXISTS `command_stock` (
+  `cs_id` int(11) NOT NULL,
+  `cs_dateCommande` date NOT NULL,
+  PRIMARY KEY (`cs_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `contenance`
 --
 
 DROP TABLE IF EXISTS `contenance`;
 CREATE TABLE IF NOT EXISTS `contenance` (
   `co_id` int(11) NOT NULL,
-  `co_contenance` int(11) NOT NULL,
-  `co_unite` varchar(10) COLLATE utf8_bin NOT NULL,
+  `co_qte` int(11) NOT NULL,
+  `co_unite` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`co_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -96,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `contenance` (
 -- Déchargement des données de la table `contenance`
 --
 
-INSERT INTO `contenance` (`co_id`, `co_contenance`, `co_unite`) VALUES
+INSERT INTO `contenance` (`co_id`, `co_qte`, `co_unite`) VALUES
 (1, 75, 'ml'),
 (2, 150, 'ml'),
 (3, 200, 'ml'),
@@ -139,7 +152,8 @@ CREATE TABLE IF NOT EXISTS `habilitation` (
 INSERT INTO `habilitation` (`h_id`, `h_libelle`) VALUES
 (1, 'Client'),
 (2, 'Administrateur'),
-(3, 'Responsable commercial');
+(3, 'Responsable commercial'),
+(4, 'Responsable des stocks');
 
 -- --------------------------------------------------------
 
@@ -177,6 +191,21 @@ INSERT INTO `login` (`l_id`, `l_identifiant`, `l_motdepasse`, `u_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `passer`
+--
+
+DROP TABLE IF EXISTS `passer`;
+CREATE TABLE IF NOT EXISTS `passer` (
+  `cs_id` int(11) NOT NULL,
+  `p_id` int(11) NOT NULL,
+  `cs_nbProduit` int(11) NOT NULL,
+  PRIMARY KEY (`cs_id`,`p_id`),
+  KEY `passer_produit1_FK` (`p_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `produit`
 --
 
@@ -187,6 +216,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `p_photo` varchar(255) COLLATE utf8_bin NOT NULL,
   `p_description` varchar(255) COLLATE utf8_bin NOT NULL,
   `p_marque` varchar(50) COLLATE utf8_bin NOT NULL,
+  `p_stock` int(11) NOT NULL,
   `ca_id` int(11) NOT NULL,
   PRIMARY KEY (`p_id`),
   KEY `produit_categorie0_FK` (`ca_id`)
@@ -196,12 +226,12 @@ CREATE TABLE IF NOT EXISTS `produit` (
 -- Déchargement des données de la table `produit`
 --
 
-INSERT INTO `produit` (`p_id`, `p_nom`, `p_photo`, `p_description`, `p_marque`, `ca_id`) VALUES
-(1, 'Shampooing à la Mangue', 'img-product/shampoing2.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non.', 'Klorane', 1),
-(2, 'Novathrix - Shampooing Energisant Fortifiant', 'img-product/fortifiant.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non.', 'Phyto', 1),
-(3, 'Mystérieux Repulpant', 'img-product/repulpant.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non.', 'Garancia', 3),
-(4, 'Infusion Bonne Nuit', 'img-product/infusion.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non.', 'Juvamine', 2),
-(5, 'Gel Lavant Doux Corps et Cheveux pour nouveau née', 'img-product/gellavant.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non.', 'Mustela', 4);
+INSERT INTO `produit` (`p_id`, `p_nom`, `p_photo`, `p_description`, `p_marque`, `p_stock`, `ca_id`) VALUES
+(1, 'Shampooing à la Mangue', 'img-product/shampoing2.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non. Aenean risus risus, vehicula a dictum a, fermentum eget eros. Sed accumsan justo eu est imperdiet tristique.', 'Klorane', 10, 1),
+(2, 'Novathrix - Shampooing Energisant Fortifiant', 'img-product/fortifiant.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non. Aenean risus risus, vehicula a dictum a, fermentum eget eros. Sed accumsan justo eu est imperdiet tristique.', 'Phyto', 10, 1),
+(3, 'Mystérieux Repulpant', 'img-product/repulpant.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non. Aenean risus risus, vehicula a dictum a, fermentum eget eros. Sed accumsan justo eu est imperdiet tristique.', 'Garancia', 10, 3),
+(4, 'Infusion Bonne Nuit', 'img-product/infusion.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non. Aenean risus risus, vehicula a dictum a, fermentum eget eros. Sed accumsan justo eu est imperdiet tristique.', 'Juvamine', 10, 2),
+(5, 'Gel Lavant Doux Corps et Cheveux pour nouveau née', 'img-product/gellavant.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non. Aenean risus risus, vehicula a dictum a, fermentum eget eros. Sed accumsan justo eu est imperdiet tristique.', 'Mustela', 10, 4);
 
 -- --------------------------------------------------------
 
@@ -213,8 +243,7 @@ DROP TABLE IF EXISTS `remplir`;
 CREATE TABLE IF NOT EXISTS `remplir` (
   `p_id` int(11) NOT NULL,
   `co_id` int(11) NOT NULL,
-  `r_prixVente` float NOT NULL,
-  `r_qteStock` int(11) NOT NULL,
+  `r_prixProduit` float NOT NULL,
   PRIMARY KEY (`p_id`,`co_id`),
   KEY `remplir_contenance1_FK` (`co_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -223,17 +252,17 @@ CREATE TABLE IF NOT EXISTS `remplir` (
 -- Déchargement des données de la table `remplir`
 --
 
-INSERT INTO `remplir` (`p_id`, `co_id`, `r_prixVente`, `r_qteStock`) VALUES
-(1, 3, 5.95, 10),
-(1, 4, 8.99, 10),
-(2, 2, 6.85, 10),
-(2, 3, 9.95, 10),
-(3, 1, 12.99, 10),
-(3, 2, 18.65, 10),
-(4, 5, 4.26, 10),
-(4, 6, 6.38, 10),
-(5, 3, 8.15, 10),
-(5, 4, 12.35, 10);
+INSERT INTO `remplir` (`p_id`, `co_id`, `r_prixProduit`) VALUES
+(1, 3, 5.95),
+(1, 4, 8.99),
+(2, 2, 6.85),
+(2, 3, 9.95),
+(3, 1, 12.99),
+(3, 2, 18.65),
+(4, 5, 4.2),
+(4, 6, 6.3),
+(5, 3, 8.1),
+(5, 4, 12.35);
 
 -- --------------------------------------------------------
 
@@ -258,14 +287,14 @@ CREATE TABLE IF NOT EXISTS `suggerer` (
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `u_id` int(11) NOT NULL,
-  `u_nom` varchar(50) COLLATE utf8_bin NOT NULL,
-  `u_prenom` varchar(50) COLLATE utf8_bin NOT NULL,
-  `u_adresse` varchar(100) COLLATE utf8_bin NOT NULL,
-  `u_cp` varchar(100) COLLATE utf8_bin NOT NULL,
-  `u_ville` varchar(100) COLLATE utf8_bin NOT NULL,
-  `u_email` varchar(100) COLLATE utf8_bin NOT NULL,
-  `l_id` int(11) NOT NULL,
-  `h_id` int(11) NOT NULL,
+  `u_nom` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `u_prenom` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `u_adresse` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `u_cp` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `u_ville` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `u_email` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `l_id` int(11) DEFAULT NULL,
+  `h_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`u_id`),
   UNIQUE KEY `utilisateur_login0_AK` (`l_id`),
   KEY `utilisateur_habilitation1_FK` (`h_id`)
@@ -278,7 +307,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 INSERT INTO `utilisateur` (`u_id`, `u_nom`, `u_prenom`, `u_adresse`, `u_cp`, `u_ville`, `u_email`, `l_id`, `h_id`) VALUES
 (1, 'Villechalane', 'Louis', '8 cours Lafontaine', '29000', 'BREST', 'villechalane.louis@gmail.com', 1, 1),
 (2, 'Andre', 'David', '1 r Aimon de Chissée', '38100', 'GRENOBLE', 'andre.david@gmail.com', 2, 3),
-(3, 'Bedos', 'Christian', '1 r Bénédictins', '65000', 'TARBES', 'bedos.christian@gmail.com', 3, 2),
+(3, 'Bedos', 'Christian', '1 r Bénédictins', '65000', 'TARBES', 'bedos.christian@gmail.com', 3, 4),
 (4, 'Tusseau', 'Louis', '22 r Renou', '86000', 'POITIERS', 'tusseau.louis@gmail.com', 4, 2),
 (5, 'Bentot', 'Pascal', '11 av 6 Juin', '67000', 'STRASBOURG', 'bentot.pascal@gmail.com', 5, 2),
 (6, 'Bioret', 'Luc', '1 r Linne', '35000', 'RENNES', 'bioret.luc@gmail.com', 6, 2),
@@ -317,6 +346,13 @@ ALTER TABLE `contenir`
 --
 ALTER TABLE `login`
   ADD CONSTRAINT `login_utilisateur0_FK` FOREIGN KEY (`u_id`) REFERENCES `utilisateur` (`u_id`);
+
+--
+-- Contraintes pour la table `passer`
+--
+ALTER TABLE `passer`
+  ADD CONSTRAINT `passer_command_stock0_FK` FOREIGN KEY (`cs_id`) REFERENCES `command_stock` (`cs_id`),
+  ADD CONSTRAINT `passer_produit1_FK` FOREIGN KEY (`p_id`) REFERENCES `produit` (`p_id`);
 
 --
 -- Contraintes pour la table `produit`

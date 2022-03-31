@@ -39,7 +39,7 @@ function getLesInfosCategorie($idCategorie)
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT ça_id, ca_libelle, ca_acrocyme from categorie WHERE ca_acronyme="' . $idCategorie . '"';
+		$req = 'SELECT ca_id, ca_libelle, ca_acronyme from categorie WHERE ca_acronyme="' . $idCategorie . '"';
 		$res = $monPdo->query($req);
 		$laLigne = $res->fetch();
 		return $laLigne;
@@ -60,7 +60,7 @@ function getLesProduitsDeCategorie($idCategorie)
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', round(r.r_prixProduit, 2) as \'prix\' FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE c.ca_acronyme = "' . $idCategorie . '" GROUP BY p.p_id';
+		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', round(r.r_prixVente, 2) as \'prix\' FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE c.ca_acronyme = "' . $idCategorie . '" GROUP BY p.p_id';
 		$res = $monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
@@ -83,7 +83,7 @@ function getLesProduitsDuTableau($desIdProduit)
 		$lesProduits = array();
 		if ($nbProduits != 0) {
 			foreach ($desIdProduit as $unIdProduit) {
-				$req = 'select p.p_id as id, p.p_nom as nom, p.p_description as description, round(r.r_prixProduit, 2) as prix, p.p_photo as image, c.co_unite as unite, c.co_qte as qte from produit p JOIN remplir r ON r.p_id = p.p_id JOIN contenance c ON c.co_id=r.co_id where p.`p_id` = "' . $unIdProduit . '" GROUP BY p.p_id;';
+				$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', round(r.r_prixVente, 2) as \'prix\', co.co_unite as \'unite\', co.co_qte as \'qte\' FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id JOIN contenance co ON co.co_id=r.co_id INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE p.`p_id` = "' . $unIdProduit . '" GROUP BY p.p_id';
 				$res = $monPdo->query($req);
 				$unProduit = $res->fetch();
 				$lesProduits[] = $unProduit;
@@ -172,7 +172,7 @@ function getTousLesProduits()
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', round(r.r_prixProduit, 2) as \'prix\' FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id GROUP BY p.p_id';
+		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', round(r.r_prixVente, 2) as \'prix\' FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id GROUP BY p.p_id';
 		$res = $monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
@@ -181,3 +181,35 @@ function getTousLesProduits()
 		die();
 	}
 }
+
+function getMinPriceProduct($id) {
+
+	try {
+
+		$monPdo = connexionPDO();
+		$req = 'SELECT MIN(r.r_prixVente) as \'prixMin\' FROM remplir r WHERE r.p_id = '.$id;
+		$res = $monPdo->query($req);
+		$result = $res->fetch();
+		return $result;
+
+	} catch (PDOException $e) {
+		
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+
+}
+
+function getCategorieProduit($id) {try {
+
+	$monPdo = connexionPDO();
+	$req = 'SELECT MIN(r.r_prixVente) as \'prixMin\' FROM remplir r WHERE r.p_id = '.$id;
+	$res = $monPdo->query($req);
+	$result = $res->fetch();
+	return $result;
+
+} catch (PDOException $e) {
+	
+	print "Erreur !: " . $e->getMessage();
+	die();
+}}

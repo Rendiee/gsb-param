@@ -8,6 +8,7 @@ switch($action)
 	{
 		$lesCategories = getLesCategories();
   		$categorie = $_REQUEST['categorie'];
+		$nomCategorie  = getLesInfosCategorie($categorie);
 		$lesProduits = getLesProduitsDeCategorie($categorie);
 		include("vues/v_produitsDeCategorie.php");
 		break;

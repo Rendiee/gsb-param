@@ -187,3 +187,4 @@ function getErreursSaisieCommande($nom,$rue,$ville,$cp,$mail)
 	return $lesErreurs;
 }
 ?>
+

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
 
 body,
 html {
@@ -11,7 +12,7 @@ body {
 	width: 100%;
 	position: relative;
 	display: table;
-	font-family: 'Raleway' !important;
+	font-family: 'Oxygen' !important;
 }
 #foot {
 	display: table-row;
@@ -116,21 +117,6 @@ input[type="submit"] {
 	position: absolute;
 	bottom: 80px;
 }
-div.card {
-	width: 230px;
-	height: 300px;
-	padding: 10px;
-	margin: 10px;
-	background-color: white;
-	box-shadow: 1px 1px 4px #bbb;
-}
-div.photoCard > img {
-	max-width: 250px;
-	max-height: 190px;
-}
-div.descrCard {
-	font: 0.8em "Trebuchet MS", Arial, sans-serif;
-}
 
 #img-size-header {
 	height: auto;
@@ -195,24 +181,14 @@ input[type="submit"] {
 	border-radius: 8px;
 }
 
-.card-product {
-	background-color: #ffffff;
-	border: 1px solid rgb(196, 196, 196);
-	border-radius: 5px;
-	margin: 10px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
 .text-card {
 	color: rgb(36, 36, 36);
 	margin: 15px;
 }
 
 .img-product {
-	height: auto;
-	width: 150px;
+	height: 130px;
+	margin: auto;
 }
 
 .marque-product {
@@ -221,13 +197,16 @@ input[type="submit"] {
 	font-size: 17px;
 	padding-top: 15px;
 	margin-bottom: 5px;
+	text-align: center;
 }
 
 .name-product {
 	color: #2b2b2b;
-	font-size: 15px;
+	font-size: 13px;
 	text-align: center;
 	font-weight: 700;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .description-product {
@@ -235,8 +214,11 @@ input[type="submit"] {
 	color: #6d6d6d;
 	font-size: 13px;
 	margin-top: 25px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .title-height {
 	height: 70px;
+	overflow: hidden;
 }
