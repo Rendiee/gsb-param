@@ -29,7 +29,7 @@
 		</div>
 	</div>
 	<div class="col-9">
-		<div class="card-group">
+		<div class="card-group ms-1">
 			<?php
 			foreach ($lesProduits as $unProduit) {
 				$description = $unProduit['description'];
