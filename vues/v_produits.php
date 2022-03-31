@@ -1,11 +1,11 @@
 <div class="container-fluid">
 	<div class="w-100 text-center h2 text-success fw-bold mb-3">Tous les produits</div>
-	<div class="container">
+	<div class="container product-section">
 		<div class="row">
-			<div class="col-3">
+			<div class="col-3 column-product">
 				<h1>Test</h1>
 			</div>
-			<div class="col-9">
+			<div class="col-9 column-product">
 				<div class="card-group">
 					<?php
 					if (isset($message)) {

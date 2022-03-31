@@ -172,7 +172,7 @@ function getTousLesProduits()
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', round(r.r_prixVente, 2) as \'prix\' FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id GROUP BY p.p_id';
+		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', r.r_prixVente as \'prix\' FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id GROUP BY p.p_id';
 		$res = $monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
@@ -187,7 +187,7 @@ function getMinPriceProduct($id) {
 	try {
 
 		$monPdo = connexionPDO();
-		$req = 'SELECT MIN(r.r_prixVente) as \'prixMin\' FROM remplir r WHERE r.p_id = '.$id;
+		$req = 'SELECT ROUND(MIN(r.r_prixVente),2) as \'prixMin\' FROM remplir r WHERE r.p_id = '.$id;
 		$res = $monPdo->query($req);
 		$result = $res->fetch();
 		return $result;

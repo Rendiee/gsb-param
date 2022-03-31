@@ -222,3 +222,11 @@ input[type="submit"] {
 	height: 70px;
 	overflow: hidden;
 }
+
+.product-section {
+	background-color: #e2e2e2;
+}
+
+.column-product {
+	background-color: #bebebe;
+}
