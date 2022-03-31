@@ -5,24 +5,33 @@
 	?>
 </div>
 <div class="d-flex flex-wrap justify-content-center">
-	<div id="categories" class="list-group col-3 mt-1">
-		<?php
-		foreach ($lesCategories as $uneCategorie) {
-			$idCategorie = $uneCategorie['ca_acronyme'];
-			$libCategorie = $uneCategorie['ca_libelle'];
-		?>
-			<a id="<?php echo $idCategorie ?>" class="list-group-item list-group-item-action text-center" href="index.php?uc=voirProduits&categorie=<?php echo $idCategorie ?>&action=voirProduits">
-				<?php echo $libCategorie ?></a>
-		<?php
-		}
-		?>
+	<div class="col-3 pt-1">
+		<div class="filtre filtre-sticky rounded p-2 bg-white shadow-sm me-1">
+			<h3>Filtre</h3>
+			<div class="d-flex flex-column w-75 m-auto">
+				<div>Categories</div>
+				<button type=" button" class="d-flex justify-content-between align-items-center btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					<?php echo $categorieLibelle ?>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-end p-0">
+					<?php
+					foreach ($lesCategories as $uneCategorie) {
+						$idCategorie = $uneCategorie['ca_acronyme'];
+						$libCategorie = $uneCategorie['ca_libelle'];
+					?>
+						<li><a id="<?php echo $idCategorie ?>" class="dropdown-item" href="index.php?uc=voirProduits&categorie=<?php echo $idCategorie ?>&action=voirProduits">
+								<?php echo $libCategorie ?></a></li>
+					<?php
+					}
+					?>
+				</ul>
+			</div>
+		</div>
 	</div>
 	<div class="col-9">
 		<div class="card-group">
 			<?php
-			// parcours du tableau contenant les produits à afficher
-
-			foreach ($lesProduits as $unProduit) { 	// récupération des informations du produit
+			foreach ($lesProduits as $unProduit) {
 				$description = $unProduit['description'];
 				$image = "assets/" . $unProduit['photo'];
 				$nom = $unProduit['nom'];

@@ -1,6 +1,6 @@
 <div class="w-100 text-center h2 text-success fw-bold mb-3">Votre Panier</div>
 <div class="d-flex flex-column align-items-center commander rounded fit m-auto col-lg-8 col-12">
-	<div id="produits-commande" class="d-flex flex-wrap justify-content-around">
+	<div id="produits-commande" class="d-flex flex-wrap justify-content-left p-3 w-100">
 		<?php
 		if (isset($lesProduitsDuPanier)) {
 			foreach ($lesProduitsDuPanier as $unProduit) {
@@ -17,18 +17,6 @@
 				$description = $description . '...';
 				// affichage
 		?>
-				<!-- <div class="card d-flex flex-column justify-content-between">
-					<div class="d-flex flex-column justify-content-center align-items-center">
-						<div class="photoCard"><img src="" alt=image /></div>
-						<div class="descrCard"></div>
-					</div>
-					<div class="d-flex flex-wrap justify-content-around align-items-center">
-						<div class=""></div>
-						<a href="index.php?uc=gererPanier&produit=&action=supprimerUnProduit" onclick="return confirm('Voulez-vous vraiment retirer cet article ?');">
-							<img src="assets/images/retirerpanier.png" TITLE="Retirer du panier" alt="retirer du panier">
-						</a>
-					</div>
-				</div> -->
 				<div class="col-xl-4 col-lg-5 col-6">
 					<div class="card m-1">
 						<p class="card-title marque-product"><?php echo $marque ?></p>
@@ -46,7 +34,7 @@
 		<?php
 			}
 		} else {
-			echo '<div class="alert alert-danger mt-3">' . $message . '</div>';
+			echo '<div class="alert alert-danger mx-auto mt-3">' . $message . '</div>';
 		}
 		?>
 	</div>
