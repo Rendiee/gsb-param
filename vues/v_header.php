@@ -30,8 +30,18 @@
             </ul>
           </div>
           <div class="text-end d-flex flex-row fit m-lg-0 ms-lg-1 mt-lg-0 mt-3 m-auto">
-            <button type="button" class="btn btn-outline-success me-1 "><a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=connexion">Se connecter</a></button>
-            <button type="button" class="btn btn-success">S'inscrire</button>
+            <?php
+              if(isset($_SESSION['u_hab'])){
+                ?>
+                  <a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=deconnexion"><button type="button" class="btn btn-outline-success me-1 ">Déconnexion</button></a>
+                <?php
+              }else{
+                ?>
+                  <a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=connexion"><button type="button" class="btn btn-outline-success me-1 ">Se connecter</button></a>
+                  <button type="button" class="btn btn-success">S'inscrire</button>
+              <?php
+              }
+            ?>
           </div>
         </div>
       </div>
