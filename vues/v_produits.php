@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	<div class="col-xl-9 col-sm-12 column-product">
-		<div class="card-group ms-1">
+		<div class="card-group ms-1 justify-content-center">
 			<?php
 			if (isset($message)) {
 				echo '<div class="alert alert-danger mt-3">' . $message . '</div>';

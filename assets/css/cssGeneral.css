@@ -235,3 +235,8 @@ fieldset {
 	justify-content: center;
 	flex-direction: column;
 }
+
+.button-form-center {
+	display: flex;
+	justify-content: center;
+}

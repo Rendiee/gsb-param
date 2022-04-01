@@ -38,7 +38,7 @@
               }else{
                 ?>
                   <a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=connexion"><button type="button" class="btn btn-outline-success me-1 ">Se connecter</button></a>
-                  <button type="button" class="btn btn-success">S'inscrire</button>
+                  <a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=inscription"><button type="button" class="btn btn-success">S'inscrire</button></a>
               <?php
               }
             ?>
