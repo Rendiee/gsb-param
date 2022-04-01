@@ -226,12 +226,6 @@ fieldset {
 	margin-top: 10px;
 }
 
-.titre-sous-partie {
-	text-align: center;
-	font-size: 20px;
-	text-decoration: underline;
-}
-
 .button-filtre {
 	margin-top: 30px;
 }
@@ -240,13 +234,4 @@ fieldset {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-}
-
-.list-categorie {
-	width: 65%;
-	color: #868686;
-	text-align: center;
-	padding: 4px;
-	margin-top: 10px;
-	border: 1px solid rgb(187, 187, 187);
 }

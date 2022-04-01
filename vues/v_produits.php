@@ -1,6 +1,6 @@
 <div class="w-100 text-center h2 text-success fw-bold mb-3">Tous les produits</div>
 <div class="d-flex flex-wrap justify-content-center">
-	<div class="col-3 column-product p-1">
+	<div class="col-xl-3 col-lg-4 col-md-6 col-8 column-product p-1">
 		<div class="filtre filtre-sticky rounded p-2 bg-white shadow-sm me-1">
 			<h4 class="filtre-title">Filtre</h4>
 			<hr>
@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-9 column-product">
+	<div class="col-xl-9 col-sm-12 column-product">
 		<div class="card-group ms-1">
 			<?php
 			if (isset($message)) {

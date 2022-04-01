@@ -10,27 +10,27 @@
 			<h4 class="filtre-title">Filtre</h4>
 			<hr>
 			<div class="d-flex flex-column m-auto align-items-center">
-			<div class="titre-sous-partie">Catégories</div>
-			<select class="list-categorie" id="list-categorie" name="list-categorie" onchange="location = this.value">
-				<?php
-				
-					foreach($lesCategories as $uneCategorie){
+				<label for="list-categorie" class="text-center text-decoration-underline fw-bold">Catégories</label>
+				<select class="form-select border-success w-75 text-center" id="list-categorie" name="list-categorie" onchange="location = this.value">
+					<?php
+
+					foreach ($lesCategories as $uneCategorie) {
 						$idCategorie = $uneCategorie['ca_acronyme'];
 						$libCategorie = $uneCategorie['ca_libelle'];
 
-						if($_REQUEST['categorie'] == $idCategorie){
-							?>
-							<option value="index.php?uc=voirProduits&categorie=<?php echo $idCategorie ?>&action=voirProduits" selected><?php echo $libCategorie?></option>
-							<?php
+						if ($_REQUEST['categorie'] == $idCategorie) {
+					?>
+							<option value="index.php?uc=voirProduits&categorie=<?php echo $idCategorie ?>&action=voirProduits" selected><?php echo $libCategorie ?></option>
+						<?php
 						} else {
 						?>
-						<option value="index.php?uc=voirProduits&categorie=<?php echo $idCategorie ?>&action=voirProduits"><?php echo $libCategorie?></option>
-						<?php
+							<option value="index.php?uc=voirProduits&categorie=<?php echo $idCategorie ?>&action=voirProduits"><?php echo $libCategorie ?></option>
+					<?php
 						}
 					}
 
-				?>
-			</select>
+					?>
+				</select>
 			</div>
 		</div>
 	</div>
