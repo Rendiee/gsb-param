@@ -2,6 +2,7 @@
 	session_start();
 	require_once("modele/fonctions.inc.php");
 	require_once("modele/bd.produits.inc.php");
+	require_once("modele/connexion.inc.php");
 
 	if(!isset($_REQUEST['uc']))
 		$uc = 'accueil';
@@ -22,6 +23,10 @@
 		}
 		case 'gererPanier' :{
 			include("controleurs/c_gestionPanier.php");
+			break;
+		}
+		case 'connexion' :{
+			include("controleurs/c_gestionConnexion.php");
 			break;
 		}
 		case 'administrer' :{

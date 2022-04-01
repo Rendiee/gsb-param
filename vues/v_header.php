@@ -26,10 +26,11 @@
               <li><a href="index.php?uc=voirProduits&action=nosProduits" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Nos produits</a></li>
               <li><a href="index.php?uc=voirProduits&categorie=CH&action=voirProduits" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Produits par catégorie</a></li>
               <li><a href="index.php?uc=gererPanier&action=voirPanier" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Mon panier</a></li>
+              <?php if(isset($_SESSION['u_hab'])){ echo '<li><a href="index.php?uc=connexion&action=profil" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Mon profil</a></li>';} ?>
             </ul>
           </div>
           <div class="text-end d-flex flex-row fit m-lg-0 ms-lg-1 mt-lg-0 mt-3 m-auto">
-            <button type="button" class="btn btn-outline-success me-1 ">Se connecter</button>
+            <button type="button" class="btn btn-outline-success me-1 "><a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=connexion">Se connecter</a></button>
             <button type="button" class="btn btn-success">S'inscrire</button>
           </div>
         </div>

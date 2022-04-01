@@ -40,14 +40,6 @@ fieldset {
 	overflow: hidden;
 }
 
-label {
-	background: transparent none;
-	display: block;
-	width: 20%;
-	float: left;
-	padding-right: 1%;
-	text-align: left;
-}
 
 .erreur {
 	background-color: rgb(237, 210, 229);
@@ -207,7 +199,7 @@ label {
 .filtre {
 	position: sticky;
 	top: 10px;
-	height: 350px;
+	height: 380px;
 	border: 1px solid rgba(0, 0, 0, 0.125);
 }
 

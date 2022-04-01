@@ -19,19 +19,12 @@
 						$libCategorie = $uneCategorie['ca_libelle'];
 
 						if($_REQUEST['categorie'] == $idCategorie){
-
 							?>
-
 							<option value="index.php?uc=voirProduits&categorie=<?php echo $idCategorie ?>&action=voirProduits" selected><?php echo $libCategorie?></option>
-
 							<?php
-
 						} else {
-
 						?>
-
 						<option value="index.php?uc=voirProduits&categorie=<?php echo $idCategorie ?>&action=voirProduits"><?php echo $libCategorie?></option>
-
 						<?php
 						}
 					}
