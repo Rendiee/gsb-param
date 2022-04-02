@@ -33,11 +33,11 @@
             <?php
               if(isset($_SESSION['u_hab'])){
                 ?>
-                  <a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=deconnexion"><button type="button" class="btn btn-outline-success me-1 ">Déconnexion</button></a>
+                  <a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=deconnexion"><button type="button" class="btn btn-outline-success">Déconnexion</button></a>
                 <?php
               }else{
                 ?>
-                  <a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=connexion"><button type="button" class="btn btn-outline-success me-1 ">Se connecter</button></a>
+                  <a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=connexion"><button type="button" class="btn btn-outline-success me-1">Se connecter</button></a>
                   <a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=inscription"><button type="button" class="btn btn-success">S'inscrire</button></a>
               <?php
               }

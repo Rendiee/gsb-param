@@ -1,6 +1,6 @@
 <div class="w-100 text-center h2 text-success fw-bold mb-3">Tous les produits</div>
 <div class="d-flex flex-wrap justify-content-center">
-	<div class="col-xl-3 col-lg-4 col-md-6 col-8 column-product p-1">
+	<div class="col-xl-3 col-lg-4 col-md-6 col-9 p-1">
 		<div class="filtre filtre-sticky rounded p-2 bg-white shadow-sm me-1">
 			<h4 class="filtre-title">Filtre</h4>
 			<hr>
@@ -24,8 +24,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-xl-9 col-sm-12 column-product">
-		<div class="card-group ms-1 justify-content-center">
+	<div class="col-xl-9 col-lg-7 col-sm-12">
+		<div class="card-group ms-1 d-flex flex-wrap justify-content-center">
 			<?php
 			if (isset($message)) {
 				echo '<div class="alert alert-danger mt-3">' . $message . '</div>';
@@ -44,7 +44,7 @@
 
 
 			?>
-				<div class="col-xl-4 col-lg-5 col-6">
+				<div class="col-xl-4 col-lg-6 col-md-5 col-sm-6 col-8">
 					<div class="card m-1">
 						<p class="card-title marque-product"><?php echo $marque ?></p>
 						<div class="name-product title-height"><?php echo $nom ?></div>

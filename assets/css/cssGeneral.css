@@ -127,6 +127,7 @@ fieldset {
 
 .fit {
 	width: fit-content;
+	width: -moz-fit-content;
 }
 
 /* ===== Scrollbar CSS ===== */
