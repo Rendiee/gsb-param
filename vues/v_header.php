@@ -33,7 +33,7 @@
             <?php
               if(isset($_SESSION['u_hab'])){
                 ?>
-                  <a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=deconnexion"><button type="button" class="btn btn-outline-success">Déconnexion</button></a>
+                  <a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=deconnexion"><button type="button" class="btn btn-outline-success" onclick="return confirm('Voulez-vous vraiment vous déconnectez ?')">Déconnexion</button></a>
                 <?php
               }else{
                 ?>

@@ -19,6 +19,24 @@ function checkConnexion($email, $mdp){
             die();
     }
 
-} 
+}
+
+function infoProfil(){
+    try 
+    {
+        $monPdo = connexionPDO();
+		$req = 'SELECT u_nom, u_prenom, u_adresse, u_cp, u_ville, u_email, u.h_id, h_libelle FROM utilisateur u JOIN habilitation h ON h.h_id = u.h_id where u_id = '.$_SESSION['u_id'].'';
+		$res = $monPdo->query($req);
+		$res = $res->fetch();
+
+        return $res;
+    } 
+
+    catch (PDOException $e) 
+    {
+           print "Erreur !: " . $e->getMessage();
+            die();
+    }
+}
 
 ?>
