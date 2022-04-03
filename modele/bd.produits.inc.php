@@ -199,6 +199,23 @@ function getMinPriceProduct($id)
 	}
 }
 
+function getUniteEtPrix($id)
+{
+	try {
+
+		$monPdo = connexionPDO();
+		$req = $monPdo -> prepare('SELECT r.p_id, r.r_prixVente, r.r_qteStock, co.co_contenance, co.co_unite, co.co_id FROM remplir r JOIN contenance co ON co.co_id = r.co_id WHERE r.p_id = :id');
+		$req -> bindParam(':id', $id, PDO::PARAM_INT);
+        $req -> execute();
+		$res = $req->fetchAll();
+		return $res;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
 function getCategorieProduit($id)
 {
 	try {

@@ -7,19 +7,25 @@
 			<div class="titre-sous-partie">Prix</div>
 			<div class="row">
 				<div class="col-6 d-flex flex-column">
-					<div class="text-filtre-prix">Minimum</div>
-					<input class="input-filtre-price" type="text" id="price-min" name="price-min" size="10" maxlength="3" placeholder="EUR Min">
+					<label for="price-min" class="text-filtre-prix">Minimum</label>
+					<div class="input-group">
+						<input class="form-control text-center m-auto" type="text" id="price-min" name="price-min" size="10" maxlength="3" placeholder="Min">
+						<span class="input-group-text"><i class="bi bi-currency-euro"></i></span>
+					</div>
 				</div>
 				<div class="col-6 d-flex flex-column">
-					<div class="text-filtre-prix">Maximum</div>
-					<input class="input-filtre-price" type="text" id="price-max" name="price-max" size="10" maxlength="3" placeholder="EUR Max">
+					<label for="price-max" class="text-filtre-prix">Maximum</label>
+					<div class="input-group">
+						<input class="form-control text-center m-auto" type="text" id="price-max" name="price-max" size="10" maxlength="3" placeholder="Max">
+						<span class="input-group-text"><i class="bi bi-currency-euro"></i></span>
+					</div>
 				</div>
 			</div>
 			<br />
 			<hr>
 			<div class="titre-sous-partie">Marque</div>
 			<div class="button-position">
-				<input class="input-filtre-price" type="text" id="marque" name="marque" size="20" placeholder="Marque">
+				<input class="form-control w-auto m-auto" type="text" id="marque" name="marque" size="20" placeholder="Marque">
 				<button type="button" class="btn btn-success button-filtre align-items-center">Filtrer</button>
 			</div>
 		</div>
@@ -54,6 +60,13 @@
 							<div class="d-flex flex-column align-items-center">
 								<small>À partir de </small>
 								<div class="text-success fw-bold"><?php echo $prix[0] ?>€</div>
+								<!-- <select class="form-select border-success text-center" id="list-prix" name="list-prix">
+									< ?php 
+									foreach (getUniteEtPrix($id) as $unPrix) {
+										echo '<option value="'.$unPrix[0].'|'.$unPrix[5].'">'.$unPrix[1].'€ - '.$unPrix[3].' '.$unPrix[4].'</option>';
+									}
+									? >
+								</select> -->
 							</div>
 							<a id="categProduit" href="index.php?uc=voirProduits&produit=<?php echo $id ?>&action=ajouterAuPanier">
 								<button class="btn btn-outline-success" type="button">Ajouter</button>
@@ -70,3 +83,15 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(function() {
+		$("input[name='price-min']").on('input', function() {
+			$(this).val($(this).val().replace(/[^0-9]/g, ''));
+		});
+	});
+	$(function() {
+		$("input[name='price-max']").on('input', function() {
+			$(this).val($(this).val().replace(/[^0-9]/g, ''));
+		});
+	});
+</script>

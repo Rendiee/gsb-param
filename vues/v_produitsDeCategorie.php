@@ -60,6 +60,13 @@
 							<div class="d-flex flex-column align-items-center">
 								<small>À partir de </small>
 								<div class="text-success fw-bold"><?php echo $prix[0] ?>€</div>
+								<!-- <select class="form-select border-success text-center" id="list-prix" name="list-prix">
+									< ?php 
+									foreach (getUniteEtPrix($id) as $unPrix) {
+										echo '<option value="'.$unPrix[0].'|'.$unPrix[5].'">'.$unPrix[1].'€ - '.$unPrix[3].' '.$unPrix[4].'</option>';
+									}
+									? >
+								</select> -->
 							</div>
 							<a id="categProduit" href="index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&produit=<?php echo $id ?>&action=ajouterAuPanier">
 								<button class="btn btn-outline-success" type="button">Ajouter</button>
