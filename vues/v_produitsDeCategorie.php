@@ -43,6 +43,7 @@
 				$nom = $unProduit['nom'];
 				$marque = $unProduit['marque'];
 				$id = $unProduit['id'];
+				$qte = $unProduit['quantite'];
 
 				$prix = getMinPriceProduct($id);
 
@@ -68,6 +69,7 @@
 									? >
 								</select> -->
 							</div>
+							<?php if ($qte > 0) echo '<small class="text-success opacity-75">En Stock';else echo '<small class="text-danger opacity-75">Rupture de Stock' ?></small>
 							<a id="categProduit" href="index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&produit=<?php echo $id ?>&action=ajouterAuPanier">
 								<button class="btn btn-outline-success" type="button">Ajouter</button>
 							</a>

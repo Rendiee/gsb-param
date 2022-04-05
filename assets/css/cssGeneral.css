@@ -126,8 +126,8 @@ fieldset {
 }
 
 .fit {
-	width: fit-content;
-	width: -moz-fit-content;
+	width: fit-content !important;
+	width: -moz-fit-content !important;
 }
 
 /* ===== Scrollbar CSS ===== */
@@ -228,12 +228,6 @@ fieldset {
 
 .button-filtre {
 	margin-top: 30px;
-}
-
-.button-position {
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
 }
 
 .button-form-center {

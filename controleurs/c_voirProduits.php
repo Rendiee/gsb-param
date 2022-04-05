@@ -12,6 +12,13 @@ switch ($action) {
 			include("vues/v_produitsDeCategorie.php");
 			break;
 		}
+	case 'voirLeProduit': {
+			$id = $_REQUEST['produit'];
+			$infoProduit = getInfoProduit($id);
+			$categorie = $_REQUEST['categorie'];
+			include("vues/v_voirProduit.php");
+			break;
+		}
 	case 'ajouterAuPanier': {
 			$idProduit = $_REQUEST['produit'];
 
@@ -32,6 +39,7 @@ switch ($action) {
 
 	case 'nosProduits': {
 			$lesProduits = getTousLesProduits();
+			$lesMarques = getLesMarques();
 			include("vues/v_produits.php");
 		}
 }

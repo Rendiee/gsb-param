@@ -60,10 +60,22 @@ function getLesProduitsDeCategorie($idCategorie)
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', round(r.r_prixVente, 2) as \'prix\' FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE c.ca_acronyme = "' . $idCategorie . '" GROUP BY p.p_id';
+		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', round(r.r_prixVente, 2) as \'prix\', SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE c.ca_acronyme = "' . $idCategorie . '" GROUP BY p.p_id';
 		$res = $monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+function getInfoProduit($id){
+	try {
+		$monPdo = connexionPDO();
+		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', round(r.r_prixVente, 2) as \'prix\', SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE p.p_id = "' . $id . '"';
+		$res = $monPdo->query($req);
+		$res = $res->fetch();
+		return $res;
 	} catch (PDOException $e) {
 		print "Erreur !: " . $e->getMessage();
 		die();
@@ -172,7 +184,7 @@ function getTousLesProduits()
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', r.r_prixVente as \'prix\' FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id GROUP BY p.p_id';
+		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', r.r_prixVente as \'prix\', SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id GROUP BY p.p_id';
 		$res = $monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
@@ -224,6 +236,21 @@ function getCategorieProduit($id)
 		$req = 'SELECT MIN(r.r_prixVente) as \'prixMin\' FROM remplir r WHERE r.p_id = ' . $id;
 		$res = $monPdo->query($req);
 		$result = $res->fetch();
+		return $result;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function getLesMarques(){
+	try {
+
+		$monPdo = connexionPDO();
+		$req = 'SELECT p_marque FROM produit ORDER BY p_marque';
+		$res = $monPdo->query($req);
+		$result = $res->fetchAll();
 		return $result;
 	} catch (PDOException $e) {
 

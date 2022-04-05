@@ -24,9 +24,19 @@
 			<br />
 			<hr>
 			<div class="titre-sous-partie">Marque</div>
-			<div class="button-position">
-				<input class="form-control w-auto m-auto" type="text" id="marque" name="marque" size="20" placeholder="Marque">
-				<button type="button" class="btn btn-success button-filtre align-items-center">Filtrer</button>
+			<div class="d-flex flex-column align-items-center">
+				<select class="form-select border-success fit text-center mt-2" id="list-marque" name="list-marque">
+					<option value="default"> - Choisissez une marque - </option>
+					<?php
+					foreach ($lesMarques as $uneMarque) {
+						$marque = $uneMarque['p_marque'];
+					?>
+						<option value="<?php echo $marque ?>"><?php echo $marque ?></option>
+					<?php
+					}
+					?>
+				</select>
+				<button type="button" class="btn btn-success mt-4 align-items-center w-75">Filtrer</button>
 			</div>
 		</div>
 	</div>
@@ -42,6 +52,7 @@
 				$nom = $unProduit['nom'];
 				$marque = $unProduit['marque'];
 				$id = $unProduit['id'];
+				$qte = $unProduit['quantite'];
 
 				$prix = getMinPriceProduct($id);
 
@@ -68,8 +79,10 @@
 									? >
 								</select> -->
 							</div>
-							<a id="categProduit" href="index.php?uc=voirProduits&produit=<?php echo $id ?>&action=ajouterAuPanier">
-								<button class="btn btn-outline-success" type="button">Ajouter</button>
+							<?php if ($qte > 0) echo '<small class="text-success opacity-75">En Stock';
+							else echo '<small class="text-danger opacity-75">Rupture de Stock' ?></small>
+							<a id="categProduit" href="index.php?uc=voirProduits&produit=<?php echo $id ?>&action=voirLeProduit">
+								<button class="btn btn-outline-success" type="button">Voir</button>
 							</a>
 						</div>
 					</div>
