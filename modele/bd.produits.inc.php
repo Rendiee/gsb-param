@@ -69,10 +69,11 @@ function getLesProduitsDeCategorie($idCategorie)
 		die();
 	}
 }
-function getInfoProduit($id){
+function getInfoProduit($id)
+{
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', round(r.r_prixVente, 2) as \'prix\', SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE p.p_id = "' . $id . '"';
+		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', round(r.r_prixVente, 2) as \'prix\', c.ca_libelle as categorie, SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE p.p_id = "' . $id . '"';
 		$res = $monPdo->query($req);
 		$res = $res->fetch();
 		return $res;
@@ -211,14 +212,31 @@ function getMinPriceProduct($id)
 	}
 }
 
+function getMaxPriceProduct($id)
+{
+
+	try {
+
+		$monPdo = connexionPDO();
+		$req = 'SELECT ROUND(MAX(r.r_prixVente),2) as \'prixMin\' FROM remplir r WHERE r.p_id = ' . $id;
+		$res = $monPdo->query($req);
+		$result = $res->fetch();
+		return $result;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
 function getUniteEtPrix($id)
 {
 	try {
 
 		$monPdo = connexionPDO();
-		$req = $monPdo -> prepare('SELECT r.p_id, r.r_prixVente, r.r_qteStock, co.co_contenance, co.co_unite, co.co_id FROM remplir r JOIN contenance co ON co.co_id = r.co_id WHERE r.p_id = :id');
-		$req -> bindParam(':id', $id, PDO::PARAM_INT);
-        $req -> execute();
+		$req = $monPdo->prepare('SELECT r.p_id, r.r_prixVente, r.r_qteStock, co.co_contenance, co.co_unite, co.co_id FROM remplir r JOIN contenance co ON co.co_id = r.co_id WHERE r.p_id = :id');
+		$req->bindParam(':id', $id, PDO::PARAM_INT);
+		$req->execute();
 		$res = $req->fetchAll();
 		return $res;
 	} catch (PDOException $e) {
@@ -244,7 +262,8 @@ function getCategorieProduit($id)
 	}
 }
 
-function getLesMarques(){
+function getLesMarques()
+{
 	try {
 
 		$monPdo = connexionPDO();

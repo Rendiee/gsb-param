@@ -15,7 +15,8 @@ switch ($action) {
 	case 'voirLeProduit': {
 			$id = $_REQUEST['produit'];
 			$infoProduit = getInfoProduit($id);
-			$categorie = $_REQUEST['categorie'];
+			$prixMin = getMinPriceProduct($id);
+			$prixMax = getMaxPriceProduct($id);
 			include("vues/v_voirProduit.php");
 			break;
 		}

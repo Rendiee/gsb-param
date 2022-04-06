@@ -41,7 +41,7 @@
 		</div>
 	</div>
 	<div class="col-xl-9 col-lg-7 col-sm-12">
-		<div class="card-group ms-1 d-flex flex-wrap justify-content-center">
+		<div class="card-group ms-1 d-flex flex-wrap justify-content-left">
 			<?php
 			if (isset($message)) {
 				echo '<div class="alert alert-danger mt-3">' . $message . '</div>';
@@ -71,13 +71,6 @@
 							<div class="d-flex flex-column align-items-center">
 								<small>À partir de </small>
 								<div class="text-success fw-bold"><?php echo $prix[0] ?>€</div>
-								<!-- <select class="form-select border-success text-center" id="list-prix" name="list-prix">
-									< ?php 
-									foreach (getUniteEtPrix($id) as $unPrix) {
-										echo '<option value="'.$unPrix[0].'|'.$unPrix[5].'">'.$unPrix[1].'€ - '.$unPrix[3].' '.$unPrix[4].'</option>';
-									}
-									? >
-								</select> -->
 							</div>
 							<?php if ($qte > 0) echo '<small class="text-success opacity-75">En Stock';
 							else echo '<small class="text-danger opacity-75">Rupture de Stock' ?></small>

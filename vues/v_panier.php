@@ -1,5 +1,5 @@
 <div class="w-100 text-center h2 text-success fw-bold mb-3">Votre Panier</div>
-<div class="d-flex flex-column align-items-center commander rounded fit m-auto col-lg-8 col-12">
+<div class="d-flex flex-column align-items-center commander rounded m-auto col-lg-8 col-12">
 	<div id="produits-commande" class="d-flex flex-wrap justify-content-left p-3 w-100">
 		<?php
 		if (isset($lesProduitsDuPanier)) {

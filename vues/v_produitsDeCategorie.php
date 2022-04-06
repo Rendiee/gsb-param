@@ -9,9 +9,9 @@
 		<div class="filtre filtre-sticky rounded p-2 bg-white shadow-sm me-1 height-filtre-categorie">
 			<h4 class="filtre-title">Filtre</h4>
 			<hr>
-			<div class="d-flex flex-column m-auto align-items-center">
-				<label for="list-categorie" class="text-center text-decoration-underline fw-bold">Catégories</label>
-				<select class="form-select border-success w-75 text-center" id="list-categorie" name="list-categorie" onchange="location = this.value">
+			<div class="d-flex flex-column m-auto">
+				<label for="list-categorie" class="titre-sous-partie">Catégories</label>
+				<select class="form-select border-success w-75 text-center mx-auto mt-2" id="list-categorie" name="list-categorie" onchange="location = this.value">
 					<?php
 
 					foreach ($lesCategories as $uneCategorie) {
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	<div class="col-xl-9 col-lg-7 col-sm-12">
-		<div class="card-group ms-1 d-flex flex-wrap justify-content-center">
+		<div class="card-group ms-1 d-flex flex-wrap justify-content-left">
 			<?php
 			foreach ($lesProduits as $unProduit) {
 				$description = $unProduit['description'];
@@ -61,17 +61,11 @@
 							<div class="d-flex flex-column align-items-center">
 								<small>À partir de </small>
 								<div class="text-success fw-bold"><?php echo $prix[0] ?>€</div>
-								<!-- <select class="form-select border-success text-center" id="list-prix" name="list-prix">
-									< ?php 
-									foreach (getUniteEtPrix($id) as $unPrix) {
-										echo '<option value="'.$unPrix[0].'|'.$unPrix[5].'">'.$unPrix[1].'€ - '.$unPrix[3].' '.$unPrix[4].'</option>';
-									}
-									? >
-								</select> -->
 							</div>
-							<?php if ($qte > 0) echo '<small class="text-success opacity-75">En Stock';else echo '<small class="text-danger opacity-75">Rupture de Stock' ?></small>
-							<a id="categProduit" href="index.php?uc=voirProduits&categorie=<?php echo $categorie ?>&produit=<?php echo $id ?>&action=ajouterAuPanier">
-								<button class="btn btn-outline-success" type="button">Ajouter</button>
+							<?php if ($qte > 0) echo '<small class="text-success opacity-75">En Stock';
+							else echo '<small class="text-danger opacity-75">Rupture de Stock' ?></small>
+							<a id="categProduit" href="index.php?uc=voirProduits&produit=<?php echo $id ?>&action=voirLeProduit">
+								<button class="btn btn-outline-success" type="button">Voir</button>
 							</a>
 						</div>
 					</div>
