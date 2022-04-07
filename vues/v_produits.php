@@ -4,7 +4,7 @@
 		<div class="filtre filtre-sticky rounded p-2 bg-white shadow-sm me-1">
 			<h4 class="filtre-title">Filtre</h4>
 			<hr>
-			<div class="titre-sous-partie">Prix</div>
+			<div class="text-center">Prix</div>
 			<div class="row">
 				<div class="col-6 d-flex flex-column">
 					<label for="price-min" class="text-filtre-prix">Minimum</label>
@@ -23,7 +23,7 @@
 			</div>
 			<br />
 			<hr>
-			<div class="titre-sous-partie">Marque</div>
+			<div class="text-center">Marque</div>
 			<div class="d-flex flex-column align-items-center">
 				<select class="form-select border-success fit text-center mt-2" id="list-marque" name="list-marque">
 					<option value="default"> - Choisissez une marque - </option>

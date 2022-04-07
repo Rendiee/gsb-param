@@ -17,6 +17,7 @@ switch ($action) {
 			$infoProduit = getInfoProduit($id);
 			$prixMin = getMinPriceProduct($id);
 			$prixMax = getMaxPriceProduct($id);
+			$uniteEtPrix = getUniteEtPrix($infoProduit['id']);
 			include("vues/v_voirProduit.php");
 			break;
 		}
