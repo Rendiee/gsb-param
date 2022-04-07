@@ -25,7 +25,7 @@
                         </select>
                     </div>
                     <div class="d-flex justify-content-start align-items-center pt-2">
-                        <div id="prix" class="text-center me-1"><span class="text-success fw-bold">100.00€</span></div>
+                        <div id="prix" class="text-center me-1"><span class="text-success fw-bold opacity-75">100.00€</span></div>
                     </div>
                     <div class="d-flex w-100 justify-content-center input-group pt-2">
                         <input class="form-control border-success flex-grow-0 fit" value="1" type="number" min="1" max="10" id="nbProduit">

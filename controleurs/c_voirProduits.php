@@ -40,7 +40,20 @@ switch ($action) {
 		}
 
 	case 'nosProduits': {
-			$lesProduits = getTousLesProduits();
+			if (isset($_POST['filtrer']) && ($_POST['price-min'] != '' || $_POST['price-max'] != '' || $_POST['list-marque'] != 'default')) {
+				if (!empty($_POST['price-min']) || $_POST['price-min'] >= '0') {
+					$filtre['price-min'] = $_POST['price-min'];
+				}
+				if (!empty($_POST['price-max']) || $_POST['price-max'] >= '0') {
+					$filtre['price-max'] = $_POST['price-max'];
+				}
+				if ($_POST['list-marque'] != 'default') {
+					$filtre['marque'] = $_POST['list-marque'];
+				}
+				$lesProduits = getTousLesProduitsFiltres($filtre);
+			} else {
+				$lesProduits = getTousLesProduits();
+			}
 			$lesMarques = getLesMarques();
 			include("vues/v_produits.php");
 		}

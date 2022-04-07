@@ -29,22 +29,22 @@
               <li><a href="index.php?uc=voirProduits&categorie=CH&action=voirProduits" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Produits par catégorie</a></li>
               <li><a href="index.php?uc=gererPanier&action=voirPanier" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Mon panier</a></li>
               <?php if (isset($_SESSION['u_hab'])) {
-                      if($_SESSION['u_hab'] == 2 || $_SESSION['u_hab'] == 3){
-                          ?>
-                            <li class="dropdown"><a href="index.php?uc=connexion&action=profil" class="dropdown-toggle nav-link rounded-pill px-3 mx-1 fw-bold link-dark" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown">Administration</a>
-                              <ul class="dropdown-menu p-0" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <li><a class="dropdown-item" href="index.php?uc=administrer&action=ajouterProduit">Ajouter un produit</a></li>
-                                <li><a class="dropdown-item" href="index.php?uc=administrer&action=editerProduit">Éditer un produit</a></li>
-                                <?php
-                                if($_SESSION['u_hab'] == 3){
-                                  ?>
-                                  <li><a class="dropdown-item" href="index.php?uc=administrer&action=gererStock">Gérer les stocks</a></li>
-                                  <?php
-                                }
-                                ?>
-                              </ul>
-                            </li>
-                          <?php
+                if ($_SESSION['u_hab'] == 2 || $_SESSION['u_hab'] == 3) {
+              ?>
+                  <li class="dropdown"><a href="index.php?uc=connexion&action=profil" class="dropdown-toggle nav-link rounded-pill px-3 mx-1 fw-bold link-dark" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown">Administration</a>
+                    <ul class="dropdown-menu p-0" aria-labelledby="navbarDarkDropdownMenuLink">
+                      <li><a class="dropdown-item" href="index.php?uc=administrer&action=ajouterProduit">Ajouter un produit</a></li>
+                      <li><a class="dropdown-item" href="index.php?uc=administrer&action=editerProduit">Éditer un produit</a></li>
+                      <?php
+                      if ($_SESSION['u_hab'] == 3) {
+                      ?>
+                        <li><a class="dropdown-item" href="index.php?uc=administrer&action=gererStock">Gérer les stocks</a></li>
+                      <?php
+                      }
+                      ?>
+                    </ul>
+                  </li>
+              <?php
                 }
                 echo '<li><a href="index.php?uc=connexion&action=profil" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Mon profil</a></li>';
               } ?>

@@ -2,46 +2,47 @@
 <div class="d-flex flex-wrap justify-content-center">
 	<div class="col-xl-3 col-lg-4 col-md-6 col-9 p-1">
 		<div class="filtre filtre-sticky rounded p-2 bg-white shadow-sm me-1">
-			<h4 class="filtre-title">Filtre</h4>
-			<hr>
-			<div class="text-center">Prix</div>
-			<div class="row">
-				<div class="col-6 d-flex flex-column">
-					<label for="price-min" class="text-filtre-prix">Minimum</label>
-					<div class="input-group">
-						<input class="form-control text-center m-auto" type="text" id="price-min" name="price-min" size="10" maxlength="3" placeholder="Min">
-						<span class="input-group-text"><i class="bi bi-currency-euro"></i></span>
+			<form action="index.php?uc=voirProduits&action=nosProduits" method="POST">
+				<h4 class="filtre-title">Filtre</h4>
+				<hr>
+				<div class="text-center">Prix</div>
+				<div class="row">
+					<div class="col-6 d-flex flex-column">
+						<label for="price-min" class="text-filtre-prix">Minimum</label>
+						<div class="input-group">
+							<input class="form-control text-center m-auto" type="text" id="price-min" name="price-min" size="10" maxlength="3" placeholder="Min">
+							<span class="input-group-text"><i class="bi bi-currency-euro"></i></span>
+						</div>
+					</div>
+					<div class="col-6 d-flex flex-column">
+						<label for="price-max" class="text-filtre-prix">Maximum</label>
+						<div class="input-group">
+							<input class="form-control text-center m-auto" type="text" id="price-max" name="price-max" size="10" maxlength="3" placeholder="Max">
+							<span class="input-group-text"><i class="bi bi-currency-euro"></i></span>
+						</div>
 					</div>
 				</div>
-				<div class="col-6 d-flex flex-column">
-					<label for="price-max" class="text-filtre-prix">Maximum</label>
-					<div class="input-group">
-						<input class="form-control text-center m-auto" type="text" id="price-max" name="price-max" size="10" maxlength="3" placeholder="Max">
-						<span class="input-group-text"><i class="bi bi-currency-euro"></i></span>
-					</div>
+				<br />
+				<hr>
+				<div class="text-center">Marque</div>
+				<div class="d-flex flex-column align-items-center">
+					<select class="form-select border-success fit mt-2" id="list-marque" name="list-marque">
+						<option value="default"> - Choisissez une marque - </option>
+						<?php
+						foreach ($lesMarques as $uneMarque) {
+						?>
+							<option value="<?php echo $uneMarque['p_marque'] ?>"><?php echo $uneMarque['p_marque'] ?></option>
+						<?php
+						}
+						?>
+					</select>
+					<button type="submit" class="btn btn-success mt-4 align-items-center w-75" name="filtrer">Filtrer</button>
 				</div>
-			</div>
-			<br />
-			<hr>
-			<div class="text-center">Marque</div>
-			<div class="d-flex flex-column align-items-center">
-				<select class="form-select border-success fit text-center mt-2" id="list-marque" name="list-marque">
-					<option value="default"> - Choisissez une marque - </option>
-					<?php
-					foreach ($lesMarques as $uneMarque) {
-						$marque = $uneMarque['p_marque'];
-					?>
-						<option value="<?php echo $marque ?>"><?php echo $marque ?></option>
-					<?php
-					}
-					?>
-				</select>
-				<button type="button" class="btn btn-success mt-4 align-items-center w-75">Filtrer</button>
-			</div>
+			</form>
 		</div>
 	</div>
 	<div class="col-xl-9 col-lg-7 col-sm-12">
-		<div class="card-group ms-1 d-flex flex-wrap justify-content-left">
+		<div class="card-group ms-1 d-flex flex-wrap justify-content-lg-start justify-content-center">
 			<?php
 			if (isset($message)) {
 				echo '<div class="alert alert-danger mt-3">' . $message . '</div>';

@@ -10,7 +10,7 @@
 			<h4 class="filtre-title">Filtre</h4>
 			<hr>
 			<div class="d-flex flex-column m-auto">
-				<label for="list-categorie" class="titre-sous-partie">Catégories</label>
+				<label for="list-categorie" class="text-center">Catégories</label>
 				<select class="form-select border-success w-75 text-center mx-auto mt-2" id="list-categorie" name="list-categorie" onchange="location = this.value">
 					<?php
 
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	<div class="col-xl-9 col-lg-7 col-sm-12">
-		<div class="card-group ms-1 d-flex flex-wrap justify-content-left">
+		<div class="card-group ms-1 d-flex flex-wrap justify-content-lg-start justify-content-center">
 			<?php
 			foreach ($lesProduits as $unProduit) {
 				$description = $unProduit['description'];
