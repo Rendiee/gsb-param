@@ -39,3 +39,13 @@ $(document).ready(function () {
 		$("#nbProduit").val("0");
 	}
 });
+
+$(function () {
+	$("#formFiltrer").on('submit', function (event) {
+		$("#noFiltre").remove();
+		if(($("input[name='price-min']").val() == '' && $("input[name='price-max']").val() == '' && $("select[name='list-marque']").val() == 'default')){
+			$("#formFiltrer").append('<div id="noFiltre" class="text-danger text-center small">Veuillez saisir un filtre</div>');
+			event.preventDefault();
+		}
+	});
+});
