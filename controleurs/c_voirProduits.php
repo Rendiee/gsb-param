@@ -13,6 +13,9 @@ switch ($action) {
 			break;
 		}
 	case 'voirLeProduit': {
+			if (isset($_POST['ajouter'])) {
+				// recuperation des infos du produit ajouter au panier
+			}
 			$id = $_REQUEST['produit'];
 			$infoProduit = getInfoProduit($id);
 			$prixMin = getMinPriceProduct($id);

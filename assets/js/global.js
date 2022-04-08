@@ -35,17 +35,6 @@ $(function () {
 	});
 });
 
-$(document).ready(function () {
-	if ($("#list-prix").children(":selected").attr("id") > 0) {
-		$("#prix").append('<small id="stock" class="text-success pt-2 opacity-75"> - En Stock</small>');
-	} else {
-		$("#prix").append('<small id="stock" class="text-danger pt-2 opacity-75"> - Rupture de Stock</small>');
-		$("#ajoutPanier").attr("disabled", true);
-		$("#nbProduit").attr("disabled", true);
-		$("#nbProduit").val("0");
-	}
-});
-
 $(function () {
 	$("#formFiltrer").on("submit", function (event) {
 		$("#noFiltre").remove();
