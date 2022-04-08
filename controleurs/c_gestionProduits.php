@@ -14,5 +14,9 @@ switch ($action) {
 			include('./vues/v_gererStock.php');
 			break;
 		}
-    }
-?>
+
+	default: {
+			header('location: index.php?uc=gererPanier&action=voirPanier');
+			break;
+		}
+}

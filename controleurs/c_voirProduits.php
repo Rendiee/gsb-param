@@ -3,7 +3,7 @@
 initPanier(); // se charge de réserver un emplacement mémoire pour le panier si pas encore fait
 $action = $_REQUEST['action'];
 switch ($action) {
-	case 'voirProduits': {
+	case 'produitsCategorie': {
 			$lesCategories = getLesCategories();
 			$categorie = $_REQUEST['categorie'];
 			$categorieLibelle = getTitreCategorie($categorie);
@@ -32,7 +32,7 @@ switch ($action) {
 				// on recharge la même page ( NosProduits si pas categorie passée dans l'url')
 				if (isset($_REQUEST['categorie'])) {
 					$categorie = $_REQUEST['categorie'];
-					header('Location:index.php?uc=voirProduits&action=voirProduits&categorie=' . $categorie);
+					header('Location:index.php?uc=voirProduits&action=produitsCategorie&categorie=' . $categorie);
 				} else
 					header('Location:index.php?uc=voirProduits&action=nosProduits');
 			}

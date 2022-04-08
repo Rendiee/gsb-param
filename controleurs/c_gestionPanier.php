@@ -66,4 +66,8 @@ switch ($action) {
 
 			break;
 		}
+	default: {
+			header('location: index.php?uc=gererPanier&action=voirPanier');
+			break;
+		}
 }

@@ -33,6 +33,10 @@
 			include("controleurs/c_gestionProduits.php");
 			break;
 		}
+		default :{
+			header('location: index.php?uc=accueil');
+			break;
+		}
 	}
 	echo '</div>';
 	include("vues/v_footer.php") ;
