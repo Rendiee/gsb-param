@@ -1,6 +1,7 @@
 <?php
 
 $action = $_REQUEST['action'];
+$_SESSION['page'] = 'navbarDarkDropdownMenuLink';
 switch ($action) {
 	case 'ajouterProduit': {
 			include('./vues/v_ajouterProduit.php');

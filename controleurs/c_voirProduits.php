@@ -63,7 +63,7 @@ switch ($action) {
 
 	case 'nosProduits': {
 			if (isset($_POST['suppFiltre'])) {
-				unset($_SESSION['filtre']);
+				$_SESSION['filtre'] = false;
 			}
 			$_SESSION['page'] = 'nosproduits';
 			if (isset($_POST['filtrer']) && ($_POST['price-min'] != '' || $_POST['price-max'] != '' || $_POST['list-marque'] != 'default')) {
@@ -78,7 +78,7 @@ switch ($action) {
 				}
 				$_SESSION['filtre'] = $filtre;
 			}
-			if (isset($_SESSION['filtre'])) {
+			if ($_SESSION['filtre'] !== false) {
 				$lesProduits = getTousLesProduitsFiltres($_SESSION['filtre']);
 			} else {
 				$lesProduits = getTousLesProduits();

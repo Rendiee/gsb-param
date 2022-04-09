@@ -39,6 +39,7 @@ switch ($action) {
 			if (!isset($_SESSION['u_hab'])) {
 				header('location: index.php?uc=connexion&action=connexion');
 			} else {
+				$_SESSION['page'] = 'profil';
 				$info = infoProfil();
 				include("vues/v_profil.php");
 			}

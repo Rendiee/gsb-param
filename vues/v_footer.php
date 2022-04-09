@@ -38,7 +38,7 @@
             });
             $(function() {
                 let filtre = <?php echo json_encode($_SESSION['filtre']); ?>;
-                if (filtre !== 'undefined') {
+                if (filtre !== 'undefined' && filtre !== false) {
                     $("#formFiltrer").after('<form action="index.php?uc=voirProduits&action=nosProduits" method="POST" id=\'formSuppFiltre\' class="w-100"><button type="submit" onclick="location.href=\'index.php?uc=voirProduits&action=nosProduits\'" class="mx-auto btn btn-outline-danger mt-2 align-items-center w-75 input-group d-flex justify-content-around" name="suppFiltre"><div>Supprime filtre actif</div><i class="bi bi-x-circle"></i></button>');
                 }
             });

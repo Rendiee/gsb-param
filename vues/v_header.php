@@ -46,7 +46,7 @@
                   </li>
               <?php
                 }
-                echo '<li><a href="index.php?uc=connexion&action=profil" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Mon profil</a></li>';
+                echo '<li><a id="profil" href="index.php?uc=connexion&action=profil" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Mon profil</a></li>';
               } ?>
             </ul>
           </div>
