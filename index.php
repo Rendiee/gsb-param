@@ -12,6 +12,7 @@ else
 include("vues/v_header.php");
 echo '<div class="container my-4">';
 $_SESSION['page'] = 'accueil';
+$_SESSION['filtre'] = false;
 switch ($uc) {
 	case 'accueil': {
 			include("vues/v_accueil.php");
