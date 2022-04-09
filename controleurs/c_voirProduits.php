@@ -78,7 +78,7 @@ switch ($action) {
 				}
 				$_SESSION['filtre'] = $filtre;
 			}
-			if ($_SESSION['filtre'] !== false) {
+			if (isset($_SESSION['filtre']) && $_SESSION['filtre'] !== false) {
 				$lesProduits = getTousLesProduitsFiltres($_SESSION['filtre']);
 			} else {
 				$lesProduits = getTousLesProduits();
