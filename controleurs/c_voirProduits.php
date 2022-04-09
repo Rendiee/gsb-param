@@ -4,6 +4,7 @@ initPanier(); // se charge de réserver un emplacement mémoire pour le panier s
 $action = $_REQUEST['action'];
 switch ($action) {
 	case 'produitsCategorie': {
+			$_SESSION['page'] = 'categories';
 			$lesCategories = getLesCategories();
 			$categorie = $_REQUEST['categorie'];
 			$categorieLibelle = getTitreCategorie($categorie);
@@ -13,11 +14,29 @@ switch ($action) {
 			break;
 		}
 	case 'voirLeProduit': {
+			if (isset($_GET['categorie'])) {
+				$_SESSION['page'] = 'categories';
+			} else {
+				$_SESSION['page'] = 'nosproduits';
+			}
 			if (isset($_POST['ajouter'])) {
 				// recuperation des infos du produit ajouter au panier
 			}
 			$id = $_REQUEST['produit'];
 			$infoProduit = getInfoProduit($id);
+			if (is_null($infoProduit[0])) {
+				if ($_SESSION['page'] == 'categories') {
+					header('location:index.php?uc=voirProduits&categorie=CH&action=produitsCategorie');
+				} else {
+					header('location:index.php?uc=voirProduits&action=nosProduits');
+				}
+			} else {
+				if ($_SESSION['page'] == 'categories') {
+					$categorieActive = "index.php?uc=voirProduits&categorie=CH&action=produitsCategorie";
+				} else {
+					$categorieActive = "index.php?uc=voirProduits&action=nosProduits";
+				}
+			}
 			$prixMin = getMinPriceProduct($id);
 			$prixMax = getMaxPriceProduct($id);
 			$uniteEtPrix = getUniteEtPrix($infoProduit['id']);
@@ -43,6 +62,10 @@ switch ($action) {
 		}
 
 	case 'nosProduits': {
+			if (isset($_POST['suppFiltre'])) {
+				unset($_SESSION['filtre']);
+			}
+			$_SESSION['page'] = 'nosproduits';
 			if (isset($_POST['filtrer']) && ($_POST['price-min'] != '' || $_POST['price-max'] != '' || $_POST['list-marque'] != 'default')) {
 				if (!empty($_POST['price-min']) || $_POST['price-min'] >= '0') {
 					$filtre['price-min'] = $_POST['price-min'];
@@ -53,11 +76,19 @@ switch ($action) {
 				if ($_POST['list-marque'] != 'default') {
 					$filtre['marque'] = $_POST['list-marque'];
 				}
-				$lesProduits = getTousLesProduitsFiltres($filtre);
+				$_SESSION['filtre'] = $filtre;
+			}
+			if (isset($_SESSION['filtre'])) {
+				$lesProduits = getTousLesProduitsFiltres($_SESSION['filtre']);
 			} else {
 				$lesProduits = getTousLesProduits();
 			}
 			$lesMarques = getLesMarques();
 			include("vues/v_produits.php");
+			break;
+		}
+	default: {
+			header('location:index.php?uc=voirProduits&action=nosProduits');
+			break;
 		}
 }

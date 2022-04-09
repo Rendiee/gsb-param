@@ -1,5 +1,6 @@
 ﻿<?php
 $action = $_REQUEST['action'];
+$_SESSION['page'] = 'panier';
 switch ($action) {
 	case 'voirPanier': {
 			$n = nbProduitsDuPanier();

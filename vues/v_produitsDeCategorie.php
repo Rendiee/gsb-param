@@ -65,7 +65,7 @@
 							<?php if ($qte > 0) echo '<small class="text-success opacity-75">En Stock';
 							else echo '<small class="text-danger opacity-75">Rupture de Stock' ?></small>
 							<div class="col-3">
-								<a id="categProduit" href="index.php?uc=voirProduits&produit=<?php echo $id ?>&action=voirLeProduit">
+								<a id="categProduit" href="index.php?uc=voirProduits&produit=<?php echo $id ?>&categorie=active&action=voirLeProduit">
 									<button class="btn btn-outline-success w-100" type="button">Voir</button>
 								</a>
 							</div>

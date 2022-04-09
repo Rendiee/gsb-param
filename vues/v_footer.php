@@ -15,6 +15,31 @@
                 </div>
             </footer>
         </div>
-    </body>
-</html>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        </body>
+
+        </html>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+        <script>
+            let page = <?php echo json_encode($_SESSION['page']); ?>;
+            $('#' + page).css({
+                "text-decoration": "underline #198754",
+                "text-underline-offset": "0.8rem",
+
+            });
+            $('#' + page).mouseenter(function() {
+                $(this).css('text-decoration', 'none');
+            }).mouseleave(function() {
+                $(this).css({
+                    "text-decoration": "underline #198754",
+                    "text-underline-offset": "0.8rem",
+
+                });
+            });
+            $(function() {
+                let filtre = <?php echo json_encode($_SESSION['filtre']); ?>;
+                if (filtre !== 'undefined') {
+                    $("#formFiltrer").after('<form action="index.php?uc=voirProduits&action=nosProduits" method="POST" id=\'formSuppFiltre\' class="w-100"><button type="submit" onclick="location.href=\'index.php?uc=voirProduits&action=nosProduits\'" class="mx-auto btn btn-outline-danger mt-2 align-items-center w-75 input-group d-flex justify-content-around" name="suppFiltre"><div>Supprime filtre actif</div><i class="bi bi-x-circle"></i></button>');
+                }
+            });
+        </script>

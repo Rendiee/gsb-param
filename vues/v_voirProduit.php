@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="card-footer d-flex justify-content-center align-items-center">
-                <button class="btn btn-outline-success col-5 col-xl-4 ms-1" type="button" onclick="history.go(-1)">Retour</button>
+                <button class="btn btn-outline-success col-5 col-xl-4 ms-1" type="button" onclick="location.href='<?php echo $categorieActive; ?>'">Retour</button>
             </div>
         </div>
     </div>
