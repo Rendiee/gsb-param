@@ -10,8 +10,10 @@
 				$nom = $unProduit['nom'];
 				$marque = $unProduit['marque'];
 				$id = $unProduit['id'];
-
-				$prix = getMinPriceProduct($id);
+				$unite = $unProduit['unite'];
+				$contenance = $unProduit['contenance'];
+				$prix = $unProduit['prix'];
+				$qte = $unProduit['quantite'];
 
 				$description = substr($description, 0, 80);
 				$description = $description . '...';
@@ -24,7 +26,13 @@
 						<img class="img-product" src="<?php echo $image ?>" alt="image product">
 						<p class="card-text description-product"><?php echo $description ?></p>
 						<div class="card-footer d-flex justify-content-between align-items-center">
-							<div class="text-success fw-bold"><?php echo $prix[0] ?>€</div>
+							<div class="d-flex flex-column align-items-center">
+								<div class="d-flex">
+									<div class="text-success fw-bold me-1"><?php echo $prix ?>€</div>
+									<div class="ms-1"><?php echo $contenance . $unite ?></div>
+								</div>
+								<div class="small">Quantite : <?php echo $qte ?></div>
+							</div>
 							<a href="index.php?uc=gererPanier&produit=<?php echo $id ?>&action=supprimerUnProduit" onclick="return confirm('Voulez-vous vraiment retirer cet article ?');">
 								<button class="btn btn-outline-success" type="button">Retirer</button>
 							</a>

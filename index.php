@@ -3,6 +3,7 @@ session_start();
 require_once("modele/fonctions.inc.php");
 require_once("modele/bd.produits.inc.php");
 require_once("modele/connexion.inc.php");
+initPanier(); // se charge de réserver un emplacement mémoire pour le panier si pas encore fait
 
 if (!isset($_REQUEST['uc']))
 	$uc = 'accueil';
@@ -11,10 +12,9 @@ else
 
 include("vues/v_header.php");
 echo '<div class="container my-4">';
-$_SESSION['page'] = 'accueil';
-$_SESSION['filtre'] = false;
 switch ($uc) {
 	case 'accueil': {
+			$_SESSION['page'] = 'accueil';
 			include("vues/v_accueil.php");
 			break;
 		}

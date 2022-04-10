@@ -1,6 +1,5 @@
 ﻿<?php
 // contrôleur qui gère l'affichage des produits
-initPanier(); // se charge de réserver un emplacement mémoire pour le panier si pas encore fait
 $action = $_REQUEST['action'];
 switch ($action) {
 	case 'produitsCategorie': {
@@ -14,25 +13,26 @@ switch ($action) {
 			break;
 		}
 	case 'voirLeProduit': {
-			if (isset($_GET['categorie'])) {
-				$_SESSION['page'] = 'categories';
+			if (isset($_GET['categorie']) || is_array($_SESSION['page'])) {
+				if (isset($_GET['categorie'])) {
+					$_SESSION['page'] = array();
+					$_SESSION['page'][] = 'categories';
+					$_SESSION['page'][] = $_GET['categorie'];
+				}
 			} else {
 				$_SESSION['page'] = 'nosproduits';
-			}
-			if (isset($_POST['ajouter'])) {
-				// recuperation des infos du produit ajouter au panier
 			}
 			$id = $_REQUEST['produit'];
 			$infoProduit = getInfoProduit($id);
 			if (is_null($infoProduit[0])) {
-				if ($_SESSION['page'] == 'categories') {
+				if ($_SESSION['page'][0] == 'categories') {
 					header('location:index.php?uc=voirProduits&categorie=CH&action=produitsCategorie');
 				} else {
 					header('location:index.php?uc=voirProduits&action=nosProduits');
 				}
 			} else {
-				if ($_SESSION['page'] == 'categories') {
-					$categorieActive = "index.php?uc=voirProduits&categorie=CH&action=produitsCategorie";
+				if ($_SESSION['page'][0] == 'categories') {
+					$categorieActive = "index.php?uc=voirProduits&categorie=" . $_SESSION['page'][1] . "&action=produitsCategorie";
 				} else {
 					$categorieActive = "index.php?uc=voirProduits&action=nosProduits";
 				}
@@ -45,8 +45,9 @@ switch ($action) {
 		}
 	case 'ajouterAuPanier': {
 			$idProduit = $_REQUEST['produit'];
-
-			$ok = ajouterAuPanier($idProduit);
+			$contenance = $_POST['list-contenance'];
+			$qte = $_POST['quantite'];
+			$ok = ajouterAuPanier($idProduit, $contenance, $qte);
 			if (!$ok) {
 				$message = "Cet article est déjà dans le panier !!";
 				include("vues/v_message.php");

@@ -18,6 +18,7 @@ if (isset($_POST['connexion'])) {
 	}
 }
 $action = $_REQUEST['action'];
+$_SESSION['page'] = 'profil';
 switch ($action) {
 	case 'inscription': {
 			if (isset($_SESSION['u_hab'])) {
@@ -39,7 +40,6 @@ switch ($action) {
 			if (!isset($_SESSION['u_hab'])) {
 				header('location: index.php?uc=connexion&action=connexion');
 			} else {
-				$_SESSION['page'] = 'profil';
 				$info = infoProfil();
 				include("vues/v_profil.php");
 			}
@@ -50,6 +50,8 @@ switch ($action) {
 				header('location: index.php?uc=connexion&action=connexion');
 			} else {
 				session_destroy();
+				session_start();
+				$_SESSION['filtre'] = false;
 				header('location: index.php??uc=accueil');
 			}
 			break;
