@@ -85,8 +85,8 @@ function getLesIdProduitsDuPanier()
 function nbProduitsDuPanier()
 {
 	$n = 0;
-	if (isset($_SESSION['produits'])) {
-		$n = count($_SESSION['produits']);
+	if (isset($_SESSION['produits'][0])) {
+		$n = count($_SESSION['produits'][0]);
 	}
 	return $n;
 }

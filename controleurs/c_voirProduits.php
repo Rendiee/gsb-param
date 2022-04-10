@@ -53,11 +53,11 @@ switch ($action) {
 				include("vues/v_message.php");
 			} else {
 				// on recharge la même page ( NosProduits si pas categorie passée dans l'url')
-				if (isset($_REQUEST['categorie'])) {
-					$categorie = $_REQUEST['categorie'];
-					header('Location:index.php?uc=voirProduits&action=produitsCategorie&categorie=' . $categorie);
-				} else
-					header('Location:index.php?uc=voirProduits&action=nosProduits');
+				if ($_SESSION['page'][0] == 'categories') {
+					header("location:index.php?uc=voirProduits&categorie=" . $_SESSION['page'][1] . "&action=produitsCategorie");
+				} else {
+					header('location:index.php?uc=voirProduits&action=nosProduits');
+				}
 			}
 			break;
 		}
