@@ -219,7 +219,7 @@ function getTousLesProduitsFiltres($filtre)
 			$requete->bindParam(':prixMin', $filtreMin, PDO::PARAM_INT);
 			$requete->bindParam(':marque', $filtre['marque'], PDO::PARAM_STR);
 		} elseif (isset($filtre['price-max']) && isset($filtre['marque'])) {
-			$filtreMin = intval($filtre['price-max']);
+			$filtreMax = intval($filtre['price-max']);
 			$requete = $monPdo->prepare('SELECT p.p_id as id, p.p_nom as nom, p.p_photo as photo, p.p_description as description, p.p_marque as marque, r.r_prixVente as prix, SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id AND r.r_prixVente <= :prixMax WHERE p_marque = :marque GROUP BY p.p_id;');
 			$requete->bindParam(':prixMax', $filtreMax, PDO::PARAM_INT);
 			$requete->bindParam(':marque', $filtre['marque'], PDO::PARAM_STR);
