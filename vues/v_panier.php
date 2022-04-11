@@ -33,7 +33,7 @@
 										<div class="ms-1"><?php echo $contenance . ' ' . $unite ?></div>
 									</div>
 									<div class="small d-flex align-items-center input-group">
-										<div class="me-1">Quantite :</div><input class="border border-success rounded w-25 p-1" name="quantite" type="number" min="1" max="10" value="<?php echo $qte ?>">
+										<div class="me-1">Quantite :</div><input class="border border-success rounded w-25 p-1 qte" name="quantite" type="number" min="1" max="10" value="<?php echo $qte ?>">
 									</div>
 								</div>
 								<button class="btn btn-outline-success" type="submit" name="retirer" value="<?php echo $id . '|' . $unProduit['idContenance'] ?>" onclick="return confirm('Voulez-vous vraiment retirer cet article ?');">Retirer</button>
@@ -58,3 +58,14 @@
 		</a>
 	</div>
 </div>
+<script>
+	$(function() {
+		$(".qte").on("change", function() {
+			if (parseInt($(this).val()) > 10) {
+				$(this).val(10);
+			} else if (parseInt($(this).val()) < 1) {
+				$(this).val(1);
+			}
+		});
+	});
+</script>

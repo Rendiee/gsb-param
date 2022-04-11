@@ -49,11 +49,10 @@ switch ($action) {
 			$qte = $_POST['quantite'];
 			$ok = ajouterAuPanier($idProduit, $contenance, $qte);
 			if (!$ok) {
-				$message = "Cet article est déjà dans le panier !!";
-				include("vues/v_message.php");
+				$_SESSION['message'] = "Cet article est déjà dans le panier !";
+				header("Location: " . $_SERVER["HTTP_REFERER"]); // recharge la page du produit
 			} else {
-				// on recharge la même page ( NosProduits si pas categorie passée dans l'url')
-				if ($_SESSION['page'][0] == 'categories') {
+				if ($_SESSION['page'][0] == 'categories') { // on recharge la même page ( NosProduits si pas categorie passée dans la session')
 					header("location:index.php?uc=voirProduits&categorie=" . $_SESSION['page'][1] . "&action=produitsCategorie");
 				} else {
 					header('location:index.php?uc=voirProduits&action=nosProduits');

@@ -1,3 +1,7 @@
+<?php if (isset($_SESSION['message'])) {
+    echo '<div class="m-auto fit alert alert-danger mb-2">' . $_SESSION['message'] . '</div>';
+}
+unset($_SESSION['message']) ?>
 <form class="w-75 m-auto" method="POST" action="index.php?uc=voirProduits&produit=<?php echo $id ?>&action=ajouterAuPanier">
     <div class="d-flex flex-lg-row flex-column bg-white border rounded shadow">
         <img class="m-auto h-100 p-1 col-5 pt-3" src="assets/<?php echo $infoProduit['photo'] ?>" alt="image product">
@@ -28,7 +32,7 @@
                         <div id="prix" class="text-center me-1"></div>
                     </div>
                     <div class="d-flex w-100 justify-content-center input-group pt-2">
-                        <input class="form-control border-success flex-grow-0 fit" value="1" type="number" name="quantite" min="1" max="10" id="nbProduit">
+                        <input class="form-control border-success flex-grow-0 fit qte" value="1" type="number" name="quantite" min="1" max="10" id="nbProduit">
                         <input id="ajoutPanier" class="btn btn-success me-1" type="submit" name="ajouter" value="Ajouter au panier">
                     </div>
                 </div>
@@ -64,5 +68,14 @@
         }
         const prix = <?php echo json_encode($uniteEtPrix); ?>;
         prix.forEach(checkPrix);
+    });
+    $(function() {
+        $(".qte").on("change", function() {
+            if (parseInt($(this).val()) > 10) {
+                $(this).val(10);
+            } else if (parseInt($(this).val()) < 1) {
+                $(this).val(1);
+            }
+        });
     });
 </script>
