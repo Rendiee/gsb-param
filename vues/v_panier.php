@@ -19,25 +19,27 @@
 				$description = $description . '...';
 				// affichage
 		?>
-				<div class="col-xl-4 col-lg-5 col-6">
-					<div class="card m-1">
-						<p class="card-title marque-product"><?php echo $marque ?></p>
-						<div class="name-product title-height"><?php echo $nom ?></div>
-						<img class="img-product" src="<?php echo $image ?>" alt="image product">
-						<p class="card-text description-product"><?php echo $description ?></p>
-						<div class="card-footer d-flex justify-content-between align-items-center">
-							<div class="d-flex flex-column align-items-center">
-								<div class="d-flex">
-									<div class="text-success fw-bold me-1"><?php echo $prix ?>€</div>
-									<div class="ms-1"><?php echo $contenance . $unite ?></div>
+				<div class="col-xxl-4 col-xl-5 col-lg-6 col-md-5 col-6">
+					<form method="POST" action="index.php?uc=gererPanier&action=supprimerUnProduit">
+						<div class="card m-1">
+							<p class="card-title marque-product"><?php echo $marque ?></p>
+							<div class="name-product title-height"><?php echo $nom ?></div>
+							<img class="img-product" src="<?php echo $image ?>" alt="image product">
+							<p class="card-text description-product"><?php echo $description ?></p>
+							<div class="card-footer d-flex justify-content-between align-items-center">
+								<div class="d-flex flex-column align-items-start col-8">
+									<div class="d-flex">
+										<div class="text-success fw-bold me-1"><?php echo $prix ?>€</div>
+										<div class="ms-1"><?php echo $contenance . ' ' . $unite ?></div>
+									</div>
+									<div class="small d-flex align-items-center input-group">
+										<div class="me-1">Quantite :</div><input class="border border-success rounded w-25 p-1" name="quantite" type="number" min="1" max="10" value="<?php echo $qte ?>">
+									</div>
 								</div>
-								<div class="small">Quantite : <?php echo $qte ?></div>
+								<button class="btn btn-outline-success" type="submit" name="retirer" value="<?php echo $id . '|' . $unProduit['idContenance'] ?>" onclick="return confirm('Voulez-vous vraiment retirer cet article ?');">Retirer</button>
 							</div>
-							<a href="index.php?uc=gererPanier&produit=<?php echo $id ?>&action=supprimerUnProduit" onclick="return confirm('Voulez-vous vraiment retirer cet article ?');">
-								<button class="btn btn-outline-success" type="button">Retirer</button>
-							</a>
 						</div>
-					</div>
+					</form>
 				</div>
 		<?php
 			}

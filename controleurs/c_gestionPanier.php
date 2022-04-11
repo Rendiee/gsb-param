@@ -15,11 +15,11 @@ switch ($action) {
 			break;
 		}
 	case 'supprimerUnProduit': {
-			$idProduit = $_REQUEST['produit'];
-			retirerDuPanier($idProduit);
-			$desIdProduit = getLesIdProduitsDuPanier();
-			$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
-			include("vues/v_panier.php");
+			$result_explode = explode('|', $_POST['retirer']);
+			$idProduit = $result_explode[0];
+			$idContenance = $result_explode[1];
+			retirerDuPanier($idProduit, $idContenance);
+			header('location: index.php?uc=gererPanier&action=voirPanier');
 			break;
 		}
 	case 'passerCommande':
@@ -58,13 +58,8 @@ switch ($action) {
 		}
 
 	case 'videPanier': {
-			$lesIdProduit = getLesIdProduitsDuPanier();
-			foreach ($lesIdProduit as $produit) {
-				retirerDuPanier($produit);
-			}
-			$message = "Votre panier est vide !";
-			include("vues/v_panier.php");
-
+			supprimerPanier();
+			header('location: index.php?uc=gererPanier&action=voirPanier');
 			break;
 		}
 	default: {

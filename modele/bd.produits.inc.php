@@ -96,7 +96,7 @@ function getLesProduitsDuTableau($desIdProduit)
 		$lesProduits = array();
 		if ($nbProduits != 0) {
 			foreach ($desIdProduit as $unIdProduit) {
-				$req = 'SELECT p.p_id as id, p.p_nom as nom, p.p_photo as photo, p.p_description as description, p.p_marque as marque, round(r.r_prixVente, 2) as prix, co.co_unite as unite, co.co_contenance as contenance FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id JOIN contenance co ON co.co_id=r.co_id AND co.co_id = "' . $unIdProduit[1] . '" INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE p.`p_id` = "' . $unIdProduit[0] . '" GROUP BY p.p_id;';
+				$req = 'SELECT p.p_id as id, p.p_nom as nom, p.p_photo as photo, p.p_description as description, p.p_marque as marque, round(r.r_prixVente, 2) as prix, co.co_unite as unite, co.co_contenance as contenance, r.co_id as idContenance FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id JOIN contenance co ON co.co_id=r.co_id AND co.co_id = "' . $unIdProduit[1] . '" INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE p.`p_id` = "' . $unIdProduit[0] . '" GROUP BY p.p_id;';
 				$res = $monPdo->query($req);
 				$unProduit = $res->fetch();
 				$unProduit['quantite'] = $unIdProduit[2];

@@ -91,18 +91,31 @@ function nbProduitsDuPanier()
 	return $n;
 }
 /**
- * Retire un de produits du panier
+ * Retire un des produits du panier
  *
  * Recherche l'index de l'idProduit dans la variable session
  * et détruit la valeur à ce rang
  
  * @param string $idProduit identifiant de produit
+ * @param string $idContenance identifiant de la contenance
  
  */
-function retirerDuPanier($idProduit)
+function retirerDuPanier($idProduit, $idContenance)
 {
-	$index = array_search($idProduit, $_SESSION['produits']);
-	unset($_SESSION['produits'][$index]);
+	$index = 0;
+	$ok = false;
+	$nb = sizeof($_SESSION['produits']) - 1;
+	foreach ($_SESSION['produits'] as $value) {
+		if ($value[0] == $idProduit && $value[1] == $idContenance) {
+			unset($_SESSION['produits'][$index]);
+			$ok = true;
+		}
+		$index++;
+	}
+	if ($ok && $nb > 0) {
+		array_unshift($_SESSION['produits'], $_SESSION['produits'][$nb]);
+		unset($_SESSION['produits'][$nb]);
+	}
 }
 /**
  * teste si une chaîne a un format de code postal
