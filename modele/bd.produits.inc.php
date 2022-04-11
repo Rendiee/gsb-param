@@ -48,6 +48,39 @@ function getLesInfosCategorie($idCategorie)
 		die();
 	}
 }
+function produitExiste($idProduit, $contenance)
+{
+	try {
+		$monPdo = connexionPDO();
+		$res = $monPdo->prepare('SELECT p_id as id FROM remplir WHERE p_id = :id AND co_id = :id_co');
+		$res->bindParam(':id', $idProduit, PDO::PARAM_INT);
+		$res->bindParam(':id_co', $contenance, PDO::PARAM_INT);
+		$res->execute();
+		$laLigne = $res->fetch();
+		if (empty($laLigne)) {
+			return false;
+		} else
+			return true;
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+function quantiteDispo($idProduit, $contenance)
+{
+	try {
+		$monPdo = connexionPDO();
+		$res = $monPdo->prepare('SELECT r_qteStock as quantite FROM remplir WHERE p_id = :id AND co_id = :id_co');
+		$res->bindParam(':id', $idProduit, PDO::PARAM_INT);
+		$res->bindParam(':id_co', $contenance, PDO::PARAM_INT);
+		$res->execute();
+		$laLigne = $res->fetch();
+		return $laLigne;
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
 /**
  * Retourne sous forme d'un tableau associatif tous les produits de la
  * catégorie passée en argument

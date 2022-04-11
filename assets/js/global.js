@@ -47,6 +47,17 @@ $(function () {
 				'<div id="noFiltre" class="text-danger text-center small mt-1 shakeDiv">Veuillez saisir un filtre</div>'
 			);
 			event.preventDefault();
+			$("#noFiltre").delay(4000).slideUp("fast");
+		}
+	});
+});
+
+$(function () {
+	$(".qte").on("change", function () {
+		if (parseInt($(this).val()) > 10) {
+			$(this).val(10);
+		} else if (parseInt($(this).val()) < 1) {
+			$(this).val(1);
 		}
 	});
 });

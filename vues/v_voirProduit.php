@@ -1,5 +1,5 @@
 <?php if (isset($_SESSION['message'])) {
-    echo '<div class="m-auto fit alert alert-danger mb-2">' . $_SESSION['message'] . '</div>';
+    echo $_SESSION['message'];
 }
 unset($_SESSION['message']) ?>
 <form class="w-75 m-auto" method="POST" action="index.php?uc=voirProduits&produit=<?php echo $id ?>&action=ajouterAuPanier">
@@ -68,14 +68,5 @@ unset($_SESSION['message']) ?>
         }
         const prix = <?php echo json_encode($uniteEtPrix); ?>;
         prix.forEach(checkPrix);
-    });
-    $(function() {
-        $(".qte").on("change", function() {
-            if (parseInt($(this).val()) > 10) {
-                $(this).val(10);
-            } else if (parseInt($(this).val()) < 1) {
-                $(this).val(1);
-            }
-        });
     });
 </script>

@@ -44,19 +44,37 @@ switch ($action) {
 			break;
 		}
 	case 'ajouterAuPanier': {
-			$idProduit = $_REQUEST['produit'];
-			$contenance = $_POST['list-contenance'];
-			$qte = $_POST['quantite'];
-			$ok = ajouterAuPanier($idProduit, $contenance, $qte);
-			if (!$ok) {
-				$_SESSION['message'] = "Cet article est déjà dans le panier !";
-				header("Location: " . $_SERVER["HTTP_REFERER"]); // recharge la page du produit
-			} else {
-				if ($_SESSION['page'][0] == 'categories') { // on recharge la même page ( NosProduits si pas categorie passée dans la session')
-					header("location:index.php?uc=voirProduits&categorie=" . $_SESSION['page'][1] . "&action=produitsCategorie");
+			if (isset($_POST['list-contenance']) && isset($_POST['quantite']) && isset($_POST['ajouter'])) {
+				$idProduit = $_REQUEST['produit'];
+				$contenance = $_POST['list-contenance'];
+				$qte = $_POST['quantite'];
+				if (produitExiste($idProduit, $contenance)) {
+					$qteDispo = quantiteDispo($idProduit, $contenance);
+					if ($qte > 0 && $qteDispo[0] >= $qte) {
+						$ajoutOk = ajouterAuPanier($idProduit, $contenance, $qte);
+						if (!$ajoutOk) {
+							$_SESSION['message'] = '<div class="m-auto fit alert alert-danger mb-2">Cet article est déjà dans le panier !</div>';
+							header("Location: " . $_SERVER["HTTP_REFERER"]); // recharge la page du produit
+						} else {
+							if ($_SESSION['page'][0] == 'categories') { // on recharge la même page ( NosProduits si pas categorie passée dans la session')
+								header("location:index.php?uc=voirProduits&categorie=" . $_SESSION['page'][1] . "&action=produitsCategorie");
+							} else {
+								header('location:index.php?uc=voirProduits&action=nosProduits');
+							}
+							$_SESSION['message'] = '<div class="m-auto fit alert alert-success mb-2">L\'article a bien été ajouter au panier !</div>';
+							header("Location: " . $_SERVER["HTTP_REFERER"]); // recharge la page du produit
+						}
+					} else {
+						$_SESSION['message'] = '<div class="m-auto fit alert alert-danger mb-2">Il n\'y a pas assez de stock (' . $qteDispo[0] . ')</div>';
+						header("Location: " . $_SERVER["HTTP_REFERER"]); // recharge la page du produit
+					}
 				} else {
-					header('location:index.php?uc=voirProduits&action=nosProduits');
+					$_SESSION['message'] = '<div class="m-auto fit alert alert-danger mb-2">Un problème est survenu</div>';
+					header("Location: " . $_SERVER["HTTP_REFERER"]); // recharge la page du produit
 				}
+			} else {
+				$_SESSION['message'] = '<div class="m-auto fit alert alert-danger mb-2">Un problème est survenu</div>';
+				header("Location: " . $_SERVER["HTTP_REFERER"]); // recharge la page du produit
 			}
 			break;
 		}
