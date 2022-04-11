@@ -98,6 +98,7 @@ function nbProduitsDuPanier()
  
  * @param string $idProduit identifiant de produit
  * @param string $idContenance identifiant de la contenance
+ * array_unshift() déplace le dernier produit du tableau à l'endroit du produit supprimer
  
  */
 function retirerDuPanier($idProduit, $idContenance)
@@ -109,10 +110,11 @@ function retirerDuPanier($idProduit, $idContenance)
 		if ($value[0] == $idProduit && $value[1] == $idContenance) {
 			unset($_SESSION['produits'][$index]);
 			$ok = true;
+			break;
 		}
 		$index++;
 	}
-	if ($ok && $nb > 0) {
+	if ($ok && $nb > 0 && $index != $nb) {
 		array_unshift($_SESSION['produits'], $_SESSION['produits'][$nb]);
 		unset($_SESSION['produits'][$nb]);
 	}
