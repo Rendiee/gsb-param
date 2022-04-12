@@ -26,20 +26,6 @@ footer {
 	min-height: 250px;
 }
 
-#accueil {
-	text-align: center;
-	padding-top: 7%;
-	color: #33d64c;
-}
-
-fieldset {
-	display: block;
-	width: 50%;
-	border: 1px dotted #353535;
-	padding: 2px;
-	overflow: hidden;
-}
-
 .erreur {
 	background-color: rgb(237, 210, 229);
 	color: rgb(203, 28, 128);
@@ -53,50 +39,13 @@ fieldset {
 	width: 100%;
 }
 
-#menu {
-	height: 1.8em;
-}
-
 #produits a {
 	font: 1em "Trebuchet MS", Arial, sans-serif;
-}
-
-#menu li {
-	list-style-type: none;
-	list-style-image: none;
-	float: left;
-	text-align: center;
-	width: 240px;
-	border: 1px solid #600;
-	margin-right: 2px;
-	color: #fff;
-	background: #ccff11;
-}
-
-#menu li a {
-	text-decoration: none;
-}
-
-.commande {
-	position: relative;
-	width: 180px;
-	height: 250px;
-	float: left;
-	padding: 10px;
-	margin: 10px;
-}
-.commande img {
-	position: absolute;
-	bottom: 80px;
 }
 
 #img-size-header {
 	height: auto;
 	width: 100px;
-}
-
-.btn-height {
-	height: 70px;
 }
 
 #produits-commande {

@@ -361,3 +361,43 @@ function getLesMarques()
 		die();
 	}
 }
+
+function getLastIdProduit ()
+{
+	try {
+
+		$monPdo = connexionPDO();
+		$req = 'SELECT MAX(p_id) as maxId FROM produit';
+		$res = $monPdo->query($req);
+		$result = $res->fetch();
+		return $result;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function insertProduct($nom, $imgName, $desc, $marque, $idCategorie)
+{
+	$id = getLastIdProduit()[0];
+	$imgLink = 'img-product/' . $imgName;
+
+	try {
+
+		$monPdo = connexionPDO();
+		$req = $monPdo -> prepare('INSERT INTO produit VALUES (:idProduct, :nomProduct, :imgProduct, :descProduct, :marqueProduct, :idCategorie');
+		$req->bindParam(':idProduct', $id, PDO::PARAM_INT);
+		$req->bindParam(':nomProduct', $nom, PDO::PARAM_STR);
+		$req->bindParam(':imgProduct', $imgLink, PDO::PARAM_STR);
+		$req->bindParam(':descProduct', $desc, PDO::PARAM_STR);
+		$req->bindParam(':marqueProduct', $marque, PDO::PARAM_STR);
+		$req->bindParam(':idCategorie', $idCategorie, PDO::PARAM_INT);
+		$req -> execute();
+		return $req;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
