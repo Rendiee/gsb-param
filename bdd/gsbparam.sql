@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3308
--- Généré le :  jeu. 31 mars 2022 à 10:40
--- Version du serveur :  8.0.18
--- Version de PHP :  7.3.12
+-- Généré le : mar. 12 avr. 2022 à 23:47
+-- Version du serveur :  5.7.31
+-- Version de PHP : 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `gsbparam`
+-- Base de données : `gsbparam`
 --
 
 -- --------------------------------------------------------
@@ -88,21 +87,22 @@ DROP TABLE IF EXISTS `contenance`;
 CREATE TABLE IF NOT EXISTS `contenance` (
   `co_id` int(11) NOT NULL,
   `co_contenance` int(11) NOT NULL,
-  `co_unite` varchar(10) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`co_id`)
+  `un_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`co_id`),
+  KEY `unite_contenance0_FK` (`un_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `contenance`
 --
 
-INSERT INTO `contenance` (`co_id`, `co_contenance`, `co_unite`) VALUES
-(1, 75, 'ml'),
-(2, 150, 'ml'),
-(3, 200, 'ml'),
-(4, 500, 'ml'),
-(5, 20, 'sachets'),
-(6, 40, 'sachets');
+INSERT INTO `contenance` (`co_id`, `co_contenance`, `un_id`) VALUES
+(1, 75, 1),
+(2, 150, 1),
+(3, 200, 1),
+(4, 500, 1),
+(5, 20, 2),
+(6, 40, 2);
 
 -- --------------------------------------------------------
 
@@ -252,6 +252,27 @@ CREATE TABLE IF NOT EXISTS `suggerer` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `unite`
+--
+
+DROP TABLE IF EXISTS `unite`;
+CREATE TABLE IF NOT EXISTS `unite` (
+  `un_id` int(11) NOT NULL,
+  `un_libelle` varchar(20) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`un_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `unite`
+--
+
+INSERT INTO `unite` (`un_id`, `un_libelle`) VALUES
+(1, 'ml'),
+(2, 'sachets');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `utilisateur`
 --
 
@@ -276,17 +297,17 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`u_id`, `u_nom`, `u_prenom`, `u_adresse`, `u_cp`, `u_ville`, `u_email`, `l_id`, `h_id`) VALUES
-(1, 'Villechalane', 'Louis', '8 cours Lafontaine', '29000', 'BREST', 'villechalane.louis@gmail.com', 1, 1),
+(1, 'Villechalane', 'Louis', '8 cours Lafontaine', '29000', 'BREST', 'villechalane.louis@gmail.com', 1, 2),
 (2, 'Andre', 'David', '1 r Aimon de Chissée', '38100', 'GRENOBLE', 'andre.david@gmail.com', 2, 3),
-(3, 'Bedos', 'Christian', '1 r Bénédictins', '65000', 'TARBES', 'bedos.christian@gmail.com', 3, 2),
-(4, 'Tusseau', 'Louis', '22 r Renou', '86000', 'POITIERS', 'tusseau.louis@gmail.com', 4, 2),
-(5, 'Bentot', 'Pascal', '11 av 6 Juin', '67000', 'STRASBOURG', 'bentot.pascal@gmail.com', 5, 2),
-(6, 'Bioret', 'Luc', '1 r Linne', '35000', 'RENNES', 'bioret.luc@gmail.com', 6, 2),
-(7, 'Bunisset', 'Francis', '10 r Nicolas Chorier', '85000', 'LA ROCHE SUR YON', 'bunisset.francis@gmail.com', 7, 2),
-(8, 'Bunisset', 'Denise', '1 r Lionne', '49100', 'ANGERS', 'bunisset.denise@gmail.com', 8, 2),
-(9, 'Cacheux', 'Bernard', '114 r Authie', '34000', 'MONTPELLIER', 'cacheux.bernard@gmail.com', 9, 2),
-(10, 'Cadic', 'Eric', '123 r Caponière', '41000', 'BLOIS', 'cadic.eric@gmail.com', 10, 2),
-(11, 'Charoze', 'Catherine', '100 pl Géants', '33000', 'BORDEAUX', 'charoze.catherine@gmail.com', 11, 2);
+(3, 'Bedos', 'Christian', '1 r Bénédictins', '65000', 'TARBES', 'bedos.christian@gmail.com', 3, 1),
+(4, 'Tusseau', 'Louis', '22 r Renou', '86000', 'POITIERS', 'tusseau.louis@gmail.com', 4, 1),
+(5, 'Bentot', 'Pascal', '11 av 6 Juin', '67000', 'STRASBOURG', 'bentot.pascal@gmail.com', 5, 1),
+(6, 'Bioret', 'Luc', '1 r Linne', '35000', 'RENNES', 'bioret.luc@gmail.com', 6, 1),
+(7, 'Bunisset', 'Francis', '10 r Nicolas Chorier', '85000', 'LA ROCHE SUR YON', 'bunisset.francis@gmail.com', 7, 1),
+(8, 'Bunisset', 'Denise', '1 r Lionne', '49100', 'ANGERS', 'bunisset.denise@gmail.com', 8, 1),
+(9, 'Cacheux', 'Bernard', '114 r Authie', '34000', 'MONTPELLIER', 'cacheux.bernard@gmail.com', 9, 1),
+(10, 'Cadic', 'Eric', '123 r Caponière', '41000', 'BLOIS', 'cadic.eric@gmail.com', 10, 1),
+(11, 'Charoze', 'Catherine', '100 pl Géants', '33000', 'BORDEAUX', 'charoze.catherine@gmail.com', 11, 1);
 
 --
 -- Contraintes pour les tables déchargées
@@ -304,6 +325,12 @@ ALTER TABLE `avis`
 --
 ALTER TABLE `commande`
   ADD CONSTRAINT `commande_utilisateur0_FK` FOREIGN KEY (`u_id`) REFERENCES `utilisateur` (`u_id`);
+
+--
+-- Contraintes pour la table `contenance`
+--
+ALTER TABLE `contenance`
+  ADD CONSTRAINT `unite_contenance0_FK` FOREIGN KEY (`un_id`) REFERENCES `unite` (`un_id`);
 
 --
 -- Contraintes pour la table `contenir`
