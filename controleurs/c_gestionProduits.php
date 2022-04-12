@@ -17,13 +17,28 @@ switch ($action) {
 				} else {
 					//insert product ici
 					insertProduct($_POST['nomproduit'], $_POST['imgproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-marque-produit']);
-					$successProduct = 'Le produit a bien été enregistrer !';
+					$successProduct = 'Le produit a bien été enregistré !';
 				}
 			}
 			$maxId = getLastIdProduit();
 			$lesCategories = getLesCategories();
+			$lesUnites = getUniteContenance();
+			$lesContenances = getContenanceValue();
 			include('./vues/v_ajouterProduit.php');
 			break;
+		}
+	case 'ajouterContenance': {
+		if(isset($_POST['ajoutercontenance'])){
+			if(empty($_POST['nomcontenance'])){
+				$errorContenance = 'Veuillez saisir un nom !';
+			} else {
+				insertContenance($_POST['nomcontenance']);
+				$successContenance = 'La contenance a bien été enregistrée !';
+			}
+		}
+		$lastId = getLastIdContenance();
+		include('./vues/v_ajouterContenance.php');
+		break;
 		}
 	case 'editerProduit': {
 			include('./vues/v_editerProduit.php');

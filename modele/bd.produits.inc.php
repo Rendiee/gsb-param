@@ -402,3 +402,71 @@ function insertProduct($nom, $imgName, $desc, $marque, $idCategorie)
 		die();
 	}
 }
+
+function getUniteContenance()
+{
+	try {
+
+		$monPdo = connexionPDO();
+		$req = 'SELECT un_id, un_libelle FROM unite';
+		$res = $monPdo->query($req);
+		$result = $res->fetchAll();
+		return $result;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function getContenanceValue()
+{
+	try {
+
+		$monPdo = connexionPDO();
+		$req = 'SELECT co_id, co_contenance FROM contenance';
+		$res = $monPdo->query($req);
+		$result = $res->fetchAll();
+		return $result;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function getLastIdContenance()
+{
+	try {
+
+		$monPdo = connexionPDO();
+		$req = 'SELECT MAX(un_id) as idMax FROM unite';
+		$res = $monPdo->query($req);
+		$result = $res->fetch();
+		return $result;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function insertContenance($nom)
+{
+	$id = getLastIdContenance()[0];
+	$id++;
+
+	try {
+
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('INSERT INTO unite VALUES (:idContenance, :nomContenance)');
+		$req->bindParam(':idContenance', $id, PDO::PARAM_INT);
+		$req->bindParam(':nomContenance', $nom, PDO::PARAM_STR);
+		$req->execute();
+		return $req;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}

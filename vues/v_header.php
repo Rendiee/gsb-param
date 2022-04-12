@@ -34,6 +34,7 @@
                   <li class="dropdown"><a href="index.php?uc=connexion&action=profil" class="dropdown-toggle nav-link rounded-pill px-3 mx-1 fw-bold link-dark" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown">Administration</a>
                     <ul class="dropdown-menu p-0" aria-labelledby="navbarDarkDropdownMenuLink">
                       <li><a class="dropdown-item" href="index.php?uc=administrer&action=ajouterProduit">Ajouter un produit</a></li>
+                      <li><a class="dropdown-item" href="index.php?uc=administrer&action=ajouterContenance">Ajouter une contenance</a></li>
                       <li><a class="dropdown-item" href="index.php?uc=administrer&action=editerProduit">Éditer un produit</a></li>
                       <?php
                       if ($_SESSION['u_hab'] == 2) {
