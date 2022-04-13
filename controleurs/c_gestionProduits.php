@@ -5,19 +5,19 @@ switch ($action) {
 	case 'ajouterProduit': {
 			if (isset($_POST['ajouterproduit'])) {
 				if (empty($_POST['nomproduit'])) {
-					$errorProduct = 'Veuillez saisir un nom !';
+					$_SESSION['messageError'] = 'Veuillez saisir un nom !';
 				} else if (empty($_POST['descproduit'])) {
-					$errorProduct = 'Veuillez saisir une description !';
+					$_SESSION['messageError'] = 'Veuillez saisir une description !';
 				} else if (empty($_POST['imgproduit'])) {
-					$errorProduct = 'Veuillez mettre une image !';
+					$_SESSION['messageError'] = 'Veuillez mettre une image !';
 				} else if (empty($_POST['marqueproduit'])) {
-					$errorProduct = 'Veuillez saisir une marque !';
+					$_SESSION['messageError'] = 'Veuillez saisir une marque !';
 				} else if ($_POST['list-marque-produit'] == 'default') {
-					$errorProduct = 'Veuillez choisir une catégorie !';
+					$_SESSION['messageError'] = 'Veuillez choisir une catégorie !';
 				} else {
 					//insert product ici
 					insertProduct($_POST['nomproduit'], $_POST['imgproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-marque-produit']);
-					$successProduct = 'Le produit a bien été enregistré !';
+					$_SESSION['messageSuccess'] = 'Le produit a bien été enregistré !';
 				}
 			}
 			$maxId = getLastIdProduit();
@@ -30,10 +30,10 @@ switch ($action) {
 	case 'ajouterContenance': {
 		if(isset($_POST['ajoutercontenance'])){
 			if(empty($_POST['nomcontenance'])){
-				$errorContenance = 'Veuillez saisir un nom !';
+				$_SESSION['messageError'] = 'Veuillez saisir un nom !';
 			} else {
 				insertContenance($_POST['nomcontenance']);
-				$successContenance = 'La contenance a bien été enregistrée !';
+				$_SESSION['messageSuccess'] = 'La contenance a bien été enregistrée !';
 				header('location: index.php?uc=administrer&action=ajouterContenance');
 			}
 		}
