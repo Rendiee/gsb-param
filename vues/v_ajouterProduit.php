@@ -1,6 +1,6 @@
 <div class="col-10 col-md-9 col-lg-7 col-xl-9 m-auto bg-white px-5 py-4 rounded shadow">
     <h2 class="fw-bold mb-4 text-center">Ajouter un produit</h2>
-    <p class="alert alert-danger">A FAIRE : Gérer l'insert contenance / produit</p>
+    <p class="alert alert-danger">A FAIRE : Gérer l'insert contenance / produit / prix</p>
     <?php if (isset($_SESSION['messageErrorProduit'])) { ?>
         <div class="alert alert-danger text-center w-100">
             <?php echo $_SESSION['messageErrorProduit']; ?>
@@ -40,7 +40,7 @@
                     <div class="col-6">
                         <div class="form-outline form-white mb-4">
                             <label class="form-label" for="unitecontenance">Unité</label>
-                            <select class="form-select border-success" id="list-marque-produit" name="list-marque-produit">
+                            <select class="form-select border-success" id="list-unite-contenance" name="list-unite-contenance">
                                 <option disabled selected value="default">- Unité -</option>
                                     <?php
                                     foreach ($lesUnites as $unite) {
@@ -72,6 +72,10 @@
                         }
                         ?>
                     </select>
+                </div>
+                <div class="form-outline form-white mb-4">
+                    <label class="form-label" for="prixproduit">Prix du produit (€)</label>
+                    <input required type="number" step="0.01" min="0" id="prixproduit" name="prixproduit" class="form-control" />
                 </div>
             </div>
         </div>

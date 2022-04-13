@@ -5,11 +5,11 @@
                 <h2 class="fw-bold mb-4 text-center">Ajouter une contenance</h2>
                 <?php if (isset($_SESSION['messageErrorContenance'])) { ?>
                 <div class="alert alert-danger text-center w-100">
-                    <?php echo $_SESSION['messageErrorContenance']; unset($_SESSION['messageErrorContenance']);?>
+                    <?php echo $_SESSION['messageErrorContenance'];?>
                 </div>
                 <?php } elseif (isset($_SESSION['messageSuccessContenance'])) { ?>
                     <div class="alert alert-success text-center w-100">
-                        <?php echo $_SESSION['messageSuccessContenance']; ?>
+                        <?php echo $_SESSION['messageSuccessContenance'];?>
                     </div>
                 <?php } ?>
                 <form action="index.php?uc=administrer&action=ajouterContenance" method="POST">

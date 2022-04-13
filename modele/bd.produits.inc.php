@@ -435,7 +435,7 @@ function getContenanceValue()
 	}
 }
 
-function getLastIdContenance()
+function getLastIdUnite()
 {
 	try {
 
@@ -451,17 +451,33 @@ function getLastIdContenance()
 	}
 }
 
-function insertContenance($nom)
+function getLastIdContenance()
 {
-	$id = getLastIdContenance()[0];
+	try {
+
+		$monPdo = connexionPDO();
+		$req = 'SELECT MAX(co_id) as idCon FROM contenance';
+		$res = $monPdo->query($req);
+		$result = $res->fetch();
+		return $result;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function insertUnite($id)
+{
+	$id = getLastIdUnite()[0];
 	$id++;
 
 	try {
 
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('INSERT INTO unite VALUES (:idContenance, :nomContenance)');
-		$req->bindParam(':idContenance', $id, PDO::PARAM_INT);
-		$req->bindParam(':nomContenance', $nom, PDO::PARAM_STR);
+		$req = $monPdo->prepare('INSERT INTO unite VALUES (:idUnite, :nomUnite)');
+		$req->bindParam(':idUnite', $id, PDO::PARAM_INT);
+		$req->bindParam(':nomUnite', $nom, PDO::PARAM_STR);
 		$req->execute();
 		return $req;
 	} catch (PDOException $e) {
@@ -469,4 +485,26 @@ function insertContenance($nom)
 		print "Erreur !: " . $e->getMessage();
 		die();
 	}
+}
+
+function insertContenance($valeur, $idUnite)
+{
+	$id = getLastIdContenance();
+	$id++;
+
+	try {
+
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('INSERT INTO contenance VALUES (:idContenance, :valeurContenance, :uniteId)');
+		$req->bindParam(':idContenance', $id, PDO::PARAM_INT);
+		$req->bindParam(':valeurContenance', $valeur, PDO::PARAM_INT);
+		$req->bindParam(':uniteId', $idUnite, PDO::PARAM_STR);
+		$req->execute();
+		return $req;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+
 }

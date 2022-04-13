@@ -17,6 +17,7 @@ switch ($action) {
 				} else {
 					//insert product ici
 					insertProduct($_POST['nomproduit'], $_POST['imgproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-marque-produit']);
+					insertContenance($_POST['contenance'], $_POST['list-unite-contenance']);
 					$_SESSION['messageSuccessProduit'] = 'Le produit a bien été enregistré !';
 				}
 			}
@@ -32,12 +33,12 @@ switch ($action) {
 			if(empty($_POST['nomcontenance'])){
 				$_SESSION['messageErrorContenance'] = 'Veuillez saisir un nom !';
 			} else {
-				insertContenance($_POST['nomcontenance']);
+				insertUnite($_POST['nomcontenance']);
 				$_SESSION['messageSuccessContenance'] = 'La contenance a bien été enregistrée !';
 				header('location: index.php?uc=administrer&action=ajouterContenance');
 			}
 		}
-		$lastId = getLastIdContenance();
+		$lastId = getLastIdUnite();
 		include('./vues/v_ajouterContenance.php');
 		break;
 		}
