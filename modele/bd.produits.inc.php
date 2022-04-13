@@ -467,7 +467,7 @@ function getLastIdContenance()
 	}
 }
 
-function insertUnite($id)
+function insertUnite($nom)
 {
 	$id = getLastIdUnite()[0];
 	$id++;
@@ -506,5 +506,4 @@ function insertContenance($valeur, $idUnite)
 		print "Erreur !: " . $e->getMessage();
 		die();
 	}
-
 }
