@@ -13,8 +13,6 @@ if (isset($_POST['connexion'])) {
 			$_SESSION['u_hab'] = $arr['u_hab'];
 			$_SESSION['u_id'] = $arr['u_id'];
 			$_SESSION['u_email'] = $arr['u_email'];
-			$_SESSION['messageError'] = '';
-			$_SESSION['messageSuccess'] = '';
 			header('Location: index.php?uc=connexion&action=profil');
 		}
 	}

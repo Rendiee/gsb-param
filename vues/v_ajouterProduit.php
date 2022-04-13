@@ -1,13 +1,13 @@
 <div class="col-10 col-md-9 col-lg-7 col-xl-9 m-auto bg-white px-5 py-4 rounded shadow">
     <h2 class="fw-bold mb-4 text-center">Ajouter un produit</h2>
     <p class="alert alert-danger">A FAIRE : Gérer l'insert contenance / produit</p>
-    <?php if (isset($_SESSION['messageError'])) { ?>
+    <?php if (isset($_SESSION['messageErrorProduit'])) { ?>
         <div class="alert alert-danger text-center w-100">
-            <?php echo $_SESSION['messageError']; ?>
+            <?php echo $_SESSION['messageErrorProduit']; ?>
         </div>
-    <?php } elseif (isset($_SESSION['messageSuccess'])) { ?>
+    <?php } elseif (isset($_SESSION['messageSuccessProduit'])) { ?>
         <div class="alert alert-success text-center w-100">
-            <?php echo $_SESSION['messageSuccess']; ?>
+            <?php echo $_SESSION['messageSuccessProduit']; ?>
         </div>
     <?php } ?>
     <form action="" method="POST">
