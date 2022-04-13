@@ -11,12 +11,12 @@
         </div>
     <?php } ?>
     <form action="" method="POST">
+        <div class="fs-4 mb-4 text-center">
+            <span>Produit</span>
+            <span class="text-decoration-underline">N°<?php echo $maxId['maxId'] + 1 ?></span>
+        </div>
         <div class="d-flex align-items-center justify-content-between">
             <div class="col-5">
-                <div class="form-outline form-white mb-4">
-                    <label class="form-label" for="numproduit">Numéro du produit</label>
-                    <input type="number" id="numproduit" name="numproduit" class="form-control" value="<?php echo $maxId['maxId'] + 1 ?>" disabled />
-                </div>
                 <div class="form-outline form-white mb-4">
                     <label class="form-label" for="nomproduit">Nom du produit</label>
                     <input required type="text" id="nomproduit" name="nomproduit" class="form-control" />
@@ -42,13 +42,13 @@
                             <label class="form-label" for="unitecontenance">Unité</label>
                             <select class="form-select border-success" id="list-unite-contenance" name="list-unite-contenance">
                                 <option disabled selected value="default">- Unité -</option>
-                                    <?php
-                                    foreach ($lesUnites as $unite) {
-                                    ?>
-                                        <option value="<?php echo $unite['un_id'] ?>"><?php echo $unite['un_id'] .' - '. $unite['un_libelle'] ?></option>
-                                    <?php
-                                    }
-                                    ?>
+                                <?php
+                                foreach ($lesUnites as $unite) {
+                                ?>
+                                    <option value="<?php echo $unite['un_id'] ?>"><?php echo $unite['un_id'] . ' - ' . $unite['un_libelle'] ?></option>
+                                <?php
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <div class="button-form-center">
+        <div class="button-form-center mt-2">
             <input class="btn btn-success px-5" type="submit" value="Ajouter le produit" name="ajouterproduit">
         </div>
     </form>

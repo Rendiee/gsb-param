@@ -29,18 +29,18 @@ switch ($action) {
 			break;
 		}
 	case 'ajouterContenance': {
-		if(isset($_POST['ajoutercontenance'])){
-			if(empty($_POST['nomcontenance'])){
-				$_SESSION['messageErrorContenance'] = 'Veuillez saisir un nom !';
-			} else {
-				insertUnite($_POST['nomcontenance']);
-				$_SESSION['messageSuccessContenance'] = 'La contenance a bien été enregistrée !';
-				header('location: index.php?uc=administrer&action=ajouterContenance');
+			if (isset($_POST['ajoutercontenance'])) {
+				if (empty($_POST['nomcontenance'])) {
+					$_SESSION['messageErrorContenance'] = 'Veuillez saisir un nom !';
+				} else {
+					insertUnite($_POST['nomcontenance']);
+					$_SESSION['messageSuccessContenance'] = 'La contenance a bien été enregistrée !';
+					header('location: index.php?uc=administrer&action=ajouterContenance');
+				}
 			}
-		}
-		$lastId = getLastIdUnite();
-		include('./vues/v_ajouterContenance.php');
-		break;
+			$lastId = getLastIdUnite();
+			include('./vues/v_ajouterContenance.php');
+			break;
 		}
 	case 'editerProduit': {
 			include('./vues/v_editerProduit.php');
@@ -52,7 +52,7 @@ switch ($action) {
 		}
 
 	default: {
-			header('location: index.php?uc=gererPanier&action=voirPanier');
+			header('location: index.php?uc=accueil');
 			break;
 		}
 }
