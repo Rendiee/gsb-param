@@ -8,9 +8,9 @@
                 <div class="alert alert-danger text-center w-100">
                     <?php echo $errorContenance; ?>
                 </div>
-                <?php } elseif (isset($successProduct)) { ?>
+                <?php } elseif (isset($successContenance)) { ?>
                     <div class="alert alert-success text-center w-100">
-                        <?php echo $successProduct; ?>
+                        <?php echo $successContenance; ?>
                     </div>
                 <?php } ?>
                 <form action="index.php?uc=administrer&action=ajouterContenance" method="POST">

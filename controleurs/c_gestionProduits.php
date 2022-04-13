@@ -34,6 +34,7 @@ switch ($action) {
 			} else {
 				insertContenance($_POST['nomcontenance']);
 				$successContenance = 'La contenance a bien été enregistrée !';
+				header('location: index.php?uc=administrer&action=ajouterContenance');
 			}
 		}
 		$lastId = getLastIdContenance();
