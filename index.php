@@ -34,7 +34,11 @@ switch ($uc) {
 			break;
 		}
 	case 'administrer': {
-			include("controleurs/c_gestionProduits.php");
+			if (isset($_SESSION['u_hab']) && ($_SESSION['u_hab'] == 2 || $_SESSION['u_hab'] == 3)) {
+				include("controleurs/c_gestionProduits.php");
+			} else {
+				header('location: index.php?uc=accueil');
+			}
 			break;
 		}
 	default: {

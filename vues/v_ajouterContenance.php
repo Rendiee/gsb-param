@@ -1,12 +1,14 @@
 <?php if (isset($_SESSION['messageErrorContenance'])) { ?>
-    <div class="alert alert-danger text-center fit mx-auto">
+    <div class="alert alert-danger text-center fit mx-auto message">
         <?php echo $_SESSION['messageErrorContenance']; ?>
     </div>
-<?php } elseif (isset($_SESSION['messageSuccessContenance'])) { ?>
-    <div class="alert alert-success text-center fit mx-auto">
+<?php } elseif (isset($_SESSION['messageSuccessContenance']) && $_SESSION['countContenance'] < 2) { ?>
+    <div class="alert alert-success text-center fit mx-auto message">
         <?php echo $_SESSION['messageSuccessContenance']; ?>
     </div>
-<?php } ?>
+<?php
+    $_SESSION['countContenance']++;
+} ?>
 <div class="col-10 col-md-8 col-lg-6 col-xl-5 m-auto bg-white px-5 py-4 rounded shadow">
     <div class="mt-md-2 pb-3">
         <h2 class="fw-bold mb-4 text-center">Ajouter une contenance</h2>

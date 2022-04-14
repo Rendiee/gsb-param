@@ -395,7 +395,7 @@ function insertProduct($nom, $imgName, $desc, $marque, $idCategorie)
 		$req->bindParam(':marqueProduct', $marque, PDO::PARAM_STR);
 		$req->bindParam(':idCategorie', $idCategorie, PDO::PARAM_INT);
 		$req->execute();
-		return $req;
+		return $id;
 	} catch (PDOException $e) {
 
 		print "Erreur !: " . $e->getMessage();
@@ -489,7 +489,7 @@ function insertUnite($nom)
 
 function insertContenance($valeur, $idUnite)
 {
-	$id = getLastIdContenance();
+	$id = getLastIdContenance()[0];
 	$id++;
 
 	try {
@@ -499,6 +499,25 @@ function insertContenance($valeur, $idUnite)
 		$req->bindParam(':idContenance', $id, PDO::PARAM_INT);
 		$req->bindParam(':valeurContenance', $valeur, PDO::PARAM_INT);
 		$req->bindParam(':uniteId', $idUnite, PDO::PARAM_STR);
+		$req->execute();
+		return $id;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function insertRemplir($idProduit, $idContenance, $prixproduit, $quantite)
+{
+	try {
+
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('INSERT INTO remplir VALUES (:idProduit, :idContenance, :prixproduit, :qte)');
+		$req->bindParam(':idProduit', $idProduit, PDO::PARAM_INT);
+		$req->bindParam(':idContenance', $idContenance, PDO::PARAM_INT);
+		$req->bindParam(':prixproduit', $prixproduit, PDO::PARAM_STR);
+		$req->bindParam(':qte', $quantite, PDO::PARAM_INT);
 		$req->execute();
 		return $req;
 	} catch (PDOException $e) {

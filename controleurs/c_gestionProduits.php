@@ -4,22 +4,13 @@ $_SESSION['page'] = 'navbarDarkDropdownMenuLink';
 switch ($action) {
 	case 'ajouterProduit': {
 			if (isset($_POST['ajouterproduit'])) {
-				if (empty($_POST['nomproduit'])) {
-					$_SESSION['messageErrorProduit'] = 'Veuillez saisir un nom !';
-				} else if (empty($_POST['descproduit'])) {
-					$_SESSION['messageErrorProduit'] = 'Veuillez saisir une description !';
-				} else if (empty($_POST['imgproduit'])) {
-					$_SESSION['messageErrorProduit'] = 'Veuillez mettre une image !';
-				} else if (empty($_POST['marqueproduit'])) {
-					$_SESSION['messageErrorProduit'] = 'Veuillez saisir une marque !';
-				} else if ($_POST['list-marque-produit'] == 'default') {
-					$_SESSION['messageErrorProduit'] = 'Veuillez choisir une catégorie !';
-				} else {
-					//insert product ici
-					insertProduct($_POST['nomproduit'], $_POST['imgproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-marque-produit']);
-					insertContenance($_POST['contenance'], $_POST['list-unite-contenance']);
-					$_SESSION['messageSuccessProduit'] = 'Le produit a bien été enregistré !';
-				}
+				//insert product ici
+				$idProduit = insertProduct($_POST['nomproduit'], $_POST['imgproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-marque-produit']);
+				$idContenance = insertContenance($_POST['contenance'], $_POST['list-unite-contenance']);
+				insertRemplir($idProduit, $idContenance, $_POST['prixproduit'], $_POST['quantite']);
+				$_SESSION['countProduit'] = 0;
+				$_SESSION['messageSuccessProduit'] = 'Le produit a bien été enregistré !';
+				header('location: index.php?uc=administrer&action=ajouterProduit');
 			}
 			$maxId = getLastIdProduit();
 			$lesCategories = getLesCategories();
@@ -34,6 +25,7 @@ switch ($action) {
 					$_SESSION['messageErrorContenance'] = 'Veuillez saisir un nom !';
 				} else {
 					insertUnite($_POST['nomcontenance']);
+					$_SESSION['countContenance'] = 0;
 					$_SESSION['messageSuccessContenance'] = 'La contenance a bien été enregistrée !';
 					header('location: index.php?uc=administrer&action=ajouterContenance');
 				}
