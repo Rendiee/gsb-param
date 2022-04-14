@@ -1,9 +1,4 @@
-<?php if (isset($_SESSION['messageErrorProduit'])) { ?>
-    <div class="alert alert-danger text-center fit mx-auto">
-        <?php echo $_SESSION['messageErrorProduit']; ?>
-    </div>
-<?php unset($_SESSION['messageErrorProduit']);
-} elseif (isset($_SESSION['messageSuccessContenance']) && $_SESSION['countProduit'] < 2) { ?>
+<?php if (isset($_SESSION['messageSuccessProduit']) && $_SESSION['countProduit'] < 2) { ?>
     <div class="alert alert-success text-center fit mx-auto">
         <?php echo $_SESSION['messageSuccessProduit']; ?>
     </div>
@@ -95,7 +90,7 @@
 
 <script>
     $("#formAjout").on("submit", function(event) {
-        $("#emtpyValue").remove();
+        $("#emtpyValues").remove();
         if (
             $("input[name='nomproduit']").val() == "" ||
             $("input[name='descproduit']").val() == "" ||
@@ -107,9 +102,18 @@
             $("input[name='contenance']").val() <= "0"
         ) {
             $("#divAjout").before(
-                '<div id="emtpyValue" class="alert alert-danger mx-auto fit">Veuillez saisir tout les champs ci dessous</div>'
+                '<div id="emtpyValues" class="alert alert-danger mx-auto fit">Veuillez saisir tout les champs ci dessous</div>'
             );
             event.preventDefault();
         }
     });
+    $("input").on("blur", function() {
+        if (($(this).val() == "" || $(this).val() <= "0") && $(this).attr('id') != "quantite") {
+            $(".emptyValue").remove();
+            $(this).parent().append('<small class="text-danger emptyValue">Veuillez saisir correctement le champ</small>');
+            $(this).select();
+        } else {
+            $(".emptyValue").remove();
+        }
+    })
 </script>
