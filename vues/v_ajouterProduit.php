@@ -99,7 +99,7 @@
     </form>
 </div>
 
-<script>
+<script type="text/javascript">
     $("#formAjout").on("submit", function(event) {
         $("#emtpyValues").remove();
         if (
@@ -119,12 +119,15 @@
         }
     });
     $("input").on("blur", function() {
-        if (($(this).val() == "" || $(this).val() <= "0") && $(this).attr('id') != "quantite") {
-            $(this).parent()[0].lastChild.remove();
+        var child = $(this).parent()[0].lastChild.id;
+        if (($(this).val() == "" || $(this).val() <= "0") && $(this).attr('id') != "quantite" && $(this).attr('id') != "ajouterproduit") {
+            if ($(this).parent()[0].lastChild.id == "emptyValue") {
+                $(this).parent()[0].lastChild.remove();
+            }
             $(this).removeClass("border-danger");
-            $(this).parent().append('<small class="text-danger emptyValue" id="alorx">Veuillez saisir correctement le champ</small>');
+            $(this).parent().append('<small class="text-danger emptyValue" id="emptyValue">Champ incorrect</small>');
             $(this).addClass("border-danger");
-        } else {
+        } else if ($(this).parent()[0].lastChild.id == "emptyValue") {
             $(this).parent()[0].lastChild.remove();
             $(this).removeClass("border-danger");
         }
