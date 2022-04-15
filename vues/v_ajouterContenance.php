@@ -8,6 +8,9 @@
     </div>
 <?php
     $_SESSION['countContenance']++;
+    if ($_SESSION['countContenance']) {
+        unset($_SESSION['messageSuccessContenance']);
+    }
 } ?>
 <div class="col-10 col-md-8 col-lg-6 col-xl-5 m-auto bg-white px-5 py-4 rounded shadow">
     <div class="mt-md-2 pb-3">

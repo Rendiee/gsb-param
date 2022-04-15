@@ -73,8 +73,8 @@
 								<small>À partir de </small>
 								<div class="text-success fw-bold"><?php echo $prix[0] ?>€</div>
 							</div>
-							<?php if ($qte > 0) echo '<small class="text-success opacity-75">En Stock';
-							else echo '<small class="text-danger opacity-75">Rupture de Stock' ?></small>
+							<?php if ($qte > 0) echo '<small class="text-center col-4 text-success opacity-75">En Stock';
+							else echo '<small class="text-center col-4 text-danger opacity-75">Rupture de Stock' ?></small>
 							<div class="col-3">
 								<a id="categProduit" href="index.php?uc=voirProduits&produit=<?php echo $id ?>&action=voirLeProduit">
 									<button class="btn btn-outline-success w-100" type="button">Voir</button>

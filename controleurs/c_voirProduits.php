@@ -20,7 +20,10 @@ switch ($action) {
 					$_SESSION['page'][] = $_GET['categorie'];
 				}
 			} else {
-				$_SESSION['page'] = 'nosproduits';
+				// $_SESSION['page'] = 'nosproduits';
+				if ($_SESSION['page'] == 'panier') {
+					$value = "index.php?uc=gererPanier&action=voirPanier";
+				} else $value = "index.php?uc=voirProduits&action=nosProduits";
 			}
 			$id = $_REQUEST['produit'];
 			$infoProduit = getInfoProduit($id);
@@ -28,13 +31,13 @@ switch ($action) {
 				if ($_SESSION['page'][0] == 'categories') {
 					header('location:index.php?uc=voirProduits&categorie=CH&action=produitsCategorie');
 				} else {
-					header('location:index.php?uc=voirProduits&action=nosProduits');
+					header('location:' . $value);
 				}
 			} else {
 				if ($_SESSION['page'][0] == 'categories') {
 					$categorieActive = "index.php?uc=voirProduits&categorie=" . $_SESSION['page'][1] . "&action=produitsCategorie";
 				} else {
-					$categorieActive = "index.php?uc=voirProduits&action=nosProduits";
+					$categorieActive = $value;
 				}
 			}
 			$prixMin = getMinPriceProduct($id);

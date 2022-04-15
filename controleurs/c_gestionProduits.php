@@ -4,6 +4,17 @@ $_SESSION['page'] = 'navbarDarkDropdownMenuLink';
 switch ($action) {
 	case 'ajouterProduit': {
 			if (isset($_POST['ajouterproduit'])) {
+				$count = 0;
+				foreach ($_POST as $value) {
+					if ($count != 6) {
+						if ($value == "" || $value <= "0") {
+							var_dump($count);
+							var_dump($value);
+							$_SESSION['messageErrorProduit'] = 'Un problème est survenu';
+						}
+					}
+					$count++;
+				}
 				//insert product ici
 				$idProduit = insertProduct($_POST['nomproduit'], $_POST['imgproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-marque-produit']);
 				$idContenance = insertContenance($_POST['contenance'], $_POST['list-unite-contenance']);

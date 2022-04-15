@@ -22,10 +22,12 @@
 				<div class="col-xxl-4 col-xl-5 col-lg-6 col-md-5 col-6">
 					<form method="POST" action="index.php?uc=gererPanier&action=supprimerUnProduit">
 						<div class="card m-1">
-							<p class="card-title marque-product"><?php echo $marque ?></p>
-							<div class="name-product title-height"><?php echo $nom ?></div>
-							<img class="img-product" src="<?php echo $image ?>" alt="image product">
-							<p class="card-text description-product"><?php echo $description ?></p>
+							<div class="d-flex flex-column justify-content-center pb-1 divVoirProduit" onclick="window.location='index.php?uc=voirProduits&produit=<?php echo $id; ?>&action=voirLeProduit'">
+								<p class="card-title marque-product"><?php echo $marque ?></p>
+								<div class="name-product title-height"><?php echo $nom ?></div>
+								<img class="img-product" src="<?php echo $image ?>" alt="image product">
+								<p class="card-text description-product"><?php echo $description ?></p>
+							</div>
 							<div class="card-footer d-flex justify-content-between align-items-center">
 								<div class="d-flex flex-column align-items-start col-8">
 									<div class="d-flex">
@@ -66,6 +68,37 @@
 			} else if (parseInt($(this).val()) < 1) {
 				$(this).val(1);
 			}
+		});
+	});
+	$(function() {
+		$(".divVoirProduit").css("height", "300px");
+		$(".divVoirProduit").on("mouseenter", function() {
+			$(this).children().addClass(
+				"opacity-50"
+			).css("cursor", "pointer");
+			$(this).css("cursor", "pointer");
+			$(this).append('<div id="voir">Voir</div>');
+			$("#voir").css({
+				"position": "absolute",
+				"margin-left": "auto",
+				"margin-right": "auto",
+				"left": "0",
+				"right": "0",
+				"text-align": "center",
+				"font-size": "1.5rem",
+				"border": "1px solid black",
+				"cursor": "pointer"
+
+			});
+			$("#voir").addClass(
+				"rounded fit px-3 py-1 bg-light"
+			);
+		});
+		$(".divVoirProduit").on("mouseleave", function() {
+			$(this).children().removeClass(
+				"opacity-50"
+			);
+			$("#voir").remove();
 		});
 	});
 </script>
