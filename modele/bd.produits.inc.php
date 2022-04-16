@@ -258,13 +258,13 @@ function getTousLesProduitsFiltres($filtre)
 			$requete->bindParam(':prixMax', $filtreMax, PDO::PARAM_INT);
 			$requete->bindParam(':marque', $filtre['marque'], PDO::PARAM_STR);
 		} elseif (isset($filtre['price-min'])) {
-			$filtre = intval($filtre['price-min']);
+			$filtreMin = intval($filtre['price-min']);
 			$requete = $monPdo->prepare('SELECT p.p_id as id, p.p_nom as nom, p.p_photo as photo, p.p_description as description, p.p_marque as marque, r.r_prixVente as prix, SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id AND r.r_prixVente >= :prix GROUP BY p.p_id;');
-			$requete->bindParam(':prix', $filtre, PDO::PARAM_INT);
+			$requete->bindParam(':prix', $filtreMin, PDO::PARAM_INT);
 		} elseif (isset($filtre['price-max'])) {
-			$filtre = intval($filtre['price-max']);
+			$filtreMax = intval($filtre['price-max']);
 			$requete = $monPdo->prepare('SELECT p.p_id as id, p.p_nom as nom, p.p_photo as photo, p.p_description as description, p.p_marque as marque, r.r_prixVente as prix, SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id AND r.r_prixVente <= :prix GROUP BY p.p_id;');
-			$requete->bindParam(':prix', $filtre, PDO::PARAM_INT);
+			$requete->bindParam(':prix', $filtreMax, PDO::PARAM_INT);
 		} else {
 			$requete = $monPdo->prepare('SELECT p.p_id as id, p.p_nom as nom, p.p_photo as photo, p.p_description as description, p.p_marque as marque, r.r_prixVente as prix, SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id WHERE p_marque = :marque GROUP BY p.p_id;');
 			$requete->bindParam(':marque', $filtre['marque'], PDO::PARAM_STR);

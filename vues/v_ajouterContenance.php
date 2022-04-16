@@ -8,7 +8,7 @@
     </div>
 <?php
     $_SESSION['countContenance']++;
-    if ($_SESSION['countContenance']) {
+    if ($_SESSION['countContenance'] == 2) {
         unset($_SESSION['messageSuccessContenance']);
     }
 } ?>

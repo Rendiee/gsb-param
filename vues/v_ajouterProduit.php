@@ -11,7 +11,7 @@
     </div>
 <?php
     $_SESSION['countProduit']++;
-    if ($_SESSION['countProduit']) {
+    if ($_SESSION['countProduit'] == 2) {
         unset($_SESSION['messageSuccessProduit']);
     }
 } ?>

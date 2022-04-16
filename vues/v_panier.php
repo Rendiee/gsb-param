@@ -22,7 +22,7 @@
 				<div class="col-xxl-4 col-xl-5 col-lg-6 col-md-5 col-6">
 					<form method="POST" action="index.php?uc=gererPanier&action=supprimerUnProduit">
 						<div class="card m-1">
-							<div class="d-flex flex-column justify-content-center pb-1 divVoirProduit" onclick="window.location='index.php?uc=voirProduits&produit=<?php echo $id; ?>&action=voirLeProduit'">
+							<div class="d-flex flex-column justify-content-center pb-1 divVoirProduit height325px" onclick="window.location='index.php?uc=voirProduits&produit=<?php echo $id; ?>&action=voirLeProduit'">
 								<p class="card-title marque-product"><?php echo $marque ?></p>
 								<div class="name-product title-height"><?php echo $nom ?></div>
 								<img class="img-product" src="<?php echo $image ?>" alt="image product">
@@ -71,7 +71,6 @@
 		});
 	});
 	$(function() {
-		$(".divVoirProduit").css("height", "300px");
 		$(".divVoirProduit").on("mouseenter", function() {
 			$(this).children().addClass(
 				"opacity-50"
