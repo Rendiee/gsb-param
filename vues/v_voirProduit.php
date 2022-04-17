@@ -4,8 +4,10 @@
 unset($_SESSION['message']) ?>
 <form class="w-75 m-auto" method="POST" action="index.php?uc=voirProduits&produit=<?php echo $id ?>&action=ajouterAuPanier">
     <div class="d-flex flex-lg-row flex-column bg-white border rounded shadow">
-        <img class="m-auto h-100 p-1 col-5 pt-3" src="assets/<?php echo $infoProduit['photo'] ?>" alt="image product">
-        <div class="border-start d-flex flex-column justify-content-between pt-3">
+        <div class="h-100 p-1 col-5 pt-3">
+            <img class="m-auto w-100" src="assets/<?php echo $infoProduit['photo'] ?>" alt="image product">
+        </div>
+        <div class="border-start d-flex flex-column justify-content-between pt-3 col-7">
             <div class="p-2">
                 <h3 class="card-title text-success text-center opacity-75"><?php echo $infoProduit['nom']; ?></h3>
                 <div class="w-75 mt-4 mx-auto">
@@ -59,7 +61,8 @@ unset($_SESSION['message']) ?>
 
     $(document).ready(function() {
         if ($("#list-contenance").children(":selected").attr("id") > 0) {
-            $("#prix").append('<small id="stock" class="text-success pt-2 opacity-75"> - En Stock</small>');
+            var qte = $("#list-contenance").children(":selected").attr("id")
+            $("#prix").append('<small id="stock" class="text-success pt-2 opacity-75"> - En Stock ('+qte+')</small>');
         } else {
             $("#prix").append('<small id="stock" class="text-danger pt-2 opacity-75"> - Rupture de Stock</small>');
             $("#ajoutPanier").attr("disabled", true);

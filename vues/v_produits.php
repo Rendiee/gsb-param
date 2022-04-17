@@ -64,10 +64,12 @@
 			?>
 				<div class="col-xl-4 col-lg-6 col-md-5 col-sm-6 col-8">
 					<div class="card m-1">
-						<p class="card-title marque-product"><?php echo $marque ?></p>
-						<div class="name-product title-height"><?php echo $nom ?></div>
-						<img class="img-product" src="<?php echo $image ?>" alt="image product">
-						<p class="card-text description-product"><?php echo $description ?></p>
+						<div class="d-flex flex-column justify-content-center pb-1 height325px">
+							<p class="card-title marque-product"><?php echo $marque ?></p>
+							<div class="name-product title-height"><?php echo $nom ?></div>
+							<img class="img-product" src="<?php echo $image ?>" alt="image product">
+							<p class="card-text description-product"><?php echo $description ?></p>
+						</div>
 						<div class="card-footer d-flex justify-content-between align-items-center">
 							<div class="d-flex flex-column align-items-center">
 								<small>À partir de </small>

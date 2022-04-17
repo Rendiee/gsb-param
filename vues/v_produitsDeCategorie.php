@@ -53,7 +53,7 @@
 			?>
 				<div class="col-xl-4 col-lg-6 col-md-5 col-sm-6 col-8">
 					<div class="card m-1">
-						<div class="d-flex flex-column justify-content-center pb-1 divVoirProduit height325px" onclick="window.location='index.php?uc=voirProduits&produit=<?php echo $id; ?>&action=voirLeProduit'">
+						<div class="d-flex flex-column justify-content-center pb-1 height325px">
 							<p class="card-title marque-product"><?php echo $marque ?></p>
 							<div class="name-product title-height"><?php echo $nom ?></div>
 							<img class="img-product" src="<?php echo $image ?>" alt="image product">

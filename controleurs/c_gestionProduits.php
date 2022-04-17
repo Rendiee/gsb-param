@@ -49,6 +49,10 @@ switch ($action) {
 			include('./vues/v_editerProduit.php');
 			break;
 		}
+	case 'editerCategorie': {
+			include('./vues/v_editerCategorie.php');
+			break;
+		}
 	case 'gererStock': {
 			include('./vues/v_gererStock.php');
 			break;

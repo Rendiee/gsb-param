@@ -86,6 +86,7 @@ footer {
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
 #produits-commande {
+	overflow: auto;
 	overflow: overlay;
 	scrollbar-width: auto;
 	scrollbar-color: #aaaaaa #ffffff;

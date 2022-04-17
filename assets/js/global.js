@@ -61,3 +61,35 @@ $(function () {
 		}
 	});
 });
+
+
+$(function() {
+	$(".divVoirProduit").on("mouseenter", function() {
+		$(this).children().addClass(
+			"opacity-50 user-select-none"
+		).css("cursor", "pointer");
+		$(this).css("cursor", "pointer");
+		$(this).append('<div id="voir">Voir</div>');
+		$("#voir").css({
+			"position": "absolute",
+			"margin-left": "auto",
+			"margin-right": "auto",
+			"left": "0",
+			"right": "0",
+			"text-align": "center",
+			"font-size": "1.5rem",
+			"border": "1px solid black",
+			"cursor": "pointer"
+
+		});
+		$("#voir").addClass(
+			"rounded fit px-3 py-1 bg-light"
+		);
+	});
+	$(".divVoirProduit").on("mouseleave", function() {
+		$(this).children().removeClass(
+			"opacity-50 user-select-none"
+		);
+		$("#voir").remove();
+	});
+});
