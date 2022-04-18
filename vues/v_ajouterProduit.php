@@ -69,7 +69,7 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <label class="form-label" for="unitecontenance">Unité</label><span class="text-danger"> *</span>
+                        <label class="form-label" for="list-unite">Unité</label><span class="text-danger"> *</span>
                         <select required class="form-select border-success" id="list-unite" name="list-unite">
                             <option disabled selected value="">- Unité -</option>
                             <?php
@@ -80,25 +80,21 @@
                             }
                             ?>
                         </select>
+                        <div id="newUnite" class="link-success text-decoration-underline pointer fit mx-auto">Autre unité</div>
                     </div>
                     <div class="col-6">
-                        <div>
-                            <label class="form-label" for="contenance">Contenance</label><span class="text-danger"> *</span>
-                            <select required class="form-select border-success" id="list-contenance" name="list-contenance">
-                                <option disabled selected value="">- Contenance -</option>
-                                <?php
-                                foreach ($lesContenances as $contenance) {
-                                ?>
-                                    <option value="<?php echo $contenance['co_id'] ?>"><?php echo $contenance['co_contenance'] ?></option>
-                                <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <!-- <div class="text-muted mt-2"><small>Aucune contenance ? </small><small><a class="text-success" href="index.php?uc=administrer&action=ajouterContenance">Ajouter une contenance</a></small></div> -->
-                        <div id="newUnite" class="link-success text-decoration-underline pointer fit mx-auto">Ajouter une nouvelle unité/contenance</div>
+                        <label class="form-label" for="list-contenance">Contenance</label><span class="text-danger"> *</span>
+                        <select required class="form-select border-success" id="list-contenance" name="list-contenance">
+                            <option disabled selected value="">- Contenance -</option>
+                            <?php
+                            foreach ($lesContenances as $contenance) {
+                            ?>
+                                <option value="<?php echo $contenance['co_id'] ?>"><?php echo $contenance['co_contenance'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                        <div id="newContenance" class="link-success text-decoration-underline pointer fit mx-auto">Autre contenance</div>
                     </div>
                 </div>
             </div>
@@ -110,6 +106,7 @@
 </div>
 
 <script type="text/javascript">
+    const listeContenance = $("#list-contenance");
     $("#formAjout").on("submit", function(event) {
         $("#emtpyValues").remove();
         if (
@@ -128,43 +125,46 @@
             event.preventDefault();
         }
     });
-    $("input").on("blur", function() {
-        var child = $(this).parent()[0].lastChild.id;
-        if (($(this).val() == "" || $(this).val() <= "0") && $(this).attr('id') != "quantite" && $(this).attr('id') != "ajouterproduit") {
+    $("div").on("blur", "input", function() {
+        var element = $(this).attr('class') + "";
+        if ($(this).attr('id') == "list-contenance" && $(this).val() <= "0") {
+            $(this).addClass("border-danger").removeClass('border-success');
+        } else if (($(this).val() == "" || $(this).val() <= "0") && $(this).attr('id') != "quantite" && $(this).attr('id') != "ajouterproduit") {
             if ($(this).parent()[0].lastChild.id == "emptyValue") {
                 $(this).parent()[0].lastChild.remove();
             }
-            $(this).removeClass("border-danger");
             $(this).parent().append('<small class="text-danger emptyValue" id="emptyValue">Champ incorrect</small>');
-            $(this).addClass("border-danger");
-        } else if ($(this).parent()[0].lastChild.id == "emptyValue") {
+            $(this).addClass("border-danger").removeClass('border-success');
+        } else if ($(this).parent()[0].lastChild.id == "emptyValue" || element.indexOf("border-success") == -1) {
             $(this).parent()[0].lastChild.remove();
-            $(this).removeClass("border-danger");
+            $(this).addClass("border-success").removeClass('border-danger');
         }
     });
     $('#newUnite').on("click", function() {
         if ($('#newUnite').text() == "Annuler") {
             $('.new').remove();
-            $('#list-unite').attr("disabled", false);
-            $('#list-unite').attr("required", true);
-            $('#list-contenance').attr("disabled", false);
-            $('#list-contenance').attr("required", true);
-            $('#newUnite').text("Ajouter une nouvelle unité/contenance");
-            $('#newUnite').addClass("link-success");
-            $('#newUnite').removeClass("link-danger");
+            $('#list-unite').attr("disabled", false).attr("required", true);
+            $('#list-contenance').attr("disabled", false).attr("required", true)
+            $('#newUnite').text("Autre unité").addClass("link-success").removeClass("link-danger");
+            $('#newContenance').removeClass("d-none");
         } else {
             $('.new').remove();
-            $('#newUnite').parent().before('<div class="col-6 new mt-1"><input required class="form-control" type="text" placeholder="Nom de l\'unité" id="nomUnite" name="nomUnite"></div>');
-            $('#newUnite').parent().before('<div class="col-6 new mt-1"><input required class="form-control" type="number" placeholder="Contenance" id="nbContenance" name="nbContenance"></div>');
-            $('#list-unite').prop("selectedIndex", 0);
-            $('#list-unite').attr("disabled", true);
-            $('#list-unite').attr("required", false);
-            $('#list-contenance').prop("selectedIndex", 0);
-            $('#list-contenance').attr("disabled", true);
-            $('#list-contenance').attr("required", false);
-            $('#newUnite').text("Annuler");
-            $('#newUnite').addClass("link-danger");
-            $('#newUnite').removeClass("link-success");
+            $('#newUnite').parent().parent().append('<div class="col-6 new mt-1"><input required class="form-control" type="text" placeholder="Nom de l\'unité" id="nomUnite" name="nomUnite"></div>');
+            $('#newUnite').parent().parent().append('<div class="col-6 new mt-1"><input required class="form-control" type="number" placeholder="Contenance" id="nbContenance" name="nbContenance"></div>');
+            $('#list-unite').prop("selectedIndex", 0).attr("disabled", true).attr("required", false);
+            $('#list-contenance').prop("selectedIndex", 0).attr("disabled", true).attr("required", false).removeClass("border-danger");
+            $('#newUnite').text("Annuler").addClass("link-danger").removeClass("link-success");
+            $('#newContenance').addClass("d-none");
+        }
+    });
+    $('#newContenance').on("click", function() {
+        if ($(this).text() == "Annuler") {
+            $("#list-contenance").replaceWith(listeContenance);
+            $(this).text('Autre contenance').addClass("link-success").removeClass("link-danger");
+        } else {
+            $("#list-contenance").replaceWith('<input required type="number" placeholder="Contenance" class="form-control border-success" id="list-contenance" name="list-contenance ">');
+            $("#list-contenance").select();
+            $(this).text("Annuler").addClass("link-danger").removeClass("link-success");
         }
     });
 </script>

@@ -236,3 +236,7 @@ footer {
 .pointer {
 	cursor: pointer;
 }
+
+.cursorNone {
+	cursor: none;
+}
