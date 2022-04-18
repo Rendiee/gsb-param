@@ -63,16 +63,14 @@
                         <input required type="number" step="0.01" min="0" id="prixproduit" name="prixproduit" class="form-control" value="0" />
                     </div>
                     <div class="col-6">
-                        <div>
-                            <label class="form-label" for="quantite">Quantité</label>
-                            <input required type="number" id="quantite" name="quantite" class="form-control" value="0" min="0" />
-                        </div>
+                        <label class="form-label" for="quantite">Quantité</label>
+                        <input required type="number" id="quantite" name="quantite" class="form-control" value="0" min="0" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <label class="form-label" for="unitecontenance">Unité</label><span class="text-danger"> *</span>
-                        <select required class="form-select border-success" id="list-unite-contenance" name="list-unite-contenance">
+                        <select required class="form-select border-success" id="list-unite" name="list-unite">
                             <option disabled selected value="">- Unité -</option>
                             <?php
                             foreach ($lesUnites as $unite) {
@@ -86,10 +84,22 @@
                     <div class="col-6">
                         <div>
                             <label class="form-label" for="contenance">Contenance</label><span class="text-danger"> *</span>
-                            <input required type="number" id="contenance" name="contenance" class="form-control" value="0" min="0" />
+                            <select required class="form-select border-success" id="list-contenance" name="list-contenance">
+                                <option disabled selected value="">- Contenance -</option>
+                                <?php
+                                foreach ($lesContenances as $contenance) {
+                                ?>
+                                    <option value="<?php echo $contenance['co_id'] ?>"><?php echo $contenance['co_contenance'] ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
-                    <div class="text-muted mt-2"><small>Aucune contenance ? </small><small><a class="text-success" href="index.php?uc=administrer&action=ajouterContenance">Ajouter une contenance</a></small></div>
+                    <div>
+                        <!-- <div class="text-muted mt-2"><small>Aucune contenance ? </small><small><a class="text-success" href="index.php?uc=administrer&action=ajouterContenance">Ajouter une contenance</a></small></div> -->
+                        <div id="newUnite" class="link-success text-decoration-underline pointer fit mx-auto">Ajouter une nouvelle unité/contenance</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,8 +119,8 @@
             $("input[name='marqueproduit']").val() == "" ||
             $("select[name='list-marque-produit']").val() == "" ||
             $("input[name='prixproduit']").val() <= "0" ||
-            $("select[name='list-unite-contenance']").val() == "" ||
-            $("input[name='contenance']").val() <= "0"
+            $("select[name='list-unite']").val() == "" ||
+            $("input[name='list-contenance']").val() == ""
         ) {
             $("#divAjout").before(
                 '<div id="emtpyValues" class="alert alert-danger mx-auto fit shakeDiv">Veuillez saisir tout les champs ci dessous</div>'
@@ -130,6 +140,31 @@
         } else if ($(this).parent()[0].lastChild.id == "emptyValue") {
             $(this).parent()[0].lastChild.remove();
             $(this).removeClass("border-danger");
+        }
+    });
+    $('#newUnite').on("click", function() {
+        if ($('#newUnite').text() == "Annuler") {
+            $('.new').remove();
+            $('#list-unite').attr("disabled", false);
+            $('#list-unite').attr("required", true);
+            $('#list-contenance').attr("disabled", false);
+            $('#list-contenance').attr("required", true);
+            $('#newUnite').text("Ajouter une nouvelle unité/contenance");
+            $('#newUnite').addClass("link-success");
+            $('#newUnite').removeClass("link-danger");
+        } else {
+            $('.new').remove();
+            $('#newUnite').parent().before('<div class="col-6 new mt-1"><input required class="form-control" type="text" placeholder="Nom de l\'unité" id="nomUnite" name="nomUnite"></div>');
+            $('#newUnite').parent().before('<div class="col-6 new mt-1"><input required class="form-control" type="number" placeholder="Contenance" id="nbContenance" name="nbContenance"></div>');
+            $('#list-unite').prop("selectedIndex", 0);
+            $('#list-unite').attr("disabled", true);
+            $('#list-unite').attr("required", false);
+            $('#list-contenance').prop("selectedIndex", 0);
+            $('#list-contenance').attr("disabled", true);
+            $('#list-contenance').attr("required", false);
+            $('#newUnite').text("Annuler");
+            $('#newUnite').addClass("link-danger");
+            $('#newUnite').removeClass("link-success");
         }
     });
 </script>

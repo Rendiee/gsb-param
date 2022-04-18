@@ -191,7 +191,6 @@ footer {
 }
 
 @keyframes shake {
-
 	10%,
 	90% {
 		transform: translate3d(-1px, 0, 0);
@@ -232,4 +231,8 @@ footer {
 
 .height325px {
 	height: 325px;
+}
+
+.pointer {
+	cursor: pointer;
 }

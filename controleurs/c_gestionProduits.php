@@ -8,16 +8,22 @@ switch ($action) {
 				foreach ($_POST as $value) {
 					if ($count != 6) {
 						if ($value == "" || $value <= "0") {
-							var_dump($count);
-							var_dump($value);
 							$_SESSION['messageErrorProduit'] = 'Un problème est survenu';
 						}
 					}
 					$count++;
 				}
+				if (isset($_POST['nomUnite'])) {
+					$contenance = $_POST['nbContenance'];
+					$unite = $_POST['nomUnite'];
+					$idUnite = insertUnite($unite);
+				} else {
+					$contenance = $_POST['list-contenance'];
+					$idUnite = $_POST['list-unite'];
+				}
 				//insert product ici
 				$idProduit = insertProduct($_POST['nomproduit'], $_POST['imgproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-marque-produit']);
-				$idContenance = insertContenance($_POST['contenance'], $_POST['list-unite-contenance']);
+				$idContenance = insertContenance($contenance, $idUnite);
 				insertRemplir($idProduit, $idContenance, $_POST['prixproduit'], $_POST['quantite']);
 				$_SESSION['countProduit'] = 0;
 				$_SESSION['messageSuccessProduit'] = 'Le produit a bien été enregistré !';

@@ -424,7 +424,7 @@ function getContenanceValue()
 	try {
 
 		$monPdo = connexionPDO();
-		$req = 'SELECT co_id, co_contenance FROM contenance';
+		$req = 'SELECT co_id, co_contenance FROM contenance ORDER BY co_contenance';
 		$res = $monPdo->query($req);
 		$result = $res->fetchAll();
 		return $result;
@@ -479,7 +479,7 @@ function insertUnite($nom)
 		$req->bindParam(':idUnite', $id, PDO::PARAM_INT);
 		$req->bindParam(':nomUnite', $nom, PDO::PARAM_STR);
 		$req->execute();
-		return $req;
+		return $id;
 	} catch (PDOException $e) {
 
 		print "Erreur !: " . $e->getMessage();
