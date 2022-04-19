@@ -89,7 +89,7 @@
                             <?php
                             foreach ($lesContenances as $contenance) {
                             ?>
-                                <option value="<?php echo $contenance['co_id'] ?>"><?php echo $contenance['co_contenance'] ?></option>
+                                <option value="<?php echo $contenance['co_contenance'] ?>"><?php echo $contenance['co_contenance'] ?></option>
                             <?php
                             }
                             ?>
@@ -125,8 +125,10 @@
             event.preventDefault();
         }
     });
+
     $("div").on("blur", "input", function() {
         var element = $(this).attr('class') + "";
+        console.log("div", $(this).val());
         if ($(this).attr('id') == "list-contenance" && $(this).val() <= "0") {
             $(this).addClass("border-danger").removeClass('border-success');
         } else if (($(this).val() == "" || $(this).val() <= "0") && $(this).attr('id') != "quantite" && $(this).attr('id') != "ajouterproduit") {
@@ -140,6 +142,7 @@
             $(this).addClass("border-success").removeClass('border-danger');
         }
     });
+
     $('#newUnite').on("click", function() {
         if ($('#newUnite').text() == "Annuler") {
             $('.new').remove();
@@ -149,12 +152,13 @@
             $('#newContenance').removeClass("d-none");
         } else {
             $('.new').remove();
-            $('#newUnite').parent().parent().append('<div class="col-6 new mt-1"><input required class="form-control" type="text" placeholder="Nom de l\'unité" id="nomUnite" name="nomUnite"></div>');
-            $('#newUnite').parent().parent().append('<div class="col-6 new mt-1"><input required class="form-control" type="number" placeholder="Contenance" id="nbContenance" name="nbContenance"></div>');
+            $('#newUnite').parent().parent().append('<div class="col-6 new mt-1"><input required class="form-control border-success" type="text" placeholder="Nom de l\'unité" id="nomUnite" name="nomUnite"></div>');
+            $('#newUnite').parent().parent().append('<div class="col-6 new mt-1"><input required class="form-control border-success" type="number" placeholder="Contenance" id="nbContenance" name="nbContenance" min="0"></div>');
             $('#list-unite').prop("selectedIndex", 0).attr("disabled", true).attr("required", false);
             $('#list-contenance').prop("selectedIndex", 0).attr("disabled", true).attr("required", false).removeClass("border-danger");
             $('#newUnite').text("Annuler").addClass("link-danger").removeClass("link-success");
             $('#newContenance').addClass("d-none");
+            $('#nomUnite').select();
         }
     });
     $('#newContenance').on("click", function() {
@@ -162,7 +166,7 @@
             $("#list-contenance").replaceWith(listeContenance);
             $(this).text('Autre contenance').addClass("link-success").removeClass("link-danger");
         } else {
-            $("#list-contenance").replaceWith('<input required type="number" placeholder="Contenance" class="form-control border-success" id="list-contenance" name="list-contenance ">');
+            $("#list-contenance").replaceWith('<input required type="number" placeholder="Contenance" class="form-control border-success" id="list-contenance" name="list-contenance" min="0">');
             $("#list-contenance").select();
             $(this).text("Annuler").addClass("link-danger").removeClass("link-success");
         }

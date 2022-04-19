@@ -16,14 +16,22 @@ switch ($action) {
 				if (isset($_POST['nomUnite'])) {
 					$contenance = $_POST['nbContenance'];
 					$unite = $_POST['nomUnite'];
-					$idUnite = insertUnite($unite);
+					if (!empty(idExistUnite($unite))) {
+						$idUnite = idExistUnite($unite)[0];
+					} else {
+						$idUnite = insertUnite($unite);
+					}
 				} else {
 					$contenance = $_POST['list-contenance'];
 					$idUnite = $_POST['list-unite'];
 				}
-				//insert product ici
+				//insert product ici : : : : : : : : : CHANGER LA BD POUR QUE LE LIEN ENTRE CONTENANCE ET UNITÉ SOIT EN 0.n DES 2 COTÉS ET NON 0.1 0.n : : : : : : : : : : : : : : : 
 				$idProduit = insertProduct($_POST['nomproduit'], $_POST['imgproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-marque-produit']);
-				$idContenance = insertContenance($contenance, $idUnite);
+				if (!empty(idExistContenance($contenance, $idUnite))) {
+					$idContenance = idExistContenance($contenance, $idUnite)[0];
+				} else {
+					$idContenance = insertContenance($contenance, $idUnite);
+				}
 				insertRemplir($idProduit, $idContenance, $_POST['prixproduit'], $_POST['quantite']);
 				$_SESSION['countProduit'] = 0;
 				$_SESSION['messageSuccessProduit'] = 'Le produit a bien été enregistré !';
@@ -36,7 +44,7 @@ switch ($action) {
 			include('./vues/v_ajouterProduit.php');
 			break;
 		}
-	case 'ajouterContenance': {
+	case 'ajouterContenance': { // PLUS UTILE -> FAIT DIRECTEMENT DANS AJOUTER PRODUIT
 			if (isset($_POST['ajoutercontenance'])) {
 				if (empty($_POST['nomcontenance'])) {
 					$_SESSION['messageErrorContenance'] = 'Veuillez saisir un nom !';

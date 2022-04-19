@@ -487,6 +487,41 @@ function insertUnite($nom)
 	}
 }
 
+function idExistContenance($valeur, $idUnite)
+{
+	try {
+
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT co_id FROM contenance WHERE co_contenance = :valeurContenance AND un_id = :uniteId;');
+		$req->bindParam(':valeurContenance', $valeur, PDO::PARAM_INT);
+		$req->bindParam(':uniteId', $idUnite, PDO::PARAM_STR);
+		$req->execute();
+		$res = $req->fetch();
+		return $res;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function idExistUnite($unite)
+{
+	try {
+
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT un_id FROM unite WHERE un_libelle = :unite;');
+		$req->bindParam(':unite', $unite, PDO::PARAM_STR);
+		$req->execute();
+		$res = $req->fetch();
+		return $res;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
 function insertContenance($valeur, $idUnite)
 {
 	$id = getLastIdContenance()[0];
