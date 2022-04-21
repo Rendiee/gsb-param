@@ -1,20 +1,15 @@
 <?php
 // contrôleur qui gère la connexion
 if (isset($_POST['connexion'])) {
-	if (empty($_POST['email'])) {
-		$userEmpty = "Veuillez saisir votre email !";
-	} else if (empty($_POST['password'])) {
-		$userEmpty = "Veuillez saisir un mot de passe !";
+	$arr = checkConnexion($_POST['email'], $_POST['password']);
+	if (empty($arr)) {
+		$userEmpty = "Informations incorrectes !";
+		$userInfos = $_POST['email'];
 	} else {
-		$arr = checkConnexion($_POST['email'], $_POST['password']);
-		if (empty($arr)) {
-			$userEmpty = "Informations incorrectes !";
-		} else {
-			$_SESSION['u_hab'] = $arr['u_hab'];
-			$_SESSION['u_id'] = $arr['u_id'];
-			$_SESSION['u_email'] = $arr['u_email'];
-			header('Location: index.php?uc=connexion&action=profil');
-		}
+		$_SESSION['u_hab'] = $arr['u_hab'];
+		$_SESSION['u_id'] = $arr['u_id'];
+		$_SESSION['u_email'] = $arr['u_email'];
+		header('Location: index.php?uc=connexion&action=profil');
 	}
 }
 $action = $_REQUEST['action'];
@@ -52,7 +47,7 @@ switch ($action) {
 				session_destroy();
 				session_start();
 				$_SESSION['filtre'] = false;
-				header('location: index.php??uc=accueil');
+				header('location: index.php?uc=accueil');
 			}
 			break;
 		}
@@ -62,5 +57,6 @@ switch ($action) {
 			} else {
 				header('location: index.php?uc=connexion&action=profil');
 			}
+			break;
 		}
 }

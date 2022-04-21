@@ -1,7 +1,8 @@
 function checkStock() {
 	$("#stock").remove();
 	if ($("select").children(":selected").attr("id") > 0) {
-		$("#prix").append('<small id="stock" class="text-success pt-2 opacity-75"> - En Stock</small></div>');
+		var qte = $("#list-contenance").children(":selected").attr("id")
+		$("#prix").append('<small id="stock" class="text-success pt-2 opacity-75"> - En Stock ('+qte+')</small></div>');
 		$("#ajoutPanier").attr("disabled", false);
 		$("#nbProduit").attr("disabled", false);
 		$("#nbProduit").val("1");

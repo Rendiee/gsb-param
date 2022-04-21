@@ -16,7 +16,7 @@
     }
 } ?>
 <div class="col-12 col-lg-11 col-xl-9 m-auto bg-white px-5 py-4 rounded shadow" id="divAjout">
-    <small class="text-muted"><span class="text-danger">*</span> Champs obligatoires</small>
+    <small class="text-muted"><span class="text-danger">*</span> Champ(s) facultatif(s)</small>
     <h2 class="fw-bold mb-4 text-center">Ajouter un produit</h2>
     <form action="" method="POST" id="formAjout">
         <div class="fs-4 mb-3 text-center">
@@ -26,26 +26,26 @@
         <div class="d-flex align-items-center justify-content-between height350px">
             <div class="d-flex flex-column justify-content-between h-100 col-5">
                 <div>
-                    <label class="form-label" for="nomproduit">Nom du produit</label><span class="text-danger"> *</span>
+                    <label class="form-label" for="nomproduit">Nom du produit</label>
                     <input required type="text" id="nomproduit" name="nomproduit" class="form-control" />
                 </div>
                 <div>
-                    <label class="form-label" for="descproduit">Description du produit</label><span class="text-danger"> *</span>
+                    <label class="form-label" for="descproduit">Description du produit</label>
                     <input required type="text" id="descproduit" name="descproduit" class="form-control" />
                 </div>
                 <div>
-                    <label class="form-label" for="imgproduit">Image du produit</label><span class="text-danger"> *</span>
+                    <label class="form-label" for="imgproduit">Image du produit</label>
                     <input required type="file" id="imgproduit" name="imgproduit" class="form-control" />
                 </div>
                 <div>
-                    <label class="form-label" for="marqueproduit">Marque du produit</label><span class="text-danger"> *</span>
+                    <label class="form-label" for="marqueproduit">Marque du produit</label>
                     <input required type="text" id="marqueproduit" name="marqueproduit" class="form-control" />
                 </div>
             </div>
             <div class="vr"></div>
             <div class="d-flex flex-column justify-content-between h-100 col-5">
                 <div>
-                    <label class="form-label" for="list-marque-produit">Catégorie du produit</label><span class="text-danger"> *</span>
+                    <label class="form-label" for="list-marque-produit">Catégorie du produit</label>
                     <select required class="form-select border-success" id="list-marque-produit" name="list-marque-produit">
                         <option disabled selected value="">- Choisissez une catégorie -</option>
                         <?php
@@ -59,17 +59,20 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <label class="form-label" for="prixproduit">Prix du produit (€)</label><span class="text-danger"> *</span>
-                        <input required type="number" step="0.01" min="0" id="prixproduit" name="prixproduit" class="form-control" value="0" />
+                        <label class="form-label" for="prixproduit">Prix du produit</label>
+                        <div class="input-group">
+                            <input required type="number" step="0.01" min="0" id="prixproduit" name="prixproduit" class="form-control" value="0" />
+                            <span class="input-group-text"><i class="bi bi-currency-euro"></i></span>
+                        </div>
                     </div>
                     <div class="col-6">
-                        <label class="form-label" for="quantite">Quantité</label>
+                        <label class="form-label" for="quantite">Quantité</label><span class="text-danger"> *</span>
                         <input required type="number" id="quantite" name="quantite" class="form-control" value="0" min="0" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <label class="form-label" for="list-unite">Unité</label><span class="text-danger"> *</span>
+                        <label class="form-label" for="list-unite">Unité</label>
                         <select required class="form-select border-success" id="list-unite" name="list-unite">
                             <option disabled selected value="">- Unité -</option>
                             <?php
@@ -83,7 +86,7 @@
                         <div id="newUnite" class="link-success text-decoration-underline pointer fit mx-auto">Autre unité</div>
                     </div>
                     <div class="col-6">
-                        <label class="form-label" for="list-contenance">Contenance</label><span class="text-danger"> *</span>
+                        <label class="form-label" for="list-contenance">Contenance</label>
                         <select required class="form-select border-success" id="list-contenance" name="list-contenance">
                             <option disabled selected value="">- Contenance -</option>
                             <?php
@@ -128,7 +131,6 @@
 
     $("div").on("blur", "input", function() {
         var element = $(this).attr('class') + "";
-        console.log("div", $(this).val());
         if ($(this).attr('id') == "list-contenance" && $(this).val() <= "0") {
             $(this).addClass("border-danger").removeClass('border-success');
         } else if (($(this).val() == "" || $(this).val() <= "0") && $(this).attr('id') != "quantite" && $(this).attr('id') != "ajouterproduit") {
@@ -138,7 +140,9 @@
             $(this).parent().append('<small class="text-danger emptyValue" id="emptyValue">Champ incorrect</small>');
             $(this).addClass("border-danger").removeClass('border-success');
         } else if ($(this).parent()[0].lastChild.id == "emptyValue" || element.indexOf("border-success") == -1) {
-            $(this).parent()[0].lastChild.remove();
+            if ($(this).parent()[0].lastChild.id == "emptyValue") {
+                $(this).parent()[0].lastChild.remove();
+            }
             $(this).addClass("border-success").removeClass('border-danger');
         }
     });
