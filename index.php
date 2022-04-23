@@ -4,6 +4,11 @@ require_once("modele/fonctions.inc.php");
 require_once("modele/bd.produits.inc.php");
 require_once("modele/connexion.inc.php");
 initPanier(); // se charge de réserver un emplacement mémoire pour le panier si pas encore fait
+if (empty($_SESSION['produits'][0])) {
+	$nbProduits = 0;
+} else {
+	$nbProduits = sizeof($_SESSION['produits']);
+}
 
 if (!isset($_REQUEST['uc']))
 	$uc = 'accueil';

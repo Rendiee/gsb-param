@@ -16,12 +16,8 @@
   <header>
     <nav id="main_nav" class="navbar navbar-expand-lg navbar-light border-bottom border-3 col-11 m-auto">
       <div class="container">
-        <a href="index.php?uc=accueil" class="d-flex align-items-center mb-2 mb-md-0 text-dark text-decoration-none">
-          <img src="assets/images/logo-gsb.png" id="img-size-header" alt="GsbLogo" title="GsbLogo" />
-        </a>
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler-success" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <a href="index.php?uc=accueil" class="d-flex align-items-center mb-2 mb-md-0 text-dark text-decoration-none"><img src="assets/images/logo-gsb.png" id="img-size-header" alt="GsbLogo" title="GsbLogo" /></a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler-success" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="align-self-center collapse navbar-collapse justify-content-end align-items-center" id="navbar-toggler-success">
           <div class="d-flex justify-content-center mx-auto mx-xl-0">
             <ul class="nav mb-2 flex-lg-row flex-column d-flex justify-content-center align-items-center mb-md-0">

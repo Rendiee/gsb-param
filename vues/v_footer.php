@@ -27,19 +27,16 @@
                 "text-underline-offset": "0.8rem",
 
             });
-            $('#' + page).mouseenter(function() {
-                $(this).css('text-decoration', 'none');
-            }).mouseleave(function() {
-                $(this).css({
-                    "text-decoration": "underline #198754",
-                    "text-underline-offset": "0.8rem",
-
-                });
-            });
             $(function() {
                 let filtre = <?php echo json_encode($_SESSION['filtre']); ?>;
                 if (filtre !== 'undefined' && filtre !== false) {
                     $("#formFiltrer").after('<form action="index.php?uc=voirProduits&action=nosProduits" method="POST" id=\'formSuppFiltre\' class="w-100"><button type="submit" onclick="location.href=\'index.php?uc=voirProduits&action=nosProduits\'" class="mx-auto btn btn-outline-danger mt-2 align-items-center w-75 input-group d-flex justify-content-around" name="suppFiltre"><div>Supprime filtre actif</div><i class="bi bi-x-circle"></i></button>');
+                }
+            });
+            $(function() {
+                var nb = <?php echo $nbProduits; ?>;
+                if (nb > 0) {
+                    $('#panier').before('<div id="pastille" class="d-flex align-items-center justify-content-center"> <div > ' + nb + ' </div></div>')
                 }
             });
         </script>

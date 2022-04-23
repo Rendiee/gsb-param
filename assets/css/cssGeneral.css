@@ -130,12 +130,14 @@ footer {
 	overflow: hidden;
 }
 
-.filtre {
+.sticky {
 	position: sticky;
 	top: 10px;
 	border: 1px solid rgba(0, 0, 0, 0.125);
 }
-
+.border-gris {
+	border: 1px solid rgba(0, 0, 0, 0.125);
+}
 .height-filtre-categorie {
 	height: 180px;
 }
@@ -216,4 +218,16 @@ footer {
 
 .cursorNone {
 	cursor: none;
+}
+
+#pastille {
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	background-color: #198754;
+	width: 15px;
+	height: 15px;
+	color: white;
+	padding: 10px;
+	position: absolute;
 }

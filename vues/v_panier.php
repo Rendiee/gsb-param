@@ -1,5 +1,5 @@
 <div class="w-100 text-center h2 text-success fw-bold mb-3">Mon Panier</div>
-<div id="produits-commande" class="d-flex flex-wrap justify-content-between p-3 mx-auto <?php if (!isset($lesProduitsDuPanier)) { ?> w-75 bg-white rounded shadow<?php } else { ?>w-100<?php } ?>">
+<div id="produits-commande" class="d-flex flex-wrap justify-content-between p-3 mx-auto<?php if (!isset($lesProduitsDuPanier)) { ?> w-75 bg-white rounded shadow<?php } else { ?> w-100<?php } ?>">
 
 	<?php
 	if (isset($lesProduitsDuPanier)) {
@@ -23,7 +23,7 @@
 											$description = $description . '...';
 											// affichage
 										?>
-				<div class="w-100 height325px border border-success rounded my-2 py-2 bg-white">
+				<div class="w-100 height325px border border-gris rounded my-2 py-2 bg-white">
 					<form class="h-100" method="POST" action="index.php?uc=gererPanier&action=supprimerUnProduit">
 						<div class="d-flex h-100">
 							<div class="d-flex align-items-center col-4">
@@ -56,8 +56,8 @@
 			<?php
 										} ?>
 		</div>
-		<div class="d-flex flex-column col-lg-4 col-12 height325px sticky-top my-lg-2 bg-white">
-			<div class="d-flex flex-column justify-content-between p-3 border border-success h-100 rounded ms-lg-1">
+		<div class="col-lg-4 col-12 my-lg-2">
+			<div class="d-flex flex-column justify-content-between p-3 rounded ms-lg-1 sticky rounded height325px bg-white">
 				<h2 class="fw-bold mb-4">Total</h2>
 				<div class="d-flex justify-content-between">
 					<div>Sous-total</div>
@@ -65,7 +65,7 @@
 				</div>
 				<div class="d-flex justify-content-between">
 					<div>Livraison</div>
-					<div>(Gratuite) 0.00 €</div>
+					<div>(Gratuit) 0.00 €</div>
 				</div>
 				<hr class="w-75 mx-auto">
 				<div class="d-flex justify-content-between">
