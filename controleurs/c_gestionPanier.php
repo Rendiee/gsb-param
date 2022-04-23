@@ -7,9 +7,9 @@ switch ($action) {
 			if ($n > 0) {
 				$desIdProduit = getLesIdProduitsDuPanier();
 				$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
+				$totalPanier = getTotalPanier($lesProduitsDuPanier);
 				include("vues/v_panier.php");
 			} else {
-				$message = "Votre panier est vide !";
 				include("vues/v_panier.php");
 			}
 			break;

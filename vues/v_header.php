@@ -30,12 +30,11 @@
               <li><a id="categories" href="index.php?uc=voirProduits&categorie=CH&action=produitsCategorie" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Produits par catégorie</a></li>
               <li><a id="panier" href="index.php?uc=gererPanier&action=voirPanier" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Mon panier</a></li>
               <?php if (isset($_SESSION['u_hab'])) {
-                if ($_SESSION['u_hab'] == 2 || $_SESSION['u_hab'] == 3) {
+                if ($_SESSION['u_hab'] != 1) {
               ?>
                   <li class="dropdown"><a href="index.php?uc=connexion&action=profil" class="dropdown-toggle nav-link rounded-pill px-3 mx-1 fw-bold link-dark" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown">Administration</a>
                     <ul class="dropdown-menu p-0" aria-labelledby="navbarDarkDropdownMenuLink">
                       <li><a class="dropdown-item" href="index.php?uc=administrer&action=ajouterProduit">Ajouter un produit</a></li>
-                      <li><a class="dropdown-item" href="index.php?uc=administrer&action=ajouterContenance">Ajouter une contenance</a></li>
                       <li><a class="dropdown-item" href="index.php?uc=administrer&action=editerProduit">Éditer un produit</a></li>
                       <li><a class="dropdown-item" href="index.php?uc=administrer&action=editerCategorie">Éditer une catégorie</a></li>
                       <?php

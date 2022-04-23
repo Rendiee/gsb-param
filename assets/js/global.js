@@ -1,8 +1,8 @@
 function checkStock() {
 	$("#stock").remove();
 	if ($("select").children(":selected").attr("id") > 0) {
-		var qte = $("#list-contenance").children(":selected").attr("id")
-		$("#prix").append('<small id="stock" class="text-success pt-2 opacity-75"> - En Stock ('+qte+')</small></div>');
+		var qte = $("#list-contenance").children(":selected").attr("id");
+		$("#prix").append('<small id="stock" class="text-success pt-2 opacity-75"> - En Stock (' + qte + ")</small></div>");
 		$("#ajoutPanier").attr("disabled", false);
 		$("#nbProduit").attr("disabled", false);
 		$("#nbProduit").val("1");
@@ -60,37 +60,5 @@ $(function () {
 		} else if (parseInt($(this).val()) < 1) {
 			$(this).val(1);
 		}
-	});
-});
-
-
-$(function() {
-	$(".divVoirProduit").on("mouseenter", function() {
-		$(this).children().addClass(
-			"opacity-50 user-select-none"
-		).css("cursor", "pointer");
-		$(this).css("cursor", "pointer");
-		$(this).append('<div id="voir">Voir</div>');
-		$("#voir").css({
-			"position": "absolute",
-			"margin-left": "auto",
-			"margin-right": "auto",
-			"left": "0",
-			"right": "0",
-			"text-align": "center",
-			"font-size": "1.5rem",
-			"border": "1px solid black",
-			"cursor": "pointer"
-
-		});
-		$("#voir").addClass(
-			"rounded fit px-3 py-1 bg-light"
-		);
-	});
-	$(".divVoirProduit").on("mouseleave", function() {
-		$(this).children().removeClass(
-			"opacity-50 user-select-none"
-		);
-		$("#voir").remove();
 	});
 });

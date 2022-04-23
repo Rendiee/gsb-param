@@ -11,7 +11,11 @@
                 <form action="index.php?uc=connexion&action=connexion" method="POST" id="formConnexion">
                     <div class="form-outline form-white mb-4">
                         <label class="form-label" for="email">Email</label>
-                        <input required type="email" id="email" name="email" class="form-control form-control-lg" placeholder="exemple@exemple.com" <?php if (isset($userInfos)){ echo 'value="' . $userInfos . '"';}else{ echo 'autofocus';} ?> />
+                        <input required type="email" id="email" name="email" class="form-control form-control-lg" placeholder="exemple@exemple.com" <?php if (isset($userInfos)) {
+                                                                                                                                                        echo 'value="' . $userInfos . '"';
+                                                                                                                                                    } else {
+                                                                                                                                                        echo 'autofocus';
+                                                                                                                                                    } ?> />
                     </div>
                     <div class="form-outline form-white mb-4">
                         <label class="form-label" for="password">Mot de passe</label>
@@ -41,9 +45,10 @@
                 '<div id="emtpyValues" class="alert alert-danger mx-auto fit shakeDiv">Veuillez saisir tout les champs</div>'
             );
             event.preventDefault();
-        }else if(!regex.test($("input[name='email']").val())){
+        } else if (!regex.test($("input[name='email']").val())) {
             $("input[name='email']").parent()[0].lastChild.remove();
             $("input[name='email']").parent().append('<small class="text-danger emptyValue shakeDiv" id="emptyValue">Email non valide</small>');
+            $("input[name='email']").addClass('border-danger');
             event.preventDefault();
         }
     });
@@ -53,14 +58,15 @@
             $(this).parent()[0].lastChild.remove();
         }
         if ($(this).val() == "") {
-            if($(this).attr("id") == "password"){
+            if ($(this).attr("id") == "password") {
                 $(this).parent().append('<small class="text-danger emptyValue" id="emptyValue">Veuillez saisir votre mot de passe</small>');
-            }else{
+            } else {
                 $(this).parent().append('<small class="text-danger emptyValue" id="emptyValue">Veuillez saisir votre email</small>');
             }
             $(this).addClass("border-danger").removeClass('border-success');
-        }else if($(this).attr("id") == 'email' && !regex.test($(this).val())){
+        } else if ($(this).attr("id") == 'email' && !regex.test($(this).val())) {
             $(this).parent().append('<small class="text-danger emptyValue shakeDiv" id="emptyValue">Email non valide</small>');
+            $(this).addClass('border-danger');
         } else {
             $(this).addClass("border-success").removeClass('border-danger');
         }

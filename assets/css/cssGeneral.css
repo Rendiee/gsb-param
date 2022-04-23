@@ -53,10 +53,6 @@ footer {
 	width: 100px;
 }
 
-#produits-commande {
-	max-height: 500px;
-}
-
 .commander {
 	box-shadow: 1px 1px 10px black;
 }
@@ -83,28 +79,9 @@ footer {
 	width: -moz-fit-content !important;
 }
 
-/* ===== Scrollbar CSS ===== */
-/* Firefox */
-#produits-commande {
-	overflow: auto;
-	overflow: overlay;
-	scrollbar-width: auto;
-	scrollbar-color: #aaaaaa #ffffff;
-}
-
-/* Chrome, Edge, and Safari */
-#produits-commande::-webkit-scrollbar {
-	width: 6px;
-	height: 6px;
-}
-
-#produits-commande::-webkit-scrollbar-track {
-	background: transparent;
-}
-
-#produits-commande::-webkit-scrollbar-thumb {
-	background-color: #aaaaaa;
-	border-radius: 8px;
+.h-fit {
+	height: fit-content !important;
+	height: -moz-fit-content !important;
 }
 
 .text-card {

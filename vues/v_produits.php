@@ -1,7 +1,7 @@
 <div class="w-100 text-center h2 text-success fw-bold mb-3">Tous les produits</div>
 <div class="d-flex flex-wrap justify-content-center">
 	<div class="col-xl-3 col-lg-4 col-md-6 col-9 p-1">
-		<div class="filtre filtre-sticky rounded p-2 bg-white shadow-sm me-1">
+		<div class="filtre rounded p-2 bg-white shadow-sm me-1">
 			<form action="index.php?uc=voirProduits&action=nosProduits" method="POST" id='formFiltrer'>
 				<h4 class="filtre-title">Filtre</h4>
 				<hr>

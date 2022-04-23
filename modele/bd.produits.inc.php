@@ -142,6 +142,15 @@ function getLesProduitsDuTableau($desIdProduit)
 		die();
 	}
 }
+
+function getTotalPanier($prix)
+{
+	$total = 0;
+	foreach ($prix as $unPrix) {
+		$total += $unPrix['prix'] * $unPrix['quantite'];
+	}
+	return $total;
+}
 /**
  * Crée une commande 
  *
