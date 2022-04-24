@@ -14,10 +14,8 @@
 											$unite = $unProduit['unite'];
 											$contenance = $unProduit['contenance'];
 											$prix = $unProduit['prix'];
+											$qteMax = $unProduit['quantiteMax'];
 											$qte = $unProduit['quantite'];
-
-											if (strlen($unite) > 5)
-												$unite = substr($unite, 0, 5) . '...';
 
 											$description = substr($description, 0, 80);
 											$description = $description . '...';
@@ -40,7 +38,18 @@
 									</div>
 									<div class="small d-flex align-items-center">
 										<div class="me-1">Quantite :</div>
-										<input class="border border-success rounded p-1 qte" name="quantite" type="number" min="1" max="10" value="<?php echo $qte ?>">
+										<select class="border border-success rounded p-1 qte" name="quantite">
+											<?php
+											if ($qteMax > 10) {
+												$qteMax = 10;
+											}
+											for ($i = 1; $i <= $qteMax; $i++) {
+											?>
+												<option <?php if ($i == $qte) { ?>selected <?php } ?>value="<?php echo $i ?>"><?php echo $i ?></option>
+											<?php
+											}
+											?>
+										</select>
 									</div>
 								</div>
 								<div>
@@ -61,7 +70,7 @@
 				<h2 class="fw-bold mb-4">Total</h2>
 				<div class="d-flex justify-content-between">
 					<div>Sous-total</div>
-					<div><?php echo $totalPanier ?> €</div>
+					<div><?php echo sprintf("%.02f", $totalPanier) ?> €</div>
 				</div>
 				<div class="d-flex justify-content-between">
 					<div>Livraison</div>
@@ -70,7 +79,7 @@
 				<hr class="w-75 mx-auto">
 				<div class="d-flex justify-content-between">
 					<div>Total TTC</div>
-					<div><?php echo $totalPanier ?> €</div>
+					<div><?php echo sprintf("%.02f", $totalPanier) ?> €</div>
 				</div>
 				<div class="d-flex flex-row justify-content-center align-items-center fit mx-auto mt-4">
 					<a class="text-decoration-none fit me-2" href="index.php?uc=gererPanier&action=passerCommande">
@@ -94,14 +103,3 @@
 	}
 	?>
 </div>
-<script>
-	$(function() {
-		$(".qte").on("change", function() {
-			if (parseInt($(this).val()) > 10) {
-				$(this).val(10);
-			} else if (parseInt($(this).val()) < 1) {
-				$(this).val(1);
-			}
-		});
-	});
-</script>

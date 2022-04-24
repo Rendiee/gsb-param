@@ -36,7 +36,8 @@
             $(function() {
                 var nb = <?php echo $nbProduits; ?>;
                 if (nb > 0) {
-                    $('#panier').before('<div id="pastille" class="d-flex align-items-center justify-content-center"> <div > ' + nb + ' </div></div>')
+                    $('#panier').before('<div id="pastille" class="d-flex align-items-center justify-content-center">' + nb + '</div>')
+                    $('#panier').parent().addClass('d-flex justify-content-end')
                 }
             });
         </script>

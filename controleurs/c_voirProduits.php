@@ -20,7 +20,6 @@ switch ($action) {
 					$_SESSION['page'][] = $_GET['categorie'];
 				}
 			} else {
-				// $_SESSION['page'] = 'nosproduits';
 				if ($_SESSION['page'] == 'panier') {
 					$value = "index.php?uc=gererPanier&action=voirPanier";
 				} else $value = "index.php?uc=voirProduits&action=nosProduits";
@@ -53,7 +52,7 @@ switch ($action) {
 				$qte = $_POST['quantite'];
 				if (produitExiste($idProduit, $contenance)) {
 					$qteDispo = quantiteDispo($idProduit, $contenance);
-					if ($qte > 0 && $qteDispo[0] >= $qte) {
+					if ($qte > 0 && $qteDispo[0] >= $qte && $qte <= 10) {
 						$ajoutOk = ajouterAuPanier($idProduit, $contenance, $qte);
 						if (!$ajoutOk) {
 							$_SESSION['message'] = '<div class="m-auto fit alert alert-danger mb-2">Cet article est déjà dans le panier !</div>';
@@ -68,7 +67,7 @@ switch ($action) {
 							header("Location: " . $_SERVER["HTTP_REFERER"]); // recharge la page du produit
 						}
 					} else {
-						$_SESSION['message'] = '<div class="m-auto fit alert alert-danger mb-2">Il n\'y a pas assez de stock (' . $qteDispo[0] . ')</div>';
+						$_SESSION['message'] = '<div class="m-auto fit alert alert-danger mb-2">Un problème est survenu</div>';
 						header("Location: " . $_SERVER["HTTP_REFERER"]); // recharge la page du produit
 					}
 				} else {
@@ -98,6 +97,7 @@ switch ($action) {
 					$filtre['marque'] = $_POST['list-marque'];
 				}
 				$_SESSION['filtre'] = $filtre;
+				header('location:index.php?uc=voirProduits&action=nosProduits');
 			}
 			if (isset($_SESSION['filtre']) && $_SESSION['filtre'] !== false) {
 				$lesProduits = getTousLesProduitsFiltres($_SESSION['filtre']);
