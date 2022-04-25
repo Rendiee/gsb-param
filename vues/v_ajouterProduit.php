@@ -83,7 +83,7 @@
                             }
                             ?>
                         </select>
-                        <div id="newUnite" class="link-success text-decoration-underline pointer fit mx-auto">Autre unité</div>
+                        <div id="newUnite" class="link-success text-decoration-underline pointer fit">Autre unité</div>
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="list-contenance">Contenance</label>

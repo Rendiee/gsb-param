@@ -228,7 +228,7 @@ function getTousLesProduits()
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', r.r_prixVente as \'prix\', SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id GROUP BY p.p_id ORDER BY prix';
+		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', r.r_prixVente as \'prix\', SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id GROUP BY p.p_id ORDER BY id';
 		$res = $monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;

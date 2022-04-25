@@ -60,7 +60,16 @@ switch ($action) {
 			break;
 		}
 	case 'editerProduit': {
-			include('./vues/v_editerProduit.php');
+			$lesProduits = getTousLesProduits();
+			if(isset($_POST['editproduit'])){
+				if(isset($_POST['list-edit-product'])){
+					if($_POST['list-edit-produit'] == ""){
+						$_SESSION['messageErrorEditProduit'] = 'Un problème est survenu';
+					}
+				}
+				header('location: index.php?uc=administrer&action=editerProduit');
+			}
+			include('./vues/v_formEditerProduit.php');
 			break;
 		}
 	case 'editerCategorie': {
