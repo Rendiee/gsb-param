@@ -84,6 +84,7 @@ switch ($action) {
 	case 'nosProduits': {
 			if (isset($_POST['suppFiltre'])) {
 				$_SESSION['filtre'] = false;
+				header('location:index.php?uc=voirProduits&action=nosProduits');
 			}
 			$_SESSION['page'] = 'nosproduits';
 			if (isset($_POST['filtrer']) && ($_POST['price-min'] != '' || $_POST['price-max'] != '' || $_POST['list-marque'] != 'default')) {

@@ -10,14 +10,14 @@
 					<div class="col-6 d-flex flex-column">
 						<label for="price-min" class="text-filtre-prix">Minimum</label>
 						<div class="input-group">
-							<input class="form-control text-center m-auto" type="text" id="price-min" name="price-min" size="10" maxlength="3" placeholder="Min">
+							<input class="form-control text-center m-auto" type="number" step="0.01" id="price-min" name="price-min" size="10" maxlength="3" min="0" placeholder="Min">
 							<span class="input-group-text"><i class="bi bi-currency-euro"></i></span>
 						</div>
 					</div>
 					<div class="col-6 d-flex flex-column">
 						<label for="price-max" class="text-filtre-prix">Maximum</label>
 						<div class="input-group">
-							<input class="form-control text-center m-auto" type="text" id="price-max" name="price-max" size="10" maxlength="3" placeholder="Max">
+							<input class="form-control text-center m-auto" type="number" step="0.01" id="price-max" name="price-max" size="10" maxlength="3" min="0" placeholder="Max">
 							<span class="input-group-text"><i class="bi bi-currency-euro"></i></span>
 						</div>
 					</div>
@@ -42,11 +42,10 @@
 		</div>
 	</div>
 	<div class="col-xl-9 col-lg-7 col-sm-12">
+			<?php
+			if(!empty($lesProduits)){?>
 		<div class="card-group ms-1 d-flex flex-wrap justify-content-lg-start justify-content-center">
 			<?php
-			if (isset($message)) {
-				echo '<div class="alert alert-danger mt-3">' . $message . '</div>';
-			}
 			foreach ($lesProduits as $unProduit) {
 				$description = $unProduit['description'];
 				$image = "assets/" . $unProduit['photo'];
@@ -87,10 +86,18 @@
 				</div>
 
 			<?php
-
 			}
-
 			?>
-		</div>
+			</div>
+			<?php
+			}else{
+			?>
+			<div class="ms-1">
+				<div class="mx-auto fit display-2">Oups !</div><br/>
+				<div class="mx-auto fit">Il semblerait qu'il n'y ait aucun produit...</div>
+			</div>
+			<?php
+			}
+			?>
 	</div>
 </div>

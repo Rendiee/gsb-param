@@ -1,25 +1,3 @@
-//filtre min
-$(function () {
-	$("input[name='price-min']").on("input", function () {
-		$(this).val(
-			$(this)
-				.val()
-				.replace(/[^0-9]/g, "")
-		);
-	});
-});
-
-//filtre max
-$(function () {
-	$("input[name='price-max']").on("input", function () {
-		$(this).val(
-			$(this)
-				.val()
-				.replace(/[^0-9]/g, "")
-		);
-	});
-});
-
 //filtre on submit
 $(function () {
 	$("#formFiltrer").on("submit", function (event) {
