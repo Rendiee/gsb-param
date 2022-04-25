@@ -61,7 +61,7 @@
                     <div class="col-6">
                         <label class="form-label" for="prixproduit">Prix du produit</label>
                         <div class="input-group">
-                            <input type="number" step="0.01" min="0" id="prixproduit" name="prixproduit" class="form-control" value="0" />
+                            <input type="number" step="0.01" min="0" id="prixproduit" name="prixproduit" class="form-control col-9" value="0" />
                             <span class="input-group-text"><i class="bi bi-currency-euro"></i></span>
                         </div>
                     </div>
@@ -83,12 +83,12 @@
                             }
                             ?>
                         </select>
-                        <div id="newUnite" class="link-success text-decoration-underline pointer fit">Autre unité</div>
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="list-contenance">Contenance</label>
                         <input type="number" placeholder="Contenance" class="form-control" id="list-contenance" name="list-contenance" min="0" value="0">
                     </div>
+                    <div id="newUnite" class="link-success text-decoration-underline pointer fit w-100 text-center">Ajouter une unité</div>
                 </div>
             </div>
         </div>
@@ -143,13 +143,21 @@
                 if ($(this).parent()[0].lastChild.id == "emptyValue") {
                     $(this).parent()[0].lastChild.remove();
                 }
+                if ($(this).parent().parent()[0].lastChild.id == "emptyValue") {
+                    $(this).parent().parent()[0].lastChild.remove();
+                }
                 if ($(this).attr('id') != "prixproduit") {
                     $(this).parent().append('<small class="text-danger emptyValue" id="emptyValue">Champ incorrect</small>');
+                } else {
+                    $(this).parent().parent().append('<small class="text-danger emptyValue" id="emptyValue">Champ incorrect</small>');
                 }
                 $(this).addClass("border-danger").removeClass('border-success');
             } else if ($(this).parent()[0].lastChild.id == "emptyValue" || element.indexOf("border-success") == -1) {
                 if ($(this).parent()[0].lastChild.id == "emptyValue") {
                     $(this).parent()[0].lastChild.remove();
+                }
+                if ($(this).parent().parent()[0].lastChild.id == "emptyValue") {
+                    $(this).parent().parent()[0].lastChild.remove();
                 }
                 $(this).addClass("border-success").removeClass('border-danger');
             }
@@ -162,11 +170,10 @@
             $('#list-unite').attr("disabled", false);
             $('#list-contenance').attr("disabled", false);
             $('#newUnite').text("Autre unité").addClass("link-success").removeClass("link-danger");
-            $('#newContenance').removeClass("d-none");
         } else {
             $('.new').remove();
-            $('#newUnite').parent().parent().append('<div class="col-6 new mt-1"><input  class="form-control" type="text" placeholder="Nom de l\'unité" id="nomUnite" name="nomUnite"></div>');
-            $('#newUnite').parent().parent().append('<div class="col-6 new mt-1"><input  class="form-control" type="number" placeholder="Contenance" id="nbContenance" name="nbContenance" min="0"></div>');
+            $('#newUnite').parent().append('<div class="col-6 new mt-1"><input  class="form-control" type="text" placeholder="Nom de l\'unité" id="nomUnite" name="nomUnite"></div>');
+            $('#newUnite').parent().append('<div class="col-6 new mt-1"><input  class="form-control" type="number" placeholder="Contenance" id="nbContenance" name="nbContenance" min="0"></div>');
             $('#list-unite').attr("disabled", true);
             $('#list-contenance').attr("disabled", true).removeClass("border-danger");
             $('#list-unite').prop("selectedIndex", 0).attr("disabled", true);
@@ -174,7 +181,6 @@
                 $('#list-contenance').parent()[0].lastChild.remove();
             }
             $('#newUnite').text("Annuler").addClass("link-danger").removeClass("link-success");
-            $('#newContenance').addClass("d-none");
             $('#nomUnite').select();
         }
     });

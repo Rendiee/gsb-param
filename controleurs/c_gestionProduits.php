@@ -60,10 +60,10 @@ switch ($action) {
 			break;
 		}
 	case 'editerProduit': {
-			$lesProduits = getTousLesProduits();
-			if(isset($_POST['editproduit'])){
-				if(isset($_POST['list-edit-product'])){
-					if($_POST['list-edit-produit'] == ""){
+			$lesProduits = getTousLesProduitsOrderId();
+			if (isset($_POST['editproduit'])) {
+				if (isset($_POST['list-edit-product'])) {
+					if ($_POST['list-edit-produit'] == "") {
 						$_SESSION['messageErrorEditProduit'] = 'Un problème est survenu';
 					}
 				}
