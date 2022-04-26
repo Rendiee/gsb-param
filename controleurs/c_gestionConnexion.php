@@ -19,21 +19,28 @@ switch ($action) {
 			if (isset($_SESSION['u_hab'])) {
 				header('location: index.php?uc=connexion&action=profil');
 			} else {
-				if(isset($_POST['inscription'])){
-					//A FAIRE
-				}else{
-					include("vues/v_inscription.php");
+				if (isset($_POST['inscription'])) {
+					$_SESSION['countInscription'] = 0;
+					if ($_POST['email'] != "" && $_POST['password'] != "" && checkEmail($_POST['email'])) {
+						createLogin($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['adresse'], $_POST['cp'], $_POST['ville'], $_POST['password']);
+						$_SESSION['successInscription'] = "Inscription réussie";
+						header('location: index.php?uc=connexion&action=inscription');
+					} else {
+						$_SESSION['erreurInscription'] = "Un problème est survenu, l'adresse mail est peut être déjà utilisée";
+						header("Location: " . $_SERVER["HTTP_REFERER"]);
+					}
 				}
-				break;
+				include("vues/v_inscription.php");
 			}
+			break;
 		}
 	case 'connexion': {
 			if (isset($_SESSION['u_hab'])) {
 				header('location: index.php?uc=connexion&action=profil');
 			} else {
 				include("vues/v_connexion.php");
-				break;
 			}
+			break;
 		}
 	case 'profil': {
 			if (!isset($_SESSION['u_hab'])) {

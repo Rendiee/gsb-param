@@ -27,8 +27,7 @@
                 </form>
             </div>
             <div>
-                <p class="mb-0 text-center">Pas de compte ? <a href="index.php?uc=connexion&action=inscription" class="text-success">S'inscrire</a>
-                </p>
+                <p class="mb-0 text-center">Pas de compte ? <a href="index.php?uc=connexion&action=inscription" class="text-success">S'inscrire</a></p>
             </div>
         </div>
     </div>
@@ -59,16 +58,47 @@
         }
         if ($(this).val() == "") {
             if ($(this).attr("id") == "password") {
-                $(this).parent().append('<small class="text-danger emptyValue" id="emptyValue">Veuillez saisir votre mot de passe</small>');
+                $(this).parent().append('<small class="text-danger emptyValue" id="emptyValue">Veuillez renseigner un mot de passe</small>');
             } else {
-                $(this).parent().append('<small class="text-danger emptyValue" id="emptyValue">Veuillez saisir votre email</small>');
+                $(this).parent().append('<small class="text-danger emptyValue" id="emptyValue">Veuillez renseigner un email</small>');
             }
             $(this).addClass("border-danger").removeClass('border-success');
         } else if ($(this).attr("id") == 'email' && !regex.test($(this).val())) {
+            if ($(this).parent()[0].lastChild.id == "emptyValue") {
+                $(this).parent()[0].lastChild.remove();
+            }
             $(this).parent().append('<small class="text-danger emptyValue shakeDiv" id="emptyValue">Email non valide</small>');
             $(this).addClass('border-danger');
         } else {
             $(this).addClass("border-success").removeClass('border-danger');
+            if ($(this).parent()[0].lastChild.id == "emptyValue") {
+                $(this).parent()[0].lastChild.remove();
+            }
+        }
+    });
+    $("input").on("input", function() {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if ($(this).parent()[0].lastChild.id == "emptyValue") {
+            $(this).parent()[0].lastChild.remove();
+        }
+        if ($(this).val() == "") {
+            if ($(this).attr("id") == "password") {
+                $(this).parent().append('<small class="text-danger emptyValue" id="emptyValue">Veuillez renseigner un mot de passe</small>');
+            } else {
+                $(this).parent().append('<small class="text-danger emptyValue" id="emptyValue">Veuillez renseigner un email</small>');
+            }
+            $(this).addClass("border-danger").removeClass('border-success');
+        } else if ($(this).attr("id") == 'email' && !regex.test($(this).val())) {
+            if ($(this).parent()[0].lastChild.id == "emptyValue") {
+                $(this).parent()[0].lastChild.remove();
+            }
+            $(this).parent().append('<small class="text-danger emptyValue shakeDiv" id="emptyValue">Email non valide</small>');
+            $(this).addClass('border-danger');
+        } else {
+            $(this).addClass("border-success").removeClass('border-danger');
+            if ($(this).parent()[0].lastChild.id == "emptyValue") {
+                $(this).parent()[0].lastChild.remove();
+            }
         }
     });
 </script>
