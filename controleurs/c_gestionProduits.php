@@ -25,14 +25,14 @@ switch ($action) {
 					$contenance = $_POST['list-contenance'];
 					$idUnite = $_POST['list-unite'];
 				}
-				//insert product ici : : : : : : : : : CHANGER LA BD POUR QUE LE LIEN ENTRE CONTENANCE ET UNITÉ SOIT EN 0.n DES 2 COTÉS ET NON 0.1 0.n : : : : : : : : : : : : : : : 
+				//insert product ici
 				$idProduit = insertProduct($_POST['nomproduit'], $_POST['imgproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-marque-produit']);
-				if (!empty(idExistContenance($contenance, $idUnite))) {
-					$idContenance = idExistContenance($contenance, $idUnite)[0];
+				if (!empty(idExistContenance($contenance))) {
+					$idContenance = idExistContenance($contenance)[0];
 				} else {
-					$idContenance = insertContenance($contenance, $idUnite);
+					$idContenance = insertContenance($contenance);
 				}
-				insertRemplir($idProduit, $idContenance, $_POST['prixproduit'], $_POST['quantite']);
+				insertRemplir($idProduit, $idContenance, $_POST['prixproduit'], $_POST['quantite'], $idUnite);
 				$_SESSION['countProduit'] = 0;
 				$_SESSION['messageSuccessProduit'] = 'Le produit a bien été enregistré !';
 				header('location: index.php?uc=administrer&action=ajouterProduit');

@@ -129,7 +129,7 @@ function getLesProduitsDuTableau($desIdProduit)
 		$lesProduits = array();
 		if ($nbProduits != 0) {
 			foreach ($desIdProduit as $unIdProduit) {
-				$req = 'SELECT p.p_id as id, p.p_nom as nom, p.p_photo as photo, p.p_description as description, p.p_marque as marque, round(r.r_prixVente, 2) as prix, u.un_libelle as unite, co.co_contenance as contenance, r.co_id as idContenance, r.r_qteStock as quantiteMax FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id JOIN contenance co ON co.co_id=r.co_id AND co.co_id = "' . $unIdProduit[1] . '" JOIN unite u ON u.un_id=co.un_id INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE p.`p_id` = "' . $unIdProduit[0] . '" GROUP BY p.p_id;';
+				$req = 'SELECT p.p_id as id, p.p_nom as nom, p.p_photo as photo, p.p_description as description, p.p_marque as marque, round(r.r_prixVente, 2) as prix, u.un_libelle as unite, co.co_contenance as contenance, r.co_id as idContenance, r.r_qteStock as quantiteMax FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id JOIN contenance co ON co.co_id=r.co_id AND co.co_id = "' . $unIdProduit[1] . '" JOIN unite u ON u.un_id=r.un_id INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE p.`p_id` = "' . $unIdProduit[0] . '" GROUP BY p.p_id;';
 				$res = $monPdo->query($req);
 				$unProduit = $res->fetch();
 				$unProduit['quantite'] = $unIdProduit[2];
@@ -341,7 +341,7 @@ function getUniteEtPrix($id)
 	try {
 
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('SELECT r.p_id, r.r_prixVente, r.r_qteStock as quantite, co.co_contenance, u.un_libelle, co.co_id FROM remplir r JOIN contenance co ON co.co_id = r.co_id JOIN unite u ON u.un_id=co.un_id WHERE r.p_id = :id');
+		$req = $monPdo->prepare('SELECT r.p_id, r.r_prixVente, r.r_qteStock as quantite, co.co_contenance, u.un_libelle, r.co_id, r.un_id FROM remplir r JOIN contenance co ON co.co_id = r.co_id JOIN unite u ON u.un_id=r.un_id WHERE r.p_id = :id');
 		$req->bindParam(':id', $id, PDO::PARAM_INT);
 		$req->execute();
 		$res = $req->fetchAll();
@@ -510,14 +510,13 @@ function insertUnite($nom)
 	}
 }
 
-function idExistContenance($valeur, $idUnite)
+function idExistContenance($valeur)
 {
 	try {
 
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('SELECT co_id FROM contenance WHERE co_contenance = :valeurContenance AND un_id = :uniteId;');
+		$req = $monPdo->prepare('SELECT co_id FROM contenance WHERE co_contenance = :valeurContenance;');
 		$req->bindParam(':valeurContenance', $valeur, PDO::PARAM_INT);
-		$req->bindParam(':uniteId', $idUnite, PDO::PARAM_STR);
 		$req->execute();
 		$res = $req->fetch();
 		return $res;
@@ -545,7 +544,7 @@ function idExistUnite($unite)
 	}
 }
 
-function insertContenance($valeur, $idUnite)
+function insertContenance($valeur)
 {
 	$id = getLastIdContenance()[0];
 	$id++;
@@ -553,10 +552,9 @@ function insertContenance($valeur, $idUnite)
 	try {
 
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('INSERT INTO contenance VALUES (:idContenance, :valeurContenance, :uniteId)');
+		$req = $monPdo->prepare('INSERT INTO contenance VALUES (:idContenance, :valeurContenance)');
 		$req->bindParam(':idContenance', $id, PDO::PARAM_INT);
 		$req->bindParam(':valeurContenance', $valeur, PDO::PARAM_INT);
-		$req->bindParam(':uniteId', $idUnite, PDO::PARAM_STR);
 		$req->execute();
 		return $id;
 	} catch (PDOException $e) {
@@ -566,14 +564,15 @@ function insertContenance($valeur, $idUnite)
 	}
 }
 
-function insertRemplir($idProduit, $idContenance, $prixproduit, $quantite)
+function insertRemplir($idProduit, $idContenance, $prixproduit, $quantite, $idUnite)
 {
 	try {
 
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('INSERT INTO remplir VALUES (:idProduit, :idContenance, :prixproduit, :qte)');
+		$req = $monPdo->prepare('INSERT INTO remplir VALUES (:idProduit, :idContenance, :idUnite, :prixproduit, :qte)');
 		$req->bindParam(':idProduit', $idProduit, PDO::PARAM_INT);
 		$req->bindParam(':idContenance', $idContenance, PDO::PARAM_INT);
+		$req->bindParam(':idUnite', $idUnite, PDO::PARAM_INT);
 		$req->bindParam(':prixproduit', $prixproduit, PDO::PARAM_STR);
 		$req->bindParam(':qte', $quantite, PDO::PARAM_INT);
 		$req->execute();
