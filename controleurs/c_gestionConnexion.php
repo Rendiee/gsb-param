@@ -19,7 +19,11 @@ switch ($action) {
 			if (isset($_SESSION['u_hab'])) {
 				header('location: index.php?uc=connexion&action=profil');
 			} else {
-				include("vues/v_inscription.php");
+				if(isset($_POST['inscription'])){
+					//A FAIRE
+				}else{
+					include("vues/v_inscription.php");
+				}
 				break;
 			}
 		}

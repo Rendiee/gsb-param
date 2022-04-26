@@ -1,5 +1,5 @@
 <div class="col-10 col-md-8 col-lg-6 col-xl-5 m-auto">
-    <div class="card" style="border-radius: 1rem;">
+    <div class="card rounded">
         <div class="card-body p-4">
             <div class="mt-md-2 pb-3">
                 <h2 class="fw-bold mb-4 text-center">Connexion</h2>

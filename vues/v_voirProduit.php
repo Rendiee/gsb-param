@@ -19,7 +19,6 @@ unset($_SESSION['message']) ?>
                 </div>
                 <hr class="w-75 mx-auto">
                 <div class="d-flex flex-column align-items-start justify-content-center col-md-8 col-12 mx-auto">
-                    <div><?php echo $prixMin[0] . '€ - ' . $prixMax[0] . '€' ?></div>
                     <div class="d-flex justify-content-start align-items-center pt-2">
                         <div class="text-center me-1">Contenance : </div>
                         <select class="form-select border-success fit" id="list-contenance" name="list-contenance" onchange="checkStock(); checkContenanceEtQte();">
