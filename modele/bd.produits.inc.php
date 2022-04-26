@@ -583,3 +583,17 @@ function insertRemplir($idProduit, $idContenance, $prixproduit, $quantite, $idUn
 		die();
 	}
 }
+
+function getInfoTechProduit($id){
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT p.p_id as id, p.p_nom as nom, p.p_description as descr, p.p_marque as marque FROM produit p WHERE p.p_id = :id');
+		$req->bindParam(':id', $id, PDO::PARAM_INT);
+		$req->execute();
+		$res = $req->fetch();
+		return $res;
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}

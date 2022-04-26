@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="col-6">
-                        <label class="form-label" for="quantite">Quantité</label><span class="text-danger"> *</span>
+                        <label class="form-label" for="quantite">Stock</label><span class="text-danger"> *</span>
                         <input type="number" id="quantite" name="quantite" class="form-control" value="0" min="0" />
                     </div>
                 </div>
@@ -181,7 +181,6 @@
                 $('#list-contenance').parent()[0].lastChild.remove();
             }
             $('#newUnite').text("Annuler").addClass("link-danger").removeClass("link-success");
-            $('#nomUnite').select();
         }
     });
 </script>

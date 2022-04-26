@@ -62,14 +62,18 @@ switch ($action) {
 	case 'editerProduit': {
 			$lesProduits = getTousLesProduitsOrderId();
 			if (isset($_POST['editproduit'])) {
-				if (isset($_POST['list-edit-product'])) {
-					if ($_POST['list-edit-produit'] == "") {
-						$_SESSION['messageErrorEditProduit'] = 'Un problème est survenu';
-					}
+				//var_dump($_POST['list-edit-produit']);
+				if (isset($_POST['list-edit-produit']) && $_POST['list-edit-produit'] != "") {
+					$idProduit = $_POST['list-edit-produit'];
+					$leProduit = getInfoTechProduit($idProduit);
+					include('./vues/v_pageEditerProduit.php');
+				}else{
+					$_SESSION['messageErrorEditProduit'] = 'Un problème est survenu.';
+					header('location: index.php?uc=administrer&action=editerProduit');
 				}
-				header('location: index.php?uc=administrer&action=editerProduit');
+			}else{
+				include('./vues/v_formEditerProduit.php');
 			}
-			include('./vues/v_formEditerProduit.php');
 			break;
 		}
 	case 'editerCategorie': {
