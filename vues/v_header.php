@@ -65,4 +65,12 @@
         </div>
       </div>
     </nav>
+    <ul>
+      <li class="text-danger">A FAIRE :</li>
+      <li class="text-danger">- PRODUIT SUGGERER (page produit)</li>
+      <li class="text-danger">- AJOUTER/RETIRER STOCK (page admin)</li>
+      <li class="text-danger">- EDITER CATEGORIE (page admin)</li>
+      <li class="text-danger">- AVIS SOUS PRODUIT/PAGE PRODUIT (page produit)</li>
+      <li class="text-danger">- ENREGISTREMENT COMMANDE (après page panier)</li>
+    </ul>
   </header>

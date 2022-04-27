@@ -23,7 +23,7 @@
                 </select>
             </div>
             <div class="button-form-center mt-3">
-                <input class="btn btn-success px-5" type="submit" value="Éditer le produit" name="editproduit" id="editproduit">
+                <input class="btn btn-success px-5" type="submit" value="Choisir ce produit" name="chooseproduct" id="chooseproduct">
             </div>
         </form>
     </div>

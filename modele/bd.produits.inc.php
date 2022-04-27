@@ -93,7 +93,7 @@ function getLesProduitsDeCategorie($idCategorie)
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', round(r.r_prixVente, 2) as \'prix\', SUM(r.r_qteStock) as quantite, c.ca_acronyme FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE c.ca_acronyme = "' . $idCategorie . '" GROUP BY p.p_id';
+		$req = 'SELECT p.p_id as id, p.p_nom as nom, p.p_photo as photo, p.p_description as description, p.p_marque as marque, round(r.r_prixVente, 2) as prix, SUM(r.r_qteStock) as quantite, c.ca_acronyme FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE c.ca_acronyme = "' . $idCategorie . '" GROUP BY p.p_id';
 		$res = $monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
@@ -106,7 +106,7 @@ function getInfoProduit($id)
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', round(r.r_prixVente, 2) as \'prix\', c.ca_libelle as categorie, SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE p.p_id = "' . $id . '"';
+		$req = 'SELECT p.p_id as id, p.p_nom as nom, p.p_photo as photo, p.p_description as description, p.p_marque as marque, round(r.r_prixVente, 2) as prix, c.ca_libelle as categorie, SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN categorie c ON p.ca_id = c.ca_id WHERE p.p_id = "' . $id . '"';
 		$res = $monPdo->query($req);
 		$res = $res->fetch();
 		return $res;
@@ -228,7 +228,7 @@ function getTousLesProduitsOrderId()
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', r.r_prixVente as \'prix\', SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id GROUP BY p.p_id ORDER BY id';
+		$req = 'SELECT p.p_id as id, p.p_nom as nom, p.p_photo as photo, p.p_description as description, p.p_marque as marque, r.r_prixVente as prix, SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id GROUP BY p.p_id ORDER BY id';
 		$res = $monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
@@ -242,7 +242,7 @@ function getTousLesProduits()
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT p.p_id as \'id\', p.p_nom as \'nom\', p.p_photo as \'photo\', p.p_description as \'description\', p.p_marque as \'marque\', r.r_prixVente as \'prix\', SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id GROUP BY p.p_id ORDER BY prix';
+		$req = 'SELECT p.p_id as id, p.p_nom as nom, p.p_photo as photo, p.p_description as description, p.p_marque as marque, r.r_prixVente as prix, SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id GROUP BY p.p_id ORDER BY prix';
 		$res = $monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
@@ -308,7 +308,7 @@ function getMinPriceProduct($id)
 	try {
 
 		$monPdo = connexionPDO();
-		$req = 'SELECT ROUND(MIN(r.r_prixVente),2) as \'prixMin\' FROM remplir r WHERE r.p_id = ' . $id;
+		$req = 'SELECT ROUND(MIN(r.r_prixVente),2) as prixMin FROM remplir r WHERE r.p_id = ' . $id;
 		$res = $monPdo->query($req);
 		$result = $res->fetch();
 		return $result;
@@ -325,7 +325,7 @@ function getMaxPriceProduct($id)
 	try {
 
 		$monPdo = connexionPDO();
-		$req = 'SELECT ROUND(MAX(r.r_prixVente),2) as \'prixMin\' FROM remplir r WHERE r.p_id = ' . $id;
+		$req = 'SELECT ROUND(MAX(r.r_prixVente),2) as prixMin FROM remplir r WHERE r.p_id = ' . $id;
 		$res = $monPdo->query($req);
 		$result = $res->fetch();
 		return $result;
@@ -358,7 +358,7 @@ function getCategorieProduit($id)
 	try {
 
 		$monPdo = connexionPDO();
-		$req = 'SELECT MIN(r.r_prixVente) as \'prixMin\' FROM remplir r WHERE r.p_id = ' . $id;
+		$req = 'SELECT MIN(r.r_prixVente) as prixMin FROM remplir r WHERE r.p_id = ' . $id;
 		$res = $monPdo->query($req);
 		$result = $res->fetch();
 		return $result;
@@ -587,10 +587,65 @@ function insertRemplir($idProduit, $idContenance, $prixproduit, $quantite, $idUn
 function getInfoTechProduit($id){
 	try {
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('SELECT p.p_id as id, p.p_nom as nom, p.p_description as descr, p.p_marque as marque FROM produit p WHERE p.p_id = :id');
+		$req = $monPdo->prepare('SELECT p.p_id AS id, p.p_nom AS nom, p.p_photo AS img, p.p_description AS descr, p.p_marque AS marque, c.ca_id AS catId, r.r_prixVente AS prix, r.r_qteStock AS stock, r.un_id AS unite, r.co_id AS coId, co.co_contenance as coLib FROM produit p INNER JOIN categorie c ON c.ca_id = p.ca_id INNER JOIN remplir r ON r.p_id = p.p_id INNER JOIN contenance co ON r.co_id = co.co_id WHERE p.p_id = :id;');
 		$req->bindParam(':id', $id, PDO::PARAM_INT);
 		$req->execute();
 		$res = $req->fetch();
+		return $res;
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function updateProduct($id, $nom, $desc, $marque, $idCategorie)
+{
+
+	try {
+
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('UPDATE produit p SET p.p_nom = :nom, p.p_description = :descr, p.p_marque = :marque, p.ca_id = :catId WHERE p.p_id = :id');
+		$req->bindParam(':id', $id, PDO::PARAM_STR);
+		$req->bindParam(':nom', $nom, PDO::PARAM_STR);
+		$req->bindParam(':descr', $desc, PDO::PARAM_STR);
+		$req->bindParam(':marque', $marque, PDO::PARAM_STR);
+		$req->bindParam(':catId', $idCategorie, PDO::PARAM_INT);
+		$req->execute();
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function updateRemplir($id, $prix, $stock, $uniteId, $contId)
+{
+	try {
+
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('UPDATE remplir r SET r.co_id = :coId, SET r.un_id = :uniteId, SET r.r_prixVente = :prix, SET r.r_qteStock = :stock WHERE r.p_id = :id');
+		$req->bindParam(':id', $id, PDO::PARAM_INT);
+		$req->bindParam(':coId', $contId, PDO::PARAM_INT);
+		$req->bindParam(':uniteId', $uniteId, PDO::PARAM_INT);
+		$req->bindParam(':prix', $prix, PDO::PARAM_STR);
+		$req->bindParam(':stock', $stock, PDO::PARAM_INT);
+		$req->execute();
+		return $id;
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function getMemeProduitAvecContenance($id)
+{
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT p.p_id AS id, p.p_nom AS nom, c.co_contenance AS coCont, u.un_libelle AS unite, r.r_prixVente AS prix FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN contenance c ON c.co_id = r.co_id INNER JOIN unite u ON u.un_id = r.un_id WHERE p.p_id = :id ORDER BY :id;');
+		$req->bindParam(':id', $id, PDO::PARAM_INT);
+		$req->execute();
+		$res = $req->fetchAll();
 		return $res;
 	} catch (PDOException $e) {
 		print "Erreur !: " . $e->getMessage();

@@ -61,16 +61,31 @@ switch ($action) {
 		}
 	case 'editerProduit': {
 			$lesProduits = getTousLesProduitsOrderId();
-			if (isset($_POST['editproduit'])) {
-				//var_dump($_POST['list-edit-produit']);
-				if (isset($_POST['list-edit-produit']) && $_POST['list-edit-produit'] != "") {
+			if(isset($_POST['modif-product'])){
+				//update product ici
+				updateProduct($lesProduits[0]['id'], $_POST['nomproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-cat-produit']);
+				updateRemplir($lesProduits[0]['id'], $_POST['prixproduit'], $_POST['quantite'], $_POST['list-unite'], $_POST['list-cat-produit']);
+				header('location: index.php?uc=administrer&action=editerProduit');
+			}
+			if(isset($_POST['editproduit'])){
+				if(isset($_POST['list-edit-produit-contenance']) && $_POST['list-edit-produit-contenance'] != ""){
 					$idProduit = $_POST['list-edit-produit'];
 					$leProduit = getInfoTechProduit($idProduit);
+					$lesCategories = getLesCategories();
+					$lesUnites = getUniteContenance();
+					$lesContenances = getContenanceValue();
 					include('./vues/v_pageEditerProduit.php');
-				}else{
-					$_SESSION['messageErrorEditProduit'] = 'Un problème est survenu.';
-					header('location: index.php?uc=administrer&action=editerProduit');
 				}
+			}
+			if (isset($_POST['chooseproduct'])) {
+				if (isset($_POST['list-edit-produit']) && $_POST['list-edit-produit'] != "") {
+					$produitsContenance = getMemeProduitAvecContenance($_POST['list-edit-produit']);
+					include('./vues/v_choixProduitContenance.php');
+				}
+				// else{
+				// 	$_SESSION['messageErrorEditProduit'] = 'Un problème est survenu.';
+				// 	header('location: index.php?uc=administrer&action=editerProduit');
+				// }
 			}else{
 				include('./vues/v_formEditerProduit.php');
 			}
