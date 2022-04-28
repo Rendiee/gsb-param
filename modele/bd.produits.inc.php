@@ -584,11 +584,13 @@ function insertRemplir($idProduit, $idContenance, $prixproduit, $quantite, $idUn
 	}
 }
 
-function getInfoTechProduit($id){
+function getInfoTechProduit($idProd, $coId, $unite){
 	try {
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('SELECT p.p_id AS id, p.p_nom AS nom, p.p_photo AS img, p.p_description AS descr, p.p_marque AS marque, c.ca_id AS catId, r.r_prixVente AS prix, r.r_qteStock AS stock, r.un_id AS unite, r.co_id AS coId, co.co_contenance as coLib FROM produit p INNER JOIN categorie c ON c.ca_id = p.ca_id INNER JOIN remplir r ON r.p_id = p.p_id INNER JOIN contenance co ON r.co_id = co.co_id WHERE p.p_id = :id;');
-		$req->bindParam(':id', $id, PDO::PARAM_INT);
+		$req = $monPdo->prepare('SELECT p.p_id AS id, p.p_nom AS nom, p.p_photo AS img, p.p_description AS descr, p.p_marque AS marque, c.ca_id AS catId, r.r_prixVente AS prix, r.r_qteStock AS stock, r.un_id AS unite, r.co_id AS coId, co.co_contenance as coLib FROM produit p INNER JOIN categorie c ON c.ca_id = p.ca_id INNER JOIN remplir r ON r.p_id = p.p_id INNER JOIN contenance co ON r.co_id = co.co_id WHERE p.p_id = :idProd AND r.co_id = :coId AND r.un_id = :unite');
+		$req->bindParam(':idProd', $idProd, PDO::PARAM_INT);
+		$req->bindParam(':coId', $coId, PDO::PARAM_INT);
+		$req->bindParam(':unite', $unite, PDO::PARAM_INT);
 		$req->execute();
 		$res = $req->fetch();
 		return $res;
@@ -642,7 +644,7 @@ function getMemeProduitAvecContenance($id)
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('SELECT p.p_id AS id, p.p_nom AS nom, c.co_contenance AS coCont, u.un_libelle AS unite, r.r_prixVente AS prix FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN contenance c ON c.co_id = r.co_id INNER JOIN unite u ON u.un_id = r.un_id WHERE p.p_id = :id ORDER BY :id;');
+		$req = $monPdo->prepare('SELECT p.p_id AS id, p.p_nom AS nom, c.co_contenance AS coCont, c.co_id as coId, u.un_id as unId, u.un_libelle AS unite, r.r_prixVente AS prix FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN contenance c ON c.co_id = r.co_id INNER JOIN unite u ON u.un_id = r.un_id WHERE p.p_id = :id ORDER BY :id;');
 		$req->bindParam(':id', $id, PDO::PARAM_INT);
 		$req->execute();
 		$res = $req->fetchAll();

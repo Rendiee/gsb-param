@@ -61,25 +61,26 @@ switch ($action) {
 		}
 	case 'editerProduit': {
 			$lesProduits = getTousLesProduitsOrderId();
-			if(isset($_POST['modif-product'])){
-				//update product ici
-				updateProduct($lesProduits[0]['id'], $_POST['nomproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-cat-produit']);
-				updateRemplir($lesProduits[0]['id'], $_POST['prixproduit'], $_POST['quantite'], $_POST['list-unite'], $_POST['list-cat-produit']);
-				header('location: index.php?uc=administrer&action=editerProduit');
-			}
 			if(isset($_POST['editproduit'])){
 				if(isset($_POST['list-edit-produit-contenance']) && $_POST['list-edit-produit-contenance'] != ""){
-					$idProduit = $_POST['list-edit-produit'];
-					$leProduit = getInfoTechProduit($idProduit);
+					$infoProduit = $_POST['list-edit-produit-contenance'];
+					$paramProduit = explode("|", $infoProduit);
+					$idProduit = $paramProduit[0];
+					$leProduit = getInfoTechProduit($paramProduit[0], $paramProduit[1], $paramProduit[2]);
 					$lesCategories = getLesCategories();
 					$lesUnites = getUniteContenance();
 					$lesContenances = getContenanceValue();
 					include('./vues/v_pageEditerProduit.php');
 				}
-			}
-			if (isset($_POST['chooseproduct'])) {
+			}else if(isset($_POST['modif-product'])){
+				//update product ici
+				updateProduct($lesProduits[0]['id'], $_POST['nomproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-cat-produit']);
+				updateRemplir($lesProduits[0]['id'], $_POST['prixproduit'], $_POST['quantite'], $_POST['list-unite'], $_POST['list-cat-produit']);
+				header('location: index.php?uc=administrer&action=editerProduit');
+			}else if (isset($_POST['chooseproduct'])) {
 				if (isset($_POST['list-edit-produit']) && $_POST['list-edit-produit'] != "") {
 					$produitsContenance = getMemeProduitAvecContenance($_POST['list-edit-produit']);
+					unset($_POST['chooseproduct']);
 					include('./vues/v_choixProduitContenance.php');
 				}
 				// else{
