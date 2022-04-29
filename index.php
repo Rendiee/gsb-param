@@ -18,7 +18,7 @@ else {
 if (!isset($_SESSION['filtre'])) {
 	$_SESSION['filtre'] = false;
 }
-include("vues/v_header.php");
+include ("vues/v_header.php");
 echo '<div class="container my-4">';
 switch ($uc) {
 	case 'accueil': {

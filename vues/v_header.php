@@ -55,7 +55,7 @@
               <a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=deconnexion"><button type="button" class="btn btn-outline-success" onclick="return confirm('Voulez-vous vraiment vous déconnectez ?')">Déconnexion</button></a>
             <?php
             } else {
-            ?>
+            ?> 
               <a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=connexion"><button type="button" class="btn btn-outline-success me-1">Se connecter</button></a>
               <a class="text-decoration-none text-reset" href="index.php?uc=connexion&action=inscription"><button type="button" class="btn btn-success">S'inscrire</button></a>
             <?php
@@ -72,5 +72,7 @@
       <li class="text-danger">- EDITER CATEGORIE (page admin)</li>
       <li class="text-danger">- AVIS SOUS PRODUIT/PAGE PRODUIT (page produit)</li>
       <li class="text-danger">- ENREGISTREMENT COMMANDE (après page panier)</li>
+      <li class="text-danger">- MESSAGE D'ERREUR LORS DES CHOIX EDITER PRODUIT (page éditer produit)</li>
+      <li class="text-danger">- MESSAGE SUCCES EDITER PRODUIT (page éditer produit)</li>
     </ul>
   </header>

@@ -35,11 +35,11 @@ function getLesCategories()
  * @param string $idCategorie l'id de la catégorie
  * @return array $laLigne le tableau associatif des informations de la catégorie 
  */
-function getLesInfosCategorie($idCategorie)
+function getLesInfosCategorie($id)
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT ca_id, ca_libelle, ca_acronyme from categorie WHERE ca_acronyme="' . $idCategorie . '"';
+		$req = 'SELECT ca_id, ca_libelle, ca_acronyme from categorie WHERE ca_id="' . $id . '"';
 		$res = $monPdo->query($req);
 		$laLigne = $res->fetch();
 		return $laLigne;
@@ -625,7 +625,7 @@ function updateRemplir($id, $prix, $stock, $uniteId, $contId)
 	try {
 
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('UPDATE remplir r SET r.co_id = :coId, SET r.un_id = :uniteId, SET r.r_prixVente = :prix, SET r.r_qteStock = :stock WHERE r.p_id = :id');
+		$req = $monPdo->prepare('UPDATE remplir r SET r.co_id = :coId, r.un_id = :uniteId, r.r_prixVente = :prix, r.r_qteStock = :stock WHERE r.p_id = :id AND r.co_id = :coId AND r.un_id = :uniteId');
 		$req->bindParam(':id', $id, PDO::PARAM_INT);
 		$req->bindParam(':coId', $contId, PDO::PARAM_INT);
 		$req->bindParam(':uniteId', $uniteId, PDO::PARAM_INT);
