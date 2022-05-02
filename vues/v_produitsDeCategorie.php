@@ -1,8 +1,9 @@
 <div class="w-100 text-center h2 text-success fw-bold mb-3">
-	Produits de la catégorie
+	Produits de la catégorie : <span class="text-dark">
 	<?php
 	echo $nomCategorie['ca_libelle'];
 	?>
+	</span>
 </div>
 <div class="d-flex flex-wrap justify-content-center">
 	<div class="col-xl-3 col-lg-4 col-md-6 col-9 p-1">

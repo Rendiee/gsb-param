@@ -35,11 +35,18 @@ function getLesCategories()
  * @param string $idCategorie l'id de la catégorie
  * @return array $laLigne le tableau associatif des informations de la catégorie 
  */
-function getLesInfosCategorie($id)
+function getLesInfosCategorie($id, $isNumber)
 {
+	$req = 'SELECT ca_id, ca_libelle, ca_acronyme from categorie WHERE ';
+	if($isNumber){
+		$req = $req . 'ca_id = ';
+	}else{
+		$req = $req . 'ca_acronyme = ';
+	}
+
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT ca_id, ca_libelle, ca_acronyme from categorie WHERE ca_id="' . $id . '"';
+		$req = $req . '"' . $id . '"';
 		$res = $monPdo->query($req);
 		$laLigne = $res->fetch();
 		return $laLigne;

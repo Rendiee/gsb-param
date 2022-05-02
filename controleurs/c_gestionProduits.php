@@ -98,7 +98,7 @@ switch ($action) {
 			$lesCategories = getLesCategories();
 			if(isset($_POST['edit-categorie'])){
 				if(isset($_POST['list-edit-categorie']) && $_POST['list-edit-categorie'] != ""){
-					$lesInfos = getLesInfosCategorie($_POST['list-edit-categorie']);
+					$lesInfos = getLesInfosCategorie($_POST['list-edit-categorie'], true);
 					include('./vues/v_pageEditerCategorie.php');
 				}
 			}else{

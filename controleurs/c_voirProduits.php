@@ -7,7 +7,7 @@ switch ($action) {
 			$lesCategories = getLesCategories();
 			$categorie = $_REQUEST['categorie'];
 			$categorieLibelle = getTitreCategorie($categorie);
-			$nomCategorie  = getLesInfosCategorie($categorie);
+			$nomCategorie  = getLesInfosCategorie($categorie, false);
 			$lesProduits = getLesProduitsDeCategorie($categorie);
 			include("vues/v_produitsDeCategorie.php");
 			break;
