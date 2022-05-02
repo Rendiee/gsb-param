@@ -29,6 +29,20 @@ function getLesCategories()
 		die();
 	}
 }
+
+function getIdCategorie($acro){
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT ca_id from categorie WHERE :acro');
+		$req->bindParam(':acro', $acro, PDO::PARAM_STR);
+		$req -> execute();
+		$laLigne = $req->fetch();
+		return $laLigne;
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
 /**
  * Retourne toutes les informations d'une catégorie passée en paramètre
  *
@@ -639,7 +653,6 @@ function updateRemplir($id, $prix, $stock, $uniteId, $contId)
 		$req->bindParam(':prix', $prix, PDO::PARAM_STR);
 		$req->bindParam(':stock', $stock, PDO::PARAM_INT);
 		$req->execute();
-		return $id;
 	} catch (PDOException $e) {
 
 		print "Erreur !: " . $e->getMessage();
@@ -657,6 +670,24 @@ function getMemeProduitAvecContenance($id)
 		$res = $req->fetchAll();
 		return $res;
 	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function updateCategorie($idCat, $acro, $lib){
+
+	try {
+
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('UPDATE categorie SET ca_acronyme = :acro, ca_libelle = :lib WHERE ca_id = :id');
+		$req->bindParam(':id', $idCat, PDO::PARAM_INT);
+		$req->bindParam(':acro', $acro, PDO::PARAM_STR);
+		$req->bindParam(':lib', $lib, PDO::PARAM_STR);
+		$req->execute();
+		$req -> debugDumpParams();
+	} catch (PDOException $e) {
+
 		print "Erreur !: " . $e->getMessage();
 		die();
 	}

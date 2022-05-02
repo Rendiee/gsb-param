@@ -101,6 +101,12 @@ switch ($action) {
 					$lesInfos = getLesInfosCategorie($_POST['list-edit-categorie'], true);
 					include('./vues/v_pageEditerCategorie.php');
 				}
+			}else if(isset($_POST['modif-categorie'])){
+				if(isset($_POST['acronymeCategorie']) && isset($_POST['nomCategorie'])){
+					$id = getIdCategorie($_POST['acronymeCategorie']);
+					updateCategorie($id, $_POST['acronymeCategorie'], $_POST['nomCategorie']);
+					header('location: index.php?uc=administrer&action=editerCategorie', true);	
+				}
 			}else{
 				include('./vues/v_formEditerCategorie.php');
 			}
