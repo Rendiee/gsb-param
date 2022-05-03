@@ -56,6 +56,19 @@ function tousLesAvisDuProduit($id){
 		die();
 	}
 }
+function avisMoyenProduit($id){
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT AVG(a_note) from avis WHERE p_id = :id');
+		$req->bindParam(':id', $id, PDO::PARAM_STR);
+		$req -> execute();
+		$laLigne = $req->fetch();
+		return $laLigne;
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
 /**
  * Retourne toutes les informations d'une catégorie passée en paramètre
  *

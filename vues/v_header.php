@@ -33,7 +33,6 @@
                       <li><a class="dropdown-item" href="index.php?uc=administrer&action=ajouterProduit">Ajouter un produit</a></li>
                       <li><a class="dropdown-item" href="index.php?uc=administrer&action=editerProduit">Éditer un produit</a></li>
                       <li><a class="dropdown-item" href="index.php?uc=administrer&action=editerCategorie">Éditer une catégorie</a></li>
-                      <li><a class="dropdown-item" href="./vues/v_todolist.php">Todo-list</a></li>
                       <?php
                       if ($_SESSION['u_hab'] == 2) {
                       ?>

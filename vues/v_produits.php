@@ -54,7 +54,8 @@
 					$id = $unProduit['id'];
 					$qte = $unProduit['quantite'];
 
-					$prix = getMinPriceProduct($id);
+					$prix = getMinPriceProduct($id);					
+					$avis = round(floatval(avisMoyenProduit($id)[0]));
 
 					$description = substr($description, 0, 80);
 					$description = $description . '...';
@@ -69,11 +70,14 @@
 								<img class="img-product" src="<?php echo $image ?>" alt="image product">
 								<p class="card-text description-product"><?php echo $description ?></p>
 								<div class="d-flex justify-content-center pb-2">
-									<svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" width="1.5rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24"><path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z"/></svg>
-									<svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" width="1.5rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24"><path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z"/></svg>
-									<svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" width="1.5rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24"><path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z"/></svg>
-									<svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" width="1.5rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24"><path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z"/></svg>
-									<svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" width="1.5rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24"><path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z"/></svg>
+									<?php for($i=1;$i<=5;$i++){
+										if($avis != null and $avis >= $i){
+											?> <svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" width="1.5rem" fill="var(--color-star-full, #ea7315)" viewBox="0 0 24 24"><path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z"/></svg>
+								  <?php }else{
+											?> <svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" width="1.5rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24"><path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z"/></svg>
+								  <?php }
+									} 
+									?>
 								</div>
 							</div>
 							<div class="card-footer d-flex justify-content-between align-items-center">

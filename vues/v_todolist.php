@@ -7,4 +7,3 @@
     <li class="text-danger">- MESSAGE D'ERREUR LORS DES CHOIX EDITER PRODUIT (page éditer produit)</li>
     <li class="text-danger">- MESSAGE SUCCES EDITER PRODUIT (page éditer produit)</li>
 </ul>
-<button onclick="history.back()">Retour</button>
