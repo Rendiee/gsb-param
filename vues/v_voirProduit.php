@@ -43,21 +43,40 @@ unset($_SESSION['message']) ?>
         </div>
     </div>
 </form>
-<div class="container">
-    <div class="w-100 text-center h2 text-success fw-bold mt-5 mb-5">Avis</div>
-    <div class="d-flex flex-lg-row flex-column bg-white border rounded">
-        <div class="col-4 m-3">
-            <p>Jean Michel</p>
+<div class="w-75 mx-auto">
+        <div class="w-100 text-center h2 text-success fw-bold mt-5 mb-3">Avis</div>
+    <?php foreach ($avis as $unAvis) { ?>
+        <div class="d-flex flex-lg-row flex-column bg-white border rounded mb-2">
+            <div class="d-flex flex-column justify-content-center col-3 m-3">
+                <p class="text-center">Jean Michel</p>
+                <div class="d-flex justify-content-center pb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" width="1.5rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24">
+                        <path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" width="1.5rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24">
+                        <path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" width="1.5rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24">
+                        <path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" width="1.5rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24">
+                        <path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" width="1.5rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24">
+                        <path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z" />
+                    </svg>
+                </div>
+            </div>
+            <div class="vr col-1"></div>
+            <div class="col-8 m-4">
+                <p>Description</p>
+                <hr class="w-100">
+                <p class=""><?php echo $unAvis['a_description'] ?></p>
+            </div>
         </div>
-        <div class="col-1">
-            <div class="vr"></div>
-        </div>
-        <div class="col-8 m-4">
-            <p>Description</p>
-            <hr class="w-75">
-            <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, facere ad? Quas repellendus ducimus nemo quaerat similique itaque odio illo, quasi harum, culpa doloremque exercitationem quod commodi consectetur, repudiandae sit.</p>
-        </div>
-    </div>
+    <?php
+    }
+    ?>
 </div>
 <script type="text/javascript">
     function checkContenanceEtQte() {

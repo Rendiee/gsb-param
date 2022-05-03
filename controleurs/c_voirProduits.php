@@ -39,6 +39,7 @@ switch ($action) {
 					$categorieActive = $value;
 				}
 			}
+			$avis = tousLesAvisDuProduit($id);
 			$prixMin = getMinPriceProduct($id);
 			$prixMax = getMaxPriceProduct($id);
 			$uniteEtPrix = getUniteEtPrix($infoProduit['id']);
