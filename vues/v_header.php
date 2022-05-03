@@ -33,6 +33,7 @@
                       <li><a class="dropdown-item" href="index.php?uc=administrer&action=ajouterProduit">Ajouter un produit</a></li>
                       <li><a class="dropdown-item" href="index.php?uc=administrer&action=editerProduit">Éditer un produit</a></li>
                       <li><a class="dropdown-item" href="index.php?uc=administrer&action=editerCategorie">Éditer une catégorie</a></li>
+                      <li><a class="dropdown-item" href="./vues/v_todolist.php">Todo-list</a></li>
                       <?php
                       if ($_SESSION['u_hab'] == 2) {
                       ?>
@@ -65,14 +66,4 @@
         </div>
       </div>
     </nav>
-    <ul>
-      <li class="text-danger">A FAIRE :</li>
-      <li class="text-danger">- PRODUIT SUGGERER (page produit)</li>
-      <li class="text-danger">- AJOUTER/RETIRER STOCK (page admin)</li>
-      <li class="text-danger">- EDITER CATEGORIE (page admin)</li>
-      <li class="text-danger">- AVIS SOUS PRODUIT/PAGE PRODUIT (page produit)</li>
-      <li class="text-danger">- ENREGISTREMENT COMMANDE (après page panier)</li>
-      <li class="text-danger">- MESSAGE D'ERREUR LORS DES CHOIX EDITER PRODUIT (page éditer produit)</li>
-      <li class="text-danger">- MESSAGE SUCCES EDITER PRODUIT (page éditer produit)</li>
-    </ul>
   </header>

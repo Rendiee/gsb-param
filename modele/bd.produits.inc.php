@@ -33,7 +33,7 @@ function getLesCategories()
 function getIdCategorie($acro){
 	try {
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('SELECT ca_id from categorie WHERE :acro');
+		$req = $monPdo->prepare('SELECT ca_id from categorie WHERE ca_acronyme = :acro');
 		$req->bindParam(':acro', $acro, PDO::PARAM_STR);
 		$req -> execute();
 		$laLigne = $req->fetch();
@@ -685,7 +685,6 @@ function updateCategorie($idCat, $acro, $lib){
 		$req->bindParam(':acro', $acro, PDO::PARAM_STR);
 		$req->bindParam(':lib', $lib, PDO::PARAM_STR);
 		$req->execute();
-		$req -> debugDumpParams();
 	} catch (PDOException $e) {
 
 		print "Erreur !: " . $e->getMessage();

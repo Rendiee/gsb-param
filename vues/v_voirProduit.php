@@ -43,6 +43,22 @@ unset($_SESSION['message']) ?>
         </div>
     </div>
 </form>
+<div class="container">
+    <div class="w-100 text-center h2 text-success fw-bold mt-5 mb-5">Avis</div>
+    <div class="d-flex flex-lg-row flex-column bg-white border rounded">
+        <div class="col-4 m-3">
+            <p>Jean Michel</p>
+        </div>
+        <div class="col-1">
+            <div class="vr"></div>
+        </div>
+        <div class="col-8 m-4">
+            <p>Description</p>
+            <hr class="w-75">
+            <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, facere ad? Quas repellendus ducimus nemo quaerat similique itaque odio illo, quasi harum, culpa doloremque exercitationem quod commodi consectetur, repudiandae sit.</p>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     function checkContenanceEtQte() {
         const prix = <?php echo json_encode($uniteEtPrix); ?>;
