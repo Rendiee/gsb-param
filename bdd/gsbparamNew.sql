@@ -31,6 +31,7 @@ DROP TABLE IF EXISTS `avis`;
 CREATE TABLE IF NOT EXISTS `avis` (
   `a_id` int(11) NOT NULL,
   `a_description` varchar(255) COLLATE utf8_bin NOT NULL,
+  `a_note` int(11) NOT NULL,
   `p_id` int(11) NOT NULL,
   `u_id` int(11) NOT NULL,
   PRIMARY KEY (`a_id`),
