@@ -704,3 +704,18 @@ function updateCategorie($idCat, $acro, $lib){
 		die();
 	}
 }
+
+function getInfoUtilisateurAvis($idAvis){
+
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT u.u_nom as nom, u.u_prenom as prenom FROM utilisateur u INNER JOIN avis a ON u.u_id = a.u_id WHERE a.a_id = :idAvis');
+		$req->bindParam(':idAvis', $idAvis, PDO::PARAM_INT);
+		$req->execute();
+		$res = $req->fetch();
+		return $res;
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
