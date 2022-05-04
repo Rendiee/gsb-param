@@ -1,12 +1,5 @@
-﻿<div class="erreur">
-<ul>
+﻿<div class="d-flex justify-content-center h5 bg-danger text-white p-1 w-25 text-center rounded mx-auto">
 <?php
-foreach($msgErreurs as $erreur)
-	{
- ?>     
-	  <li><?php echo $erreur ?></li>
-<?php	  
-	}
+echo '<small>'.$msgError.'</small>';
 ?>
-</ul>
 </div>

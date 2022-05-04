@@ -39,12 +39,14 @@ switch ($action) {
 		break;
 	case 'confirmerCommande': {
 			$nom = $_REQUEST['nom'];
+			$prenom = $_REQUEST['prenom'];
 			$rue = $_REQUEST['rue'];
 			$ville = $_REQUEST['ville'];
 			$cp = $_REQUEST['cp'];
 			$mail = $_REQUEST['mail'];
-			$msgErreurs = getErreursSaisieCommande($nom, $rue, $ville, $cp, $mail);
-			if (count($msgErreurs) != 0) {
+
+			if(!checkCommander($nom, $prenom, $rue, $ville, $cp, $mail)){
+				$msgError = 'Champ vide détecté !';
 				include("vues/v_erreurs.php");
 				include("vues/v_commande.php");
 			} else {

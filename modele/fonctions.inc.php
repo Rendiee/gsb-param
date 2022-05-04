@@ -72,6 +72,7 @@ function ajouterAuPanier($idProduit, $contenance, $qte)
  */
 function getLesIdProduitsDuPanier()
 {
+	var_dump($_SESSION['produits']);
 	return $_SESSION['produits'];
 }
 /**
@@ -120,44 +121,6 @@ function retirerDuPanier($idProduit, $idContenance)
 	}
 }
 /**
- * teste si une chaîne a un format de code postal
- *
- * Teste le nombre de caractères de la chaîne et le type entier (composé de chiffres)
- 
- * @param string $codePostal  la chaîne testée
- * @return boolean $ok vrai ou faux
- */
-function estUnCp($codePostal)
-{
-
-	return strlen($codePostal) == 5 && estEntier($codePostal);
-}
-/**
- * teste si une chaîne est un entier
- *
- * Teste si la chaîne ne contient que des chiffres
- 
- * @param string $valeur la chaîne testée
- * @return boolean $ok vrai ou faux
- */
-
-function estEntier($valeur)
-{
-	return preg_match("/[^0-9]/", $valeur) == 0;
-}
-/**
- * Teste si une chaîne a le format d'un mail
- *
- * Utilise les expressions régulières
- 
- * @param string $mail la chaîne testée
- * @return boolean $ok vrai ou faux
- */
-function estUnMail($mail)
-{
-	return  preg_match('#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#', $mail);
-}
-/**
  * Retourne un tableau d'erreurs de saisie pour une commande
  *
  * @param string $nom  chaîne testée
@@ -167,11 +130,13 @@ function estUnMail($mail)
  * @param string $mail  chaîne 
  * @return array $lesErreurs un tableau de chaînes d'erreurs
  */
-function getErreursSaisieCommande($nom, $rue, $ville, $cp, $mail)
+function getErreursSaisieCommande($nom, $prenom, $rue, $ville, $cp, $mail)
 {
+	$erreur = 'Champs manquants : ';
 	$lesErreurs = array();
 	if ($nom == "") {
-		$lesErreurs[] = "Il faut saisir le champ nom";
+		$erreur += ' prénom';
+		$lesErreurs[] = "Il faut saisir un prénom";
 	}
 	if ($rue == "") {
 		$lesErreurs[] = "Il faut saisir le champ rue";
@@ -181,17 +146,41 @@ function getErreursSaisieCommande($nom, $rue, $ville, $cp, $mail)
 	}
 	if ($cp == "") {
 		$lesErreurs[] = "Il faut saisir le champ Code postal";
-	} else {
-		if (!estUnCp($cp)) {
-			$lesErreurs[] = "erreur de code postal";
-		}
 	}
 	if ($mail == "") {
 		$lesErreurs[] = "Il faut saisir le champ mail";
-	} else {
-		if (!estUnMail($mail)) {
-			$lesErreurs[] = "erreur de mail";
-		}
 	}
 	return $lesErreurs;
+}
+
+function getErreursCommander($nom, $prenom, $rue, $ville, $cp, $mail){
+
+	$erreur = 'Champs manquants : ';
+	if ($nom == "") {
+		$erreur += ', nom';
+	}
+	if ($prenom == "") {
+		$erreur += ' prénom';
+	}
+	if ($rue == "") {
+		$erreur += ', rue';
+	}
+	if ($cp == "") {
+		$erreur += ', code postal';
+	}
+	if ($ville == "") {
+		$erreur += ', ville';
+	}
+	if ($mail == "") {
+		$erreur += ", email";
+	}
+	return $erreur;
+}
+
+function checkCommander($nom, $prenom, $rue, $ville, $cp, $mail){
+	$check = true;
+	if($nom == "" || $prenom == "" || $rue == "" || $cp == "" || $ville == "" || $mail == ""){
+		$check = false;
+	}
+	return $check;
 }

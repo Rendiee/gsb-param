@@ -46,7 +46,7 @@ function getIdCategorie($acro){
 function tousLesAvisDuProduit($id){
 	try {
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('SELECT * from avis WHERE p_id = :id');
+		$req = $monPdo->prepare('SELECT `a_id`, `a_description`, concat(DAY(a_date),\'/\',MONTH(a_date),\'/\',YEAR(a_date)) as `a_date`, `a_note`, `p_id`, `u_id` FROM `avis` WHERE p_id = :id');
 		$req->bindParam(':id', $id, PDO::PARAM_STR);
 		$req -> execute();
 		$laLigne = $req->fetchAll();
@@ -60,6 +60,19 @@ function avisMoyenProduit($id){
 	try {
 		$monPdo = connexionPDO();
 		$req = $monPdo->prepare('SELECT AVG(a_note) from avis WHERE p_id = :id');
+		$req->bindParam(':id', $id, PDO::PARAM_STR);
+		$req -> execute();
+		$laLigne = $req->fetch();
+		return $laLigne;
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+function nbAvisProduit($id){
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT COUNT(a_note) from avis WHERE p_id = :id');
 		$req->bindParam(':id', $id, PDO::PARAM_STR);
 		$req -> execute();
 		$laLigne = $req->fetch();
@@ -679,6 +692,59 @@ function updateRemplir($id, $prix, $stock, $uniteId, $contId)
 		$req->bindParam(':prix', $prix, PDO::PARAM_STR);
 		$req->bindParam(':stock', $stock, PDO::PARAM_INT);
 		$req->execute();
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function getContenanceProduit($id){
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT count(*) from remplir where p_id = :id');
+		$req->bindParam(':id', $id, PDO::PARAM_INT);
+		$req->execute();
+		$res=$req->fetch();
+		return $res[0];
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function supprimerToutLeProduit($id){
+	// A FAIRE
+}
+
+function supprimerProduitVide($id){
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('DELETE FROM produit WHERE p_id = :id');
+		$req->bindParam(':id', $id, PDO::PARAM_INT);
+		$req->execute();
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function supprimerContenanceProduit($tab)
+{
+	$nb = getContenanceProduit($tab[0]);
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('DELETE FROM remplir WHERE p_id = :id AND co_id = :coId AND un_id = :uniteId');
+		$req->bindParam(':id', $tab[0], PDO::PARAM_INT);
+		$req->bindParam(':coId', $tab[1], PDO::PARAM_INT);
+		$req->bindParam(':uniteId', $tab[2], PDO::PARAM_INT);
+		$req->execute();
+		$nb = getContenanceProduit($tab[0]);
+		if($nb == 0){
+			supprimerProduitVide($tab[0]);
+		}
 	} catch (PDOException $e) {
 
 		print "Erreur !: " . $e->getMessage();

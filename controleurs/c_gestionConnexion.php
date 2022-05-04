@@ -56,10 +56,7 @@ switch ($action) {
 				header('location: index.php?uc=connexion&action=connexion');
 			} else {
 				session_destroy();
-				session_start();
-				$_SESSION['filtre'] = false;
 				header('location: index.php?uc=accueil');
-				// ERREUR DECONNEXION :  Cannot start session when headers already sent
 			}
 			break;
 		}

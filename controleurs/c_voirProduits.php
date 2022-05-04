@@ -40,6 +40,8 @@ switch ($action) {
 				}
 			}
 			$avis = tousLesAvisDuProduit($id);
+			$avisMoyen = round(floatval(avisMoyenProduit($id)[0]));
+			$nbAvis = nbAvisProduit($id)[0];
 			$prixMin = getMinPriceProduct($id);
 			$prixMax = getMaxPriceProduct($id);
 			$uniteEtPrix = getUniteEtPrix($infoProduit['id']);

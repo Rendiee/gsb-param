@@ -25,6 +25,9 @@
             <div class="button-form-center mt-3">
                 <input class="btn btn-success px-5" type="submit" value="Éditer le produit" name="editproduit" id="editproduit">
             </div>
+            <div class="button-form-center mt-3">
+                <input onclick="return confirm('Êtes vous sûr de supprimer le produit et ses contenances ?');" class="btn btn-outline-danger px-3" type="submit" value="Supprimer le produit et ses contenances" name="suppProduit" id="suppProduit">
+            </div>
         </form>
     </div>
 </div>

@@ -13,7 +13,7 @@
             <div class="d-flex flex-column justify-content-around h-100 col-5">
                 <div>
                     <label class="form-label" for="nomproduit">Nom du produit</label>
-                    <input type="text" id="nomproduit" name="nomproduit" class="form-control" value="<?php echo $leProduit['nom']?>"/>
+                    <input type="text" id="nomproduit" name="nomproduit" class="form-control" value="<?php echo $leProduit['nom'] ?>" />
                 </div>
                 <div>
                     <label class="form-label" for="descproduit">Description du produit</label>
@@ -21,7 +21,7 @@
                 </div>
                 <div>
                     <label class="form-label" for="marqueproduit">Marque du produit</label>
-                    <input type="text" id="marqueproduit" name="marqueproduit" class="form-control" value="<?php echo $leProduit['marque'] ?>"/>
+                    <input type="text" id="marqueproduit" name="marqueproduit" class="form-control" value="<?php echo $leProduit['marque'] ?>" />
                 </div>
             </div>
             <div class="vr"></div>
@@ -32,17 +32,17 @@
                         <option disabled value="">- Choisissez une catégorie -</option>
                         <?php
                         foreach ($lesCategories as $uneCategorie) {
-                            
-                            if($uneCategorie['ca_id'] == $leProduit['catId']){
+
+                            if ($uneCategorie['ca_id'] == $leProduit['catId']) {
                         ?>
-                            <option value="<?php echo $uneCategorie['ca_id'] ?>" selected><?php echo $uneCategorie['ca_libelle'] ?></option>
-                        <?php
-                        }else{
-                            ?>
-                            <option value="<?php echo $uneCategorie['ca_id'] ?>"><?php echo $uneCategorie['ca_libelle'] ?></option>
+                                <option value="<?php echo $uneCategorie['ca_id'] ?>" selected><?php echo $uneCategorie['ca_libelle'] ?></option>
                             <?php
+                            } else {
+                            ?>
+                                <option value="<?php echo $uneCategorie['ca_id'] ?>"><?php echo $uneCategorie['ca_libelle'] ?></option>
+                        <?php
+                            }
                         }
-                    }
                         ?>
                     </select>
                 </div>
@@ -67,16 +67,16 @@
                             <?php
                             foreach ($lesUnites as $unite) {
 
-                                if($unite['un_id'] == $leProduit['unite']){
+                                if ($unite['un_id'] == $leProduit['unite']) {
                             ?>
-                                <option value="<?php echo $unite['un_id'] ?>" selected><?php echo $unite['un_libelle'] ?></option>
-                            <?php
-                            }else{
-                                ?>
-                                <option value="<?php echo $unite['un_id'] ?>"><?php echo $unite['un_libelle'] ?></option>
+                                    <option value="<?php echo $unite['un_id'] ?>" selected><?php echo $unite['un_libelle'] ?></option>
                                 <?php
+                                } else {
+                                ?>
+                                    <option value="<?php echo $unite['un_id'] ?>"><?php echo $unite['un_libelle'] ?></option>
+                            <?php
+                                }
                             }
-                        }
                             ?>
                         </select>
                     </div>
@@ -89,10 +89,11 @@
             </div>
         </div>
         <div class="button-form-center mt-3">
-            <input class="btn btn-success px-5" type="submit" value="Modifier le produit" name="modif-product" id="modif-product">
+            <input class="btn btn-outline-danger px-3 w-25 me-1" type="submit" value="Supprimer le produit" name="supp-product" id="supp-product" onclick="return confirm('Voulez-vous vraiment supprimer le poruduit ?');">
+            <input class="btn btn-success px-3 w-25 ms-1" type="submit" value="Modifier le produit" name="modif-product" id="modif-product">
         </div>
         <div class="button-form-center mt-3">
             <input class="btn btn-success px-5" type="submit" value="Retour" name="modif-product-retour" id="modif-product-retour">
         </div>
     </form>
-</div> 
+</div>
