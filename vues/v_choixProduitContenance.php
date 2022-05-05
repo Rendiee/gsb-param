@@ -16,7 +16,7 @@
                     <?php
                     foreach ($produitsContenance as $prodCont) {
                     ?>
-                        <option value="<?php echo $prodCont['id'].'|'.$prodCont['coId'].'|'.$prodCont['unId'] ?>"><?php echo $prodCont['id'].' - '. $prodCont['nom'] .' : '. $prodCont['coCont'] .' '.$prodCont['unite'].', '. $prodCont['prix'] .'€'?></option>
+                        <option value="<?php echo $prodCont['id'].'|'.$prodCont['volume'].'|'.$prodCont['unId'] ?>"><?php echo $prodCont['id'].' - '. $prodCont['nom'] .' : '. $prodCont['volume'] .' '.$prodCont['unite'].', '. $prodCont['prix'] .'€'?></option>
                     <?php
                     }
                     ?>

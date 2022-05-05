@@ -288,7 +288,7 @@ function getTousLesProduitsOrderId()
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = 'SELECT p.p_id as id, p.p_nom as nom, p.p_photo as photo, p.p_description as description, p.p_marque as marque, r.r_prixVente as prix, SUM(r.r_qteStock) as quantite FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id GROUP BY p.p_id ORDER BY id';
+		$req = 'SELECT p.p_id AS id, p.p_nom AS nom, p.p_photo AS photo, p.p_description AS description, p.p_marque AS marque, cp.con_prixVente AS prix, SUM(cp.con_qteStock) AS quantite FROM produit p INNER JOIN contenant_produit cp ON p.p_id = cp.p_id GROUP BY p.p_id ORDER BY id;';
 		$res = $monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
@@ -763,7 +763,7 @@ function getMemeProduitAvecContenance($id)
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('SELECT p.p_id AS id, p.p_nom AS nom, c.co_contenance AS coCont, c.co_id as coId, u.un_id as unId, u.un_libelle AS unite, r.r_prixVente AS prix FROM produit p INNER JOIN remplir r ON p.p_id = r.p_id INNER JOIN contenance c ON c.co_id = r.co_id INNER JOIN unite u ON u.un_id = r.un_id WHERE p.p_id = :id ORDER BY :id;');
+		$req = $monPdo->prepare('SELECT p.p_id AS id, p.p_nom AS nom, u.un_id AS unId, u.un_libelle AS unite, cp.con_volume AS volume, cp.con_prixVente AS prix FROM produit p INNER JOIN contenant_produit cp ON p.p_id = cp.p_id INNER JOIN unite u ON u.un_id = cp.un_id WHERE p.p_id = :id ORDER BY :id;');
 		$req->bindParam(':id', $id, PDO::PARAM_INT);
 		$req->execute();
 		$res = $req->fetchAll();
