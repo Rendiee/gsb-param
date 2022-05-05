@@ -20,7 +20,7 @@ function connexionPDO()
 {
     $login = 'george';
     $mdp = 'george';
-    $bd = 'GsbParam';
+    $bd = 'gsbparamv4';
     $serveur = 'localhost:3308';
 
     try {

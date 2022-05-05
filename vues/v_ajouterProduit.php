@@ -88,7 +88,7 @@
                         <label class="form-label" for="list-contenance">Contenance</label>
                         <input type="number" placeholder="Contenance" class="form-control" id="list-contenance" name="list-contenance" min="0" value="0">
                     </div>
-                    <div id="newUnite" class="link-success text-decoration-underline pointer fit w-100 text-center">Ajouter une unité</div>
+                    <div id="newUnite" class="link-success text-decoration-underline pointer fit w-100">Ajouter une unité</div>
                 </div>
             </div>
         </div>
@@ -168,14 +168,14 @@
         if ($('#newUnite').text() == "Annuler") {
             $('.new').remove();
             $('#list-unite').attr("disabled", false);
-            $('#list-contenance').attr("disabled", false);
+            //$('#list-contenance').attr("disabled", false);
             $('#newUnite').text("Autre unité").addClass("link-success").removeClass("link-danger");
         } else {
             $('.new').remove();
             $('#newUnite').parent().append('<div class="col-6 new mt-1"><input  class="form-control" type="text" placeholder="Nom de l\'unité" id="nomUnite" name="nomUnite"></div>');
-            $('#newUnite').parent().append('<div class="col-6 new mt-1"><input  class="form-control" type="number" placeholder="Contenance" id="nbContenance" name="nbContenance" min="0"></div>');
+            //$('#newUnite').parent().append('<div class="col-6 new mt-1"><input  class="form-control" type="number" placeholder="Contenance" id="nbContenance" name="nbContenance" min="0"></div>');
             $('#list-unite').attr("disabled", true);
-            $('#list-contenance').attr("disabled", true).removeClass("border-danger");
+            //$('#list-contenance').attr("disabled", true).removeClass("border-danger");
             $('#list-unite').prop("selectedIndex", 0).attr("disabled", true);
             if ($('#list-contenance').parent()[0].lastChild.id == "emptyValue") {
                 $('#list-contenance').parent()[0].lastChild.remove();

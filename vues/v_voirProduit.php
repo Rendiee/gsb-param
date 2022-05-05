@@ -40,7 +40,7 @@ unset($_SESSION['message']) ?>
                         <select class="form-select border-success fit" id="list-contenance" name="list-contenance" onchange="checkStock(); checkContenanceEtQte();">
                             <?php
                             foreach ($uniteEtPrix as $unPrix) {
-                                echo '<option id="' . $unPrix['quantite'] . '" value="' . $unPrix[5] . '">' . $unPrix[3] . ' ' . $unPrix[4] . '</option>';
+                                echo '<option id="' . $unPrix['quantite'] . '" value="' . $unPrix['volume'] . '">' . $unPrix['volume'] . ' ' . $unPrix['unite'] . '</option>';
                             }
                             ?>
                         </select>

@@ -72,7 +72,6 @@ function ajouterAuPanier($idProduit, $contenance, $qte)
  */
 function getLesIdProduitsDuPanier()
 {
-	var_dump($_SESSION['produits']);
 	return $_SESSION['produits'];
 }
 /**

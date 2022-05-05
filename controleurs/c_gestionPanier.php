@@ -8,17 +8,15 @@ switch ($action) {
 				$desIdProduit = getLesIdProduitsDuPanier();
 				$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
 				$totalPanier = getTotalPanier($lesProduitsDuPanier);
-				include("vues/v_panier.php");
-			} else {
-				include("vues/v_panier.php");
 			}
+			include("vues/v_panier.php");
 			break;
 		}
 	case 'supprimerUnProduit': {
 			$result_explode = explode('|', $_POST['retirer']);
 			$idProduit = $result_explode[0];
-			$idContenance = $result_explode[1];
-			retirerDuPanier($idProduit, $idContenance);
+			$contenance = $result_explode[1];
+			retirerDuPanier($idProduit, $contenance);
 			header('location: index.php?uc=gererPanier&action=voirPanier');
 			break;
 		}
@@ -45,7 +43,7 @@ switch ($action) {
 			$cp = $_REQUEST['cp'];
 			$mail = $_REQUEST['mail'];
 
-			if(!checkCommander($nom, $prenom, $rue, $ville, $cp, $mail)){
+			if (!checkCommander($nom, $prenom, $rue, $ville, $cp, $mail)) {
 				$msgError = 'Champ vide détecté !';
 				include("vues/v_erreurs.php");
 				include("vues/v_commande.php");

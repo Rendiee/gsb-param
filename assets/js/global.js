@@ -34,7 +34,7 @@ function checkStock() {
 
 //Check la quantite du produit dans la vue voirLeProduit
 function checkQte(item) {
-	if ($("select").children(":selected").attr("value") == item["co_id"] && item["quantite"] > 0) {
+	if ($("select").children(":selected").attr("value") == item["volume"] && item["quantite"] > 0) {
 		unQte = item["quantite"];
 		$("#nbProduit").remove();
 		$("#ajoutPanier").before(
@@ -49,8 +49,9 @@ function checkQte(item) {
 
 //Check le prix du produit dans la vue voirLeProduit
 function checkPrix(item) {
-	if ($("select").children(":selected").attr("value") == item["co_id"]) {
-		unPrix = item["r_prixVente"];
+	console.log($("select").children(":selected").attr("value"));
+	if ($("select").children(":selected").attr("value") == item["volume"]) {
+		unPrix = item["prix"];
 		$("#prix span").remove();
 		$("#prix").prepend('<span class="text-success fw-bold opacity-75" value="' + unPrix + '">' + unPrix + "€");
 	}

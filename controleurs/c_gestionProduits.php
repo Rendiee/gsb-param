@@ -14,7 +14,6 @@ switch ($action) {
 					$count++;
 				}
 				if (isset($_POST['nomUnite'])) {
-					$contenance = $_POST['nbContenance'];
 					$unite = $_POST['nomUnite'];
 					if (!empty(idExistUnite($unite))) {
 						$idUnite = idExistUnite($unite)[0];
@@ -26,13 +25,8 @@ switch ($action) {
 					$idUnite = $_POST['list-unite'];
 				}
 				//insert product ici
-				$idProduit = insertProduct($_POST['nomproduit'], $_POST['imgproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-marque-produit']);
-				if (!empty(idExistContenance($contenance))) {
-					$idContenance = idExistContenance($contenance)[0];
-				} else {
-					$idContenance = insertContenance($contenance);
-				}
-				insertRemplir($idProduit, $idContenance, $_POST['prixproduit'], $_POST['quantite'], $idUnite);
+				$idProduit = insertProduct($_POST['nomproduit'], $_POST['imgproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-marque-produit'], $_POST['list-contenance'], $_POST['prixproduit'], $_POST['quantite'], $idUnite);
+				//insertRemplir($idProduit, $idContenance, $_POST['prixproduit'], $_POST['quantite'], $idUnite);
 				$_SESSION['countProduit'] = 0;
 				$_SESSION['messageSuccessProduit'] = 'Le produit a bien été enregistré !';
 				header('location: index.php?uc=administrer&action=ajouterProduit');
@@ -40,23 +34,8 @@ switch ($action) {
 			$maxId = getLastIdProduit();
 			$lesCategories = getLesCategories();
 			$lesUnites = getUniteContenance();
-			$lesContenances = getContenanceValue();
+			//$lesContenances = getContenanceValue();
 			include('./vues/v_ajouterProduit.php');
-			break;
-		}
-	case 'ajouterContenance': { // PLUS UTILE -> FAIT DIRECTEMENT DANS AJOUTER PRODUIT
-			if (isset($_POST['ajoutercontenance'])) {
-				if (empty($_POST['nomcontenance'])) {
-					$_SESSION['messageErrorContenance'] = 'Veuillez saisir un nom !';
-				} else {
-					insertUnite($_POST['nomcontenance']);
-					$_SESSION['countContenance'] = 0;
-					$_SESSION['messageSuccessContenance'] = 'La contenance a bien été enregistrée !';
-					header('location: index.php?uc=administrer&action=ajouterContenance');
-				}
-			}
-			$lastId = getLastIdUnite();
-			include('./vues/v_ajouterContenance.php');
 			break;
 		}
 	case 'editerProduit': {

@@ -56,7 +56,7 @@
 									<a class="text-decoration-none fit me-2" href="index.php?uc=voirProduits&produit=<?php echo $id; ?>&action=voirLeProduit">
 										<button type="button" class="btn btn-success">Voir</button>
 									</a>
-									<button class="btn btn-outline-success" type="submit" name="retirer" value="<?php echo $id . '|' . $unProduit['idContenance'] ?>" onclick="return confirm('Voulez-vous vraiment retirer cet article ?');">Retirer</button>
+									<button class="btn btn-outline-success" type="submit" name="retirer" value="<?php echo $id . '|' . $unProduit['contenance'] ?>" onclick="return confirm('Voulez-vous vraiment retirer cet article ?');">Retirer</button>
 								</div>
 							</div>
 						</div>
