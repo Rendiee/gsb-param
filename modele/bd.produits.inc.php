@@ -30,12 +30,13 @@ function getLesCategories()
 	}
 }
 
-function getIdCategorie($acro){
+function getIdCategorie($acro)
+{
 	try {
 		$monPdo = connexionPDO();
 		$req = $monPdo->prepare('SELECT ca_id from categorie WHERE ca_acronyme = :acro');
 		$req->bindParam(':acro', $acro, PDO::PARAM_STR);
-		$req -> execute();
+		$req->execute();
 		$laLigne = $req->fetch();
 		return $laLigne;
 	} catch (PDOException $e) {
@@ -43,12 +44,13 @@ function getIdCategorie($acro){
 		die();
 	}
 }
-function tousLesAvisDuProduit($id){
+function tousLesAvisDuProduit($id)
+{
 	try {
 		$monPdo = connexionPDO();
 		$req = $monPdo->prepare('SELECT `a_id`, `a_description`, concat(DAY(a_date),\'/\',MONTH(a_date),\'/\',YEAR(a_date)) as `a_date`, `a_note`, `p_id`, `u_id` FROM `avis` WHERE p_id = :id');
 		$req->bindParam(':id', $id, PDO::PARAM_STR);
-		$req -> execute();
+		$req->execute();
 		$laLigne = $req->fetchAll();
 		return $laLigne;
 	} catch (PDOException $e) {
@@ -56,12 +58,13 @@ function tousLesAvisDuProduit($id){
 		die();
 	}
 }
-function avisMoyenProduit($id){
+function avisMoyenProduit($id)
+{
 	try {
 		$monPdo = connexionPDO();
 		$req = $monPdo->prepare('SELECT AVG(a_note) from avis WHERE p_id = :id');
 		$req->bindParam(':id', $id, PDO::PARAM_STR);
-		$req -> execute();
+		$req->execute();
 		$laLigne = $req->fetch();
 		return $laLigne;
 	} catch (PDOException $e) {
@@ -69,12 +72,13 @@ function avisMoyenProduit($id){
 		die();
 	}
 }
-function nbAvisProduit($id){
+function nbAvisProduit($id)
+{
 	try {
 		$monPdo = connexionPDO();
 		$req = $monPdo->prepare('SELECT COUNT(a_note) from avis WHERE p_id = :id');
 		$req->bindParam(':id', $id, PDO::PARAM_STR);
-		$req -> execute();
+		$req->execute();
 		$laLigne = $req->fetch();
 		return $laLigne;
 	} catch (PDOException $e) {
@@ -91,9 +95,9 @@ function nbAvisProduit($id){
 function getLesInfosCategorie($id, $isNumber)
 {
 	$req = 'SELECT ca_id, ca_libelle, ca_acronyme from categorie WHERE ';
-	if($isNumber){
+	if ($isNumber) {
 		$req = $req . 'ca_id = ';
-	}else{
+	} else {
 		$req = $req . 'ca_acronyme = ';
 	}
 
@@ -292,6 +296,61 @@ function getTousLesProduitsOrderId()
 		$res = $monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+function getMaxIdAvis()
+{
+	try {
+		$monPdo = connexionPDO();
+		$req = 'SELECT MAX(a_id) from avis';
+		$res = $monPdo->query($req);
+		$res = $res->fetch();
+
+		return $res[0];
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function ajouterAvis($note, $commentaire, $idProduit, $idUtilisateur)
+{
+	$idAvis = getMaxIdAvis();
+	$idAvis++;
+	$date = date('Y-m-d');
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('INSERT INTO avis VALUES(:idAvis, :commentaire, :date, :note, :idProduit, :idUtilisateur)');
+		$req->bindParam(':idAvis', $idAvis, PDO::PARAM_INT);
+		$req->bindParam(':commentaire', $commentaire, PDO::PARAM_STR);
+		$req->bindParam(':date', $date, PDO::PARAM_STR);
+		$req->bindParam(':note', $note, PDO::PARAM_INT);
+		$req->bindParam(':idProduit', $idProduit, PDO::PARAM_INT);
+		$req->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+		$req->execute();
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function avisDejaExistant($idUtilisateur, $idProduit)
+{
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT COUNT(*) from avis WHERE u_id = :idUtilisateur AND p_id = :idProduit');
+		$req->bindParam(':idProduit', $idProduit, PDO::PARAM_INT);
+		$req->bindParam(':idUtilisateur', $idUtilisateur, PDO::PARAM_INT);
+		$req->execute();
+		$res = $req->fetch();
+		if (intval($res[0]) > 0) {
+			return false;
+		} else {
+			return true;
+		}
 	} catch (PDOException $e) {
 		print "Erreur !: " . $e->getMessage();
 		die();
@@ -651,7 +710,8 @@ function insertRemplir($idProduit, $idContenance, $prixproduit, $quantite, $idUn
 	}
 }
 
-function getInfoTechProduit($idProd, $coId, $unite){
+function getInfoTechProduit($idProd, $coId, $unite)
+{
 	try {
 		$monPdo = connexionPDO();
 		$req = $monPdo->prepare('SELECT p.p_id AS id, p.p_nom AS nom, p.p_photo AS img, p.p_description AS descr, p.p_marque AS marque, c.ca_id AS catId, r.r_prixVente AS prix, r.r_qteStock AS stock, r.un_id AS unite, r.co_id AS coId, co.co_contenance as coLib FROM produit p INNER JOIN categorie c ON c.ca_id = p.ca_id INNER JOIN remplir r ON r.p_id = p.p_id INNER JOIN contenance co ON r.co_id = co.co_id WHERE p.p_id = :idProd AND r.co_id = :coId AND r.un_id = :unite');
@@ -706,13 +766,14 @@ function updateRemplir($id, $prix, $stock, $uniteId, $contId)
 	}
 }
 
-function getContenanceProduit($id){
+function getContenanceProduit($id)
+{
 	try {
 		$monPdo = connexionPDO();
 		$req = $monPdo->prepare('SELECT count(*) from remplir where p_id = :id');
 		$req->bindParam(':id', $id, PDO::PARAM_INT);
 		$req->execute();
-		$res=$req->fetch();
+		$res = $req->fetch();
 		return $res[0];
 	} catch (PDOException $e) {
 
@@ -721,11 +782,13 @@ function getContenanceProduit($id){
 	}
 }
 
-function supprimerToutLeProduit($id){
+function supprimerToutLeProduit($id)
+{
 	// A FAIRE
 }
 
-function supprimerProduitVide($id){
+function supprimerProduitVide($id)
+{
 	try {
 		$monPdo = connexionPDO();
 		$req = $monPdo->prepare('DELETE FROM produit WHERE p_id = :id');
@@ -749,7 +812,7 @@ function supprimerContenanceProduit($tab)
 		$req->bindParam(':uniteId', $tab[2], PDO::PARAM_INT);
 		$req->execute();
 		$nb = getContenanceProduit($tab[0]);
-		if($nb == 0){
+		if ($nb == 0) {
 			supprimerProduitVide($tab[0]);
 		}
 	} catch (PDOException $e) {
@@ -774,7 +837,8 @@ function getMemeProduitAvecContenance($id)
 	}
 }
 
-function updateCategorie($idCat, $acro, $lib){
+function updateCategorie($idCat, $acro, $lib)
+{
 
 	try {
 
@@ -791,7 +855,8 @@ function updateCategorie($idCat, $acro, $lib){
 	}
 }
 
-function getInfoUtilisateurAvis($idAvis){
+function getInfoUtilisateurAvis($idAvis)
+{
 
 	try {
 		$monPdo = connexionPDO();

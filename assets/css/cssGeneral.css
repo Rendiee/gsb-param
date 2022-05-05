@@ -233,3 +233,7 @@ footer {
 	position: absolute;
 	margin-right: 5px;
 }
+
+.thumbnail{
+	max-height: 100px;
+}

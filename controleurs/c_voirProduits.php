@@ -112,6 +112,24 @@ switch ($action) {
 			include("vues/v_produits.php");
 			break;
 		}
+	case 'avis': {
+			if (!isset($_SESSION['u_hab'])) {
+				header('location: index.php?uc=connexion&action=connexion');
+			}
+			if (isset($_POST['valider'])) {
+				ajouterAvis($_POST['note'], $_POST['commentaire'], $_REQUEST['produit'], $_SESSION['u_id']);
+				$_SESSION['message'] = '<div class="m-auto fit alert alert-success mb-2">Avis ajouté avec succès</div>';
+				header('location:index.php?uc=voirProduits&produit=' . $_REQUEST['produit'] . '&action=voirLeProduit');
+			} elseif (avisDejaExistant($_SESSION['u_id'], $_REQUEST['produit'])) {
+				$idProduit = $_REQUEST['produit'];
+				$infoProduit = getInfoProduit($idProduit);
+				include("vues/v_redigerAvis.php");
+			} else {
+				$_SESSION['message'] = '<div class="m-auto fit alert alert-danger mb-2">Vous avez déjà donné votre avis sur ce produit</div>';
+				header('location:index.php?uc=voirProduits&produit=' . $_REQUEST['produit'] . '&action=voirLeProduit');
+			}
+			break;
+		}
 	default: {
 			header('location:index.php?uc=voirProduits&action=nosProduits');
 			break;

@@ -33,6 +33,7 @@ unset($_SESSION['message']) ?>
                     ?>
 
                 </div>
+                <div class="mx-auto fit"><a href="index.php?uc=voirProduits&produit=<?php echo $id ?>&action=avis" class="link-success small">Donner un avis</a></div>
                 <hr class="w-75 mx-auto">
                 <div class="d-flex flex-column align-items-start justify-content-center col-md-8 col-12 mx-auto">
                     <div class="d-flex justify-content-start align-items-center pt-2">
@@ -85,7 +86,7 @@ unset($_SESSION['message']) ?>
                 </div>
                 <div class="vr col-1"></div>
                 <div class="col-8 m-4">
-                    <p>Description</p>
+                    <p>Commentaire</p>
                     <hr class="w-100">
                     <p class=""><?php echo $unAvis['a_description'] ?></p>
                     <small><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 447.514 447.514" style="enable-background:new 0 0 447.514 447.514;" xml:space="preserve" width='1rem' height='1rem'>
