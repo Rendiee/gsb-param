@@ -105,6 +105,15 @@ switch ($action) {
 			}
 			if (isset($_SESSION['filtre']) && $_SESSION['filtre'] !== false) {
 				$lesProduits = getTousLesProduitsFiltres($_SESSION['filtre']);
+				if (isset($_SESSION['filtre']['price-min'])) {
+					$priceMin = intval($_SESSION['filtre']['price-min']);
+				}
+				if (isset($_SESSION['filtre']['price-max'])) {
+					$priceMax = intval($_SESSION['filtre']['price-max']);
+				}
+				if (isset($_SESSION['filtre']['marque'])) {
+					$marque = $_SESSION['filtre']['marque'];
+				}
 			} else {
 				$lesProduits = getTousLesProduits();
 			}

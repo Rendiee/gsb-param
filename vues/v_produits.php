@@ -10,14 +10,14 @@
 					<div class="col-6 d-flex flex-column">
 						<label for="price-min" class="text-filtre-prix">Minimum</label>
 						<div class="input-group">
-							<input class="form-control text-center m-auto" type="number" step="0.01" id="price-min" name="price-min" size="10" maxlength="3" min="0" placeholder="Min">
+							<input class="form-control text-center m-auto" type="number" step="0.01" id="price-min" name="price-min" size="10" maxlength="3" min="0" placeholder="Min" value="<?php if (isset($priceMin)) echo $priceMin ?>">
 							<span class="input-group-text"><i class="bi bi-currency-euro"></i></span>
 						</div>
 					</div>
 					<div class="col-6 d-flex flex-column">
 						<label for="price-max" class="text-filtre-prix">Maximum</label>
 						<div class="input-group">
-							<input class="form-control text-center m-auto" type="number" step="0.01" id="price-max" name="price-max" size="10" maxlength="3" min="0" placeholder="Max">
+							<input class="form-control text-center m-auto" type="number" step="0.01" id="price-max" name="price-max" size="10" maxlength="3" min="0" placeholder="Max" value="<?php if (isset($priceMax)) echo $priceMax ?>">
 							<span class="input-group-text"><i class="bi bi-currency-euro"></i></span>
 						</div>
 					</div>
@@ -30,9 +30,12 @@
 						<option value="default"> - Choisissez une marque - </option>
 						<?php
 						foreach ($lesMarques as $uneMarque) {
+							if (isset($marque) && $marque == $uneMarque['p_marque']) {
 						?>
-							<option value="<?php echo $uneMarque['p_marque'] ?>"><?php echo $uneMarque['p_marque'] ?></option>
-						<?php
+								<option selected value="<?php echo $uneMarque['p_marque'] ?>"><?php echo $uneMarque['p_marque'] ?></option>
+							<?php } else { ?>
+								<option value="<?php echo $uneMarque['p_marque'] ?>"><?php echo $uneMarque['p_marque'] ?></option>
+						<?php }
 						}
 						?>
 					</select>
@@ -71,14 +74,18 @@
 								<img class="img-product" src="<?php echo $image ?>" alt="image product">
 								<p class="card-text description-product"><?php echo $description ?></p>
 								<div class="d-flex justify-content-center pb-2 align-items-center">
-									<?php for($i=1;$i<=5;$i++){
-										if($avis != null && $avis >= $i){
-											?> <svg xmlns="http://www.w3.org/2000/svg" height="1rem" width="1rem" fill="var(--color-star-full, #ea7315)" viewBox="0 0 24 24"><path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z"/></svg>
-								  <?php }else{
-											?> <svg xmlns="http://www.w3.org/2000/svg" height="1rem" width="1rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24"><path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z"/></svg>
-								  <?php }
-									} 
-									echo '&nbsp<span class="text-decoration-underline small">'.$nbAvis.' avis</span>';
+									<?php for ($i = 1; $i <= 5; $i++) {
+										if ($avis != null && $avis >= $i) {
+									?> <svg xmlns="http://www.w3.org/2000/svg" height="1rem" width="1rem" fill="var(--color-star-full, #ea7315)" viewBox="0 0 24 24">
+												<path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z" />
+											</svg>
+										<?php } else {
+										?> <svg xmlns="http://www.w3.org/2000/svg" height="1rem" width="1rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24">
+												<path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z" />
+											</svg>
+									<?php }
+									}
+									echo '&nbsp<span class="text-decoration-underline small">' . $nbAvis . ' avis</span>';
 									?>
 								</div>
 							</div>
