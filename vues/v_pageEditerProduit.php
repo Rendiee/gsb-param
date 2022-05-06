@@ -82,7 +82,7 @@
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="list-contenance">Contenance</label>
-                        <input type="number" placeholder="Contenance" class="form-control" id="list-contenance" name="list-contenance" min="0" value="<?php echo $leProduit['coLib'] ?>">
+                        <input type="number" placeholder="Contenance" class="form-control" id="list-contenance" name="list-contenance" min="0" value="<?php echo $leProduit['volume'] ?>">
                     </div>
                     <!-- <div id="newUnite" class="link-success text-decoration-underline pointer fit w-100 text-center">Ajouter une unité</div> -->
                 </div>

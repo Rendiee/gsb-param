@@ -690,33 +690,13 @@ function insertContenance($valeur)
 	}
 }
 
-function insertRemplir($idProduit, $idContenance, $prixproduit, $quantite, $idUnite)
-{
-	try {
-
-		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('INSERT INTO remplir VALUES (:idProduit, :idContenance, :idUnite, :prixproduit, :qte)');
-		$req->bindParam(':idProduit', $idProduit, PDO::PARAM_INT);
-		$req->bindParam(':idContenance', $idContenance, PDO::PARAM_INT);
-		$req->bindParam(':idUnite', $idUnite, PDO::PARAM_INT);
-		$req->bindParam(':prixproduit', $prixproduit, PDO::PARAM_STR);
-		$req->bindParam(':qte', $quantite, PDO::PARAM_INT);
-		$req->execute();
-		return $req;
-	} catch (PDOException $e) {
-
-		print "Erreur !: " . $e->getMessage();
-		die();
-	}
-}
-
-function getInfoTechProduit($idProd, $coId, $unite)
+function getInfoTechProduit($idProd, $volume, $unite)
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('SELECT p.p_id AS id, p.p_nom AS nom, p.p_photo AS img, p.p_description AS descr, p.p_marque AS marque, c.ca_id AS catId, r.r_prixVente AS prix, r.r_qteStock AS stock, r.un_id AS unite, r.co_id AS coId, co.co_contenance as coLib FROM produit p INNER JOIN categorie c ON c.ca_id = p.ca_id INNER JOIN remplir r ON r.p_id = p.p_id INNER JOIN contenance co ON r.co_id = co.co_id WHERE p.p_id = :idProd AND r.co_id = :coId AND r.un_id = :unite');
+		$req = $monPdo->prepare('SELECT p.p_id AS id, p.p_nom AS nom, p.p_photo AS img, p.p_description AS descr, p.p_marque AS marque, c.ca_id AS catId, cp.con_prixVente AS prix, cp.con_qteStock AS stock, cp.un_id AS unite, cp.con_volume AS volume FROM produit p INNER JOIN contenant_produit cp ON cp.p_id = p.p_id INNER JOIN categorie c ON c.ca_id = p.ca_id WHERE p.p_id = :idProd AND cp.con_volume = :volume AND cp.un_id = :unite;');
 		$req->bindParam(':idProd', $idProd, PDO::PARAM_INT);
-		$req->bindParam(':coId', $coId, PDO::PARAM_INT);
+		$req->bindParam(':volume', $volume, PDO::PARAM_INT);
 		$req->bindParam(':unite', $unite, PDO::PARAM_INT);
 		$req->execute();
 		$res = $req->fetch();
@@ -727,7 +707,7 @@ function getInfoTechProduit($idProd, $coId, $unite)
 	}
 }
 
-function updateProduct($id, $nom, $desc, $marque, $idCategorie)
+function updateProduct($id, $nom, $desc, $marque, $idCategorie, $volume, $prix, $qteStock, $unite)
 {
 
 	try {
@@ -740,24 +720,12 @@ function updateProduct($id, $nom, $desc, $marque, $idCategorie)
 		$req->bindParam(':marque', $marque, PDO::PARAM_STR);
 		$req->bindParam(':catId', $idCategorie, PDO::PARAM_INT);
 		$req->execute();
-	} catch (PDOException $e) {
-
-		print "Erreur !: " . $e->getMessage();
-		die();
-	}
-}
-
-function updateRemplir($id, $prix, $stock, $uniteId, $contId)
-{
-	try {
-
-		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('UPDATE remplir r SET r.co_id = :coId, r.un_id = :uniteId, r.r_prixVente = :prix, r.r_qteStock = :stock WHERE r.p_id = :id AND r.co_id = :coId AND r.un_id = :uniteId');
-		$req->bindParam(':id', $id, PDO::PARAM_INT);
-		$req->bindParam(':coId', $contId, PDO::PARAM_INT);
-		$req->bindParam(':uniteId', $uniteId, PDO::PARAM_INT);
-		$req->bindParam(':prix', $prix, PDO::PARAM_STR);
-		$req->bindParam(':stock', $stock, PDO::PARAM_INT);
+		$req = $monPdo->prepare('UPDATE contenant_produit cp SET cp.p_id = :id, cp.con_volume = :volume, cp.con_prixVente = :prixVente, cp.con_qteStock = :qte, cp.un_id = :unite WHERE cp.p_id = :id AND cp.con_volume = :volume AND cp.un_id = :unite');
+		$req->bindParam(':id', $id, PDO::PARAM_STR);
+		$req->bindParam(':volume', $volume, PDO::PARAM_INT);
+		$req->bindParam(':prixVente', $prix, PDO::PARAM_STR);
+		$req->bindParam(':qte', $qteStock, PDO::PARAM_INT);
+		$req->bindParam(':unite', $unite, PDO::PARAM_INT);
 		$req->execute();
 	} catch (PDOException $e) {
 
@@ -770,7 +738,7 @@ function getContenanceProduit($id)
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('SELECT count(*) from remplir where p_id = :id');
+		$req = $monPdo->prepare('SELECT count(*) from contenant_produit cp where cp.p_id = :id');
 		$req->bindParam(':id', $id, PDO::PARAM_INT);
 		$req->execute();
 		$res = $req->fetch();

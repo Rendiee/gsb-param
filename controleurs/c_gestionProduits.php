@@ -50,15 +50,15 @@ switch ($action) {
 					$leProduit = getInfoTechProduit($paramProduit[0], $paramProduit[1], $paramProduit[2]);
 					$lesCategories = getLesCategories();
 					$lesUnites = getUniteContenance();
-					$lesContenances = getContenanceValue();
+					//$lesContenances = getContenanceValue();
 					include('./vues/v_pageEditerProduit.php');
 				}
 			}else if(isset($_POST['suppProduit'])){
 
 			}else if(isset($_POST['modif-product'])){
 				//update product ici
-				updateProduct($_SESSION['idProduit'], $_POST['nomproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-cat-produit']);
-				updateRemplir($_SESSION['idProduit'], $_POST['prixproduit'], $_POST['quantite'], $_POST['list-unite'], $_POST['list-cat-produit']);
+				updateProduct($_SESSION['idProduit'], $_POST['nomproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-cat-produit'], $_POST['list-contenance'], $_POST['prixproduit'], $_POST['quantite'], $_POST['list-unite']);
+				//updateRemplir($_SESSION['idProduit'], $_POST['prixproduit'], $_POST['quantite'], $_POST['list-unite'], $_POST['list-cat-produit']);
 				unset($_SESSION['idProduit']);
 				header('location: index.php?uc=administrer&action=editerProduit', true);
 			}else if(isset($_POST['supp-product'])){
