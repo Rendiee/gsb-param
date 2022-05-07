@@ -30,6 +30,25 @@ function getLesCategories()
 	}
 }
 
+function issetCategorie($id)
+{
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT ca_id, ca_libelle, ca_acronyme from categorie where ca_acronyme = :id');
+		$req->bindParam(':id', $id, PDO::PARAM_STR);
+		$req->execute();
+		$res = $req->fetch();
+		if (empty($res)) {
+			return false;
+		} else {
+			return true;
+		}
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
 function getIdCategorie($acro)
 {
 	try {
@@ -755,7 +774,7 @@ function supprimerToutLeProduit($id)
 	// A FAIRE
 }
 
-function supprimerProduitVide($id)
+function supprimerProduit($id)
 {
 	try {
 		$monPdo = connexionPDO();
@@ -774,15 +793,30 @@ function supprimerContenanceProduit($tab)
 	$nb = getContenanceProduit($tab[0]);
 	try {
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('DELETE FROM remplir WHERE p_id = :id AND co_id = :coId AND un_id = :uniteId');
+		$req = $monPdo->prepare('DELETE FROM contenant_produit WHERE p_id = :id AND con_volume = :coId AND un_id = :uniteId');
 		$req->bindParam(':id', $tab[0], PDO::PARAM_INT);
 		$req->bindParam(':coId', $tab[1], PDO::PARAM_INT);
 		$req->bindParam(':uniteId', $tab[2], PDO::PARAM_INT);
 		$req->execute();
 		$nb = getContenanceProduit($tab[0]);
 		if ($nb == 0) {
-			supprimerProduitVide($tab[0]);
+			supprimerProduit($tab[0]);
 		}
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function supprimerLesContenancesEtLeProduit($id)
+{
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('DELETE FROM contenant_produit WHERE p_id = :id');
+		$req->bindParam(':id', $id, PDO::PARAM_INT);
+		$req->execute();
+		supprimerProduit($id);
 	} catch (PDOException $e) {
 
 		print "Erreur !: " . $e->getMessage();

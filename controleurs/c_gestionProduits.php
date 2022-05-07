@@ -40,8 +40,8 @@ switch ($action) {
 		}
 	case 'editerProduit': {
 			$lesProduits = getTousLesProduitsOrderId();
-			if(isset($_POST['editproduit'])){
-				if(isset($_POST['list-edit-produit-contenance']) && $_POST['list-edit-produit-contenance'] != ""){
+			if (isset($_POST['editproduit'])) {
+				if (isset($_POST['list-edit-produit-contenance']) && $_POST['list-edit-produit-contenance'] != "") {
 					$infoProduit = $_POST['list-edit-produit-contenance'];
 					$paramProduit = explode("|", $infoProduit);
 					$idProduit = $paramProduit[0];
@@ -53,19 +53,23 @@ switch ($action) {
 					//$lesContenances = getContenanceValue();
 					include('./vues/v_pageEditerProduit.php');
 				}
-			}else if(isset($_POST['suppProduit'])){
-
-			}else if(isset($_POST['modif-product'])){
+			} else if (isset($_POST['suppProduit'])) {
+				if (isset($_POST['list-edit-produit']) && $_POST['list-edit-produit'] != "") {
+					supprimerLesContenancesEtLeProduit($_POST['list-edit-produit']);
+				}
+			} else if (isset($_POST['modif-product'])) {
 				//update product ici
 				updateProduct($_SESSION['idProduit'], $_POST['nomproduit'], $_POST['descproduit'], $_POST['marqueproduit'], $_POST['list-cat-produit'], $_POST['list-contenance'], $_POST['prixproduit'], $_POST['quantite'], $_POST['list-unite']);
 				//updateRemplir($_SESSION['idProduit'], $_POST['prixproduit'], $_POST['quantite'], $_POST['list-unite'], $_POST['list-cat-produit']);
 				unset($_SESSION['idProduit']);
 				header('location: index.php?uc=administrer&action=editerProduit', true);
-			}else if(isset($_POST['supp-product'])){
-				//suppression product ici
-				supprimerContenanceProduit($_SESSION['editProduit']);
+			} else if (isset($_POST['suppContenance'])) {
+				//suppression contenance ici
+				$infoProduit = $_POST['list-edit-produit-contenance'];
+				$paramProduit = explode("|", $infoProduit);
+				supprimerContenanceProduit($paramProduit);
 				header('location: index.php?uc=administrer&action=editerProduit', true);
-			}else if (isset($_POST['chooseproduct'])) {
+			} else if (isset($_POST['chooseproduct'])) {
 				if (isset($_POST['list-edit-produit']) && $_POST['list-edit-produit'] != "") {
 					$produitsContenance = getMemeProduitAvecContenance($_POST['list-edit-produit']);
 					unset($_POST['chooseproduct']);
@@ -75,25 +79,25 @@ switch ($action) {
 				// 	$_SESSION['messageErrorEditProduit'] = 'Un problème est survenu.';
 				// 	header('location: index.php?uc=administrer&action=editerProduit');
 				// }
-			}else{
+			} else {
 				include('./vues/v_formEditerProduit.php');
 			}
 			break;
 		}
 	case 'editerCategorie': {
 			$lesCategories = getLesCategories();
-			if(isset($_POST['edit-categorie'])){
-				if(isset($_POST['list-edit-categorie']) && $_POST['list-edit-categorie'] != ""){
+			if (isset($_POST['edit-categorie'])) {
+				if (isset($_POST['list-edit-categorie']) && $_POST['list-edit-categorie'] != "") {
 					$lesInfos = getLesInfosCategorie($_POST['list-edit-categorie'], true);
 					include('./vues/v_pageEditerCategorie.php');
 				}
-			}else if(isset($_POST['modif-categorie'])){
-				if(isset($_POST['acronymeCategorie']) && isset($_POST['nomCategorie'])){
-					$id = getIdCategorie($_POST['acronymeCategorie']);
+			} else if (isset($_POST['modif-categorie'])) {
+				if (isset($_POST['acronymeCategorie']) && isset($_POST['nomCategorie'])) {
+					$id = $_REQUEST['categorie'];
 					updateCategorie($id, $_POST['acronymeCategorie'], $_POST['nomCategorie']);
-					header('location: index.php?uc=administrer&action=editerCategorie', true);	
+					header('location: index.php?uc=administrer&action=editerCategorie', true);
 				}
-			}else{
+			} else {
 				include('./vues/v_formEditerCategorie.php');
 			}
 			break;

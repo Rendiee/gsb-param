@@ -10,12 +10,12 @@
         <form action="index.php?uc=administrer&action=editerCategorie" method="POST">
             <div>
                 <label class="form-label" for="list-edit-categorie">Liste des catégories</label>
-                <select class="form-select" id="list-edit-categorie" name="list-edit-categorie">
-                    <option disabled value="">- Choisissez une catégorie -</option>
+                <select class="form-select" id="list-edit-categorie" name="list-edit-categorie" required>
+                    <option selected disabled value="">- Choisissez une catégorie -</option>
                     <?php
                     foreach ($lesCategories as $uneCategorie) {
                     ?>
-                        <option value="<?php echo $uneCategorie['ca_id'] ?>"><?php echo $uneCategorie['ca_id'].' - '. $uneCategorie['ca_libelle'] ?></option>
+                        <option value="<?php echo $uneCategorie['ca_id'] ?>"><?php echo $uneCategorie['ca_id'] . ' - ' . $uneCategorie['ca_libelle'] ?></option>
                     <?php
                     }
                     ?>

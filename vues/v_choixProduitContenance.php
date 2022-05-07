@@ -1,7 +1,8 @@
 <?php if (isset($_SESSION['messageErrorEditProduit'])) { ?>
     <div class="alert alert-danger text-center fit mx-auto message">
         <?php echo $_SESSION['messageErrorEditProduit'];
-        // unset($_SESSION['messageErrorEditProduit']); ?>
+        // unset($_SESSION['messageErrorEditProduit']); 
+        ?>
     </div>
 <?php } ?>
 
@@ -11,12 +12,12 @@
         <form action="index.php?uc=administrer&action=editerProduit" method="POST" id="formEditProduct">
             <div>
                 <label class="form-label" for="list-edit-produit-contenance">Liste des contenances</label>
-                <select class="form-select" id="list-edit-produit-contenance" name="list-edit-produit-contenance">
-                    <option disabled value="">- Choisissez une contenance -</option>
+                <select class="form-select" id="list-edit-produit-contenance" name="list-edit-produit-contenance" required>
+                    <option disabled selected value>- Choisissez une contenance -</option>
                     <?php
                     foreach ($produitsContenance as $prodCont) {
                     ?>
-                        <option value="<?php echo $prodCont['id'].'|'.$prodCont['volume'].'|'.$prodCont['unId'] ?>"><?php echo $prodCont['id'].' - '. $prodCont['nom'] .' : '. $prodCont['volume'] .' '.$prodCont['unite'].', '. $prodCont['prix'] .'€'?></option>
+                        <option value="<?php echo $prodCont['id'] . '|' . $prodCont['volume'] . '|' . $prodCont['unId'] ?>"><?php echo $prodCont['id'] . ' - ' . $prodCont['nom'] . ' : ' . $prodCont['volume'] . ' ' . $prodCont['unite'] . ', ' . $prodCont['prix'] . '€' ?></option>
                     <?php
                     }
                     ?>
@@ -26,7 +27,7 @@
                 <input class="btn btn-success px-5" type="submit" value="Éditer le produit" name="editproduit" id="editproduit">
             </div>
             <div class="button-form-center mt-3">
-                <input onclick="return confirm('Êtes vous sûr de supprimer le produit et ses contenances ?');" class="btn btn-outline-danger px-3" type="submit" value="Supprimer le produit et ses contenances" name="suppProduit" id="suppProduit">
+                <input class="btn btn-outline-danger px-3 me-1" type="submit" value="Supprimer la contenance" name="suppContenance" id="suppContenance" onclick="return confirm('Voulez-vous vraiment supprimer la contenance ?');">
             </div>
         </form>
     </div>

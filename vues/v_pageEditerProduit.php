@@ -89,7 +89,6 @@
             </div>
         </div>
         <div class="button-form-center mt-3">
-            <input class="btn btn-outline-danger px-3 w-25 me-1" type="submit" value="Supprimer le produit" name="supp-product" id="supp-product" onclick="return confirm('Voulez-vous vraiment supprimer le poruduit ?');">
             <input class="btn btn-success px-3 w-25 ms-1" type="submit" value="Modifier le produit" name="modif-product" id="modif-product">
         </div>
         <div class="button-form-center mt-3">

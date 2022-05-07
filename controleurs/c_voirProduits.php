@@ -5,11 +5,15 @@ switch ($action) {
 	case 'produitsCategorie': {
 			$_SESSION['page'] = 'categories';
 			$lesCategories = getLesCategories();
-			$categorie = $_REQUEST['categorie'];
-			$categorieLibelle = getTitreCategorie($categorie);
-			$nomCategorie  = getLesInfosCategorie($categorie, false);
-			$lesProduits = getLesProduitsDeCategorie($categorie);
-			include("vues/v_produitsDeCategorie.php");
+			if (issetCategorie($_REQUEST['categorie'])) {
+				$categorie = $_REQUEST['categorie'];
+				$categorieLibelle = getTitreCategorie($categorie);
+				$nomCategorie  = getLesInfosCategorie($categorie, false);
+				$lesProduits = getLesProduitsDeCategorie($categorie);
+				include("vues/v_produitsDeCategorie.php");
+			} else {
+				header('location: index.php?uc=voirProduits&categorie=' . $lesCategories[0]['ca_acronyme'] . '&action=produitsCategorie');
+			}
 			break;
 		}
 	case 'voirLeProduit': {
