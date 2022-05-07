@@ -56,6 +56,7 @@ switch ($action) {
 			} else if (isset($_POST['suppProduit'])) {
 				if (isset($_POST['list-edit-produit']) && $_POST['list-edit-produit'] != "") {
 					supprimerLesContenancesEtLeProduit($_POST['list-edit-produit']);
+					header('location: index.php?uc=administrer&action=editerProduit');
 				}
 			} else if (isset($_POST['modif-product'])) {
 				//update product ici
@@ -91,10 +92,21 @@ switch ($action) {
 					$lesInfos = getLesInfosCategorie($_POST['list-edit-categorie'], true);
 					include('./vues/v_pageEditerCategorie.php');
 				}
-			} else if (isset($_POST['modif-categorie'])) {
+			} elseif (isset($_POST['modif-categorie'])) {
 				if (isset($_POST['acronymeCategorie']) && isset($_POST['nomCategorie'])) {
 					$id = $_REQUEST['categorie'];
 					updateCategorie($id, $_POST['acronymeCategorie'], $_POST['nomCategorie']);
+					$_SESSION['messageCategorie'] = '<div class="alert alert-success fit mx-auto">La catégorie a bien été modifier</div>';
+					header('location: index.php?uc=administrer&action=editerCategorie', true);
+				}
+			} elseif (isset($_POST['supp-categorie']) && isset($_POST['list-edit-categorie']) && $_POST['list-edit-categorie'] != "") {
+				$id = $_POST['list-edit-categorie'];
+				if (getNbProduitCategorie($id) == 0) {
+					supprimerCategorie($id);
+					$_SESSION['messageCategorie'] = '<div class="alert alert-success fit mx-auto">La catégorie a bien été supprimer</div>';
+					header('location: index.php?uc=administrer&action=editerCategorie', true);
+				} else {
+					$_SESSION['messageCategorie'] = '<div class="alert alert-danger fit mx-auto">Impossible de supprimer la catégorie : des produits y sont liés</div>';
 					header('location: index.php?uc=administrer&action=editerCategorie', true);
 				}
 			} else {

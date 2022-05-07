@@ -857,6 +857,38 @@ function updateCategorie($idCat, $acro, $lib)
 	}
 }
 
+function getNbProduitCategorie($categorie)
+{
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT COUNT(*) FROM `produit` WHERE ca_id = :categorie');
+		$req->bindParam(':categorie', $categorie, PDO::PARAM_INT);
+		$req->execute();
+		$res = $req->fetch();
+		return $res[0];
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function supprimerCategorie($id)
+{
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('UPDATE categorie SET ca_acronyme = :acro, ca_libelle = :lib WHERE ca_id = :id');
+		$req->bindParam(':id', $idCat, PDO::PARAM_INT);
+		$req->bindParam(':acro', $acro, PDO::PARAM_STR);
+		$req->bindParam(':lib', $lib, PDO::PARAM_STR);
+		$req->execute();
+	} catch (PDOException $e) {
+
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
 function getInfoUtilisateurAvis($idAvis)
 {
 
