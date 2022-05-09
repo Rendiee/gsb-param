@@ -47,6 +47,7 @@ switch ($action) {
 				header('location: index.php?uc=connexion&action=connexion');
 			} else {
 				$info = infoProfil();
+				$commande = getCommandesClient($_SESSION['u_id']);
 				include("vues/v_profil.php");
 			}
 			break;

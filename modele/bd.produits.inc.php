@@ -198,12 +198,7 @@ function getInfoProduit($id)
 		die();
 	}
 }
-/**
- * Retourne les produits concernés par le tableau des idProduits passée en argument
- *
- * @param array $desIdProduit tableau d'idProduits
- * @return array $lesProduits un tableau associatif contenant les infos des produits dont les id ont été passé en paramètre
- */
+
 function getLesProduitsDuTableau($desIdProduit)
 {
 	try {
@@ -234,32 +229,49 @@ function getTotalPanier($prix)
 	}
 	return $total;
 }
-/**
- * Crée une commande 
- *
- * Crée une commande à partir des arguments validés passés en paramètre, l'identifiant est
- * construit à partir du maximum existant ; crée les lignes de commandes dans la table contenir à partir du
- * tableau d'idProduit passé en paramètre
- * @param string $nom nom du client
- * @param string $rue rue du client
- * @param string $cp cp du client
- * @param string $ville ville du client
- * @param string $mail mail du client
- * @param array $lesIdProduit tableau associatif contenant les id des produits commandés
-	 
- */
-function creerCommande($nom, $rue, $cp, $ville, $mail, $lesIdProduit)
-{
+
+function getLastIdCommande(){
 	try {
 		$monPdo = connexionPDO();
+		$req = 'SELECT MAX(com_id) as max FROM commande;';
+		$res = $monPdo->query($req);
+		$res = $res->fetch();
+		return $res;
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function creerCommande($montant, $utilisateurId, $lesIdProduit)
+{
+
+	$commandeId = getLastIdCommande();
+	var_dump($commandeId);
+	if(is_null($commandeId)){
+		$commandeId = 0;
+	}else{
+		$commandeId++;
+	}
+
+	$dateCommande = date("Y-m-d");
+
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('INSERT INTO commande VALUES (:comId, :date, :prix, :uId)');
+		$req->bindParam(':comId', $commandeId, PDO::PARAM_INT);
+		$req->bindParam(':date', $dateCommande, PDO::PARAM_STR);
+		$req->bindParam(':prix', $montant, PDO::PARAM_STR);
+		$req->bindParam(':uId', $utilisateurId, PDO::PARAM_INT);
+
 		// on récupère le dernier id de commande
-		$req = 'select max(id) as maxi from commande';
+		//$req = 'select max(id) as maxi from commande';
 		$res = $monPdo->query($req);
 		$laLigne = $res->fetch();
 		$maxi = $laLigne['maxi']; // on place le dernier id de commande dans $maxi
 		$idCommande = $maxi + 1; // on augmente le dernier id de commande de 1 pour avoir le nouvel idCommande
 		$date = date('Y/m/d'); // récupération de la date système
-		$req = "insert into commande values ('$idCommande','$date','$nom','$rue','$cp','$ville','$mail')";
+		//$req = "insert into commande values ('$idCommande','$date','$nom','$rue','$cp','$ville','$mail')";
 		$res = $monPdo->exec($req);
 		// insertion produits commandés
 		foreach ($lesIdProduit as $unIdProduit) {
@@ -271,13 +283,7 @@ function creerCommande($nom, $rue, $cp, $ville, $mail, $lesIdProduit)
 		die();
 	}
 }
-/**
- * Retourne les produits concernés par le tableau des idProduits passée en argument
- *
- * @param int $mois un numéro de mois entre 1 et 12
- * @param int $an une année
- * @return array $lesCommandes un tableau associatif contenant les infos des commandes du mois passé en paramètre
- */
+
 function getLesCommandesDuMois($mois, $an)
 {
 	try {
@@ -898,6 +904,20 @@ function getInfoUtilisateurAvis($idAvis)
 		$req->bindParam(':idAvis', $idAvis, PDO::PARAM_INT);
 		$req->execute();
 		$res = $req->fetch();
+		return $res;
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function getCommandesClient($idClient){
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT c.com_id, (select COUNT(*) from commander co JOIN commande c ON co.com_id = c.com_id where c.u_id = :idClient) as nbProduit, c.u_id, concat(DAY(com_dateComande),\'/\',MONTH(com_dateComande),\'/\',YEAR(com_dateComande)) as com_dateComande, c.com_totalPrix, co.p_id, cp.con_volume, cp.con_prixVente, co.qte_produit, u.un_id, u.un_libelle, p.p_nom, p.p_photo, p.p_description, p.p_marque FROM `commander` co JOIN commande c ON c.com_id = co.com_id JOIN contenant_produit cp ON cp.p_id = co.p_id AND cp.con_volume = co.con_volume JOIN unite u ON u.un_id = cp.un_id JOIN produit p ON p.p_id = cp.p_id WHERE c.u_id = :idClient GROUP BY com_id, p_id ORDER BY com_dateComande');
+		$req->bindParam(':idClient', $idClient, PDO::PARAM_INT);
+		$req->execute();
+		$res = $req->fetchAll();
 		return $res;
 	} catch (PDOException $e) {
 		print "Erreur !: " . $e->getMessage();
