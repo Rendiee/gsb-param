@@ -48,7 +48,10 @@ switch ($action) {
 				include("vues/v_erreurs.php");
 				include("vues/v_commande.php");
 			} else {
-				$lesIdProduit = getLesIdProduitsDuPanier();
+				$desIdProduit = getLesIdProduitsDuPanier();
+				$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
+				$totalPanier = getTotalPanier($lesProduitsDuPanier);
+				// creerCommande($totalPanier, )
 				creerCommande($nom, $rue, $cp, $ville, $mail, $lesIdProduit);
 				$message = "Commande enregistrée";
 				supprimerPanier();
