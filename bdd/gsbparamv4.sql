@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3308
--- Généré le :  jeu. 05 mai 2022 à 10:46
--- Version du serveur :  8.0.18
--- Version de PHP :  7.3.12
+-- Généré le : lun. 09 mai 2022 à 13:50
+-- Version du serveur : 5.7.36
+-- Version de PHP : 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `gsbparamv4`
+-- Base de données : `gsbparamv4`
 --
 
 -- --------------------------------------------------------
@@ -89,6 +88,15 @@ CREATE TABLE IF NOT EXISTS `commande` (
   KEY `commande_utilisateur0_FK` (`u_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Déchargement des données de la table `commande`
+--
+
+INSERT INTO `commande` (`com_id`, `com_dateComande`, `com_totalPrix`, `u_id`) VALUES
+(1, '2022-05-07', 22.95, 1),
+(2, '2022-05-08', 57.94, 1),
+(3, '2022-05-09', 94.92, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -104,6 +112,19 @@ CREATE TABLE IF NOT EXISTS `commander` (
   PRIMARY KEY (`p_id`,`con_volume`,`com_id`),
   KEY `commander_commande1_FK` (`com_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `commander`
+--
+
+INSERT INTO `commander` (`p_id`, `con_volume`, `com_id`, `qte_produit`) VALUES
+(1, 200, 1, 1),
+(3, 150, 3, 3),
+(4, 20, 1, 4),
+(6, 200, 2, 4),
+(7, 200, 3, 2),
+(8, 50, 2, 2),
+(9, 200, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -136,7 +157,12 @@ INSERT INTO `contenant_produit` (`p_id`, `con_volume`, `con_prixVente`, `con_qte
 (4, 20, 4.25, 10, 2),
 (4, 40, 6.3, 10, 2),
 (5, 200, 8.25, 10, 1),
-(5, 500, 12.95, 10, 1);
+(5, 500, 12.95, 10, 1),
+(6, 200, 9.99, 15, 1),
+(7, 200, 12.99, 12, 1),
+(8, 50, 8.99, 15, 1),
+(9, 200, 12.99, 20, 1),
+(10, 30, 6.99, 50, 5);
 
 -- --------------------------------------------------------
 
@@ -203,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `p_id` int(11) NOT NULL,
   `p_nom` varchar(50) COLLATE utf8_bin NOT NULL,
   `p_photo` varchar(255) COLLATE utf8_bin NOT NULL,
-  `p_description` varchar(255) COLLATE utf8_bin NOT NULL,
+  `p_description` varchar(350) COLLATE utf8_bin NOT NULL,
   `p_marque` varchar(50) COLLATE utf8_bin NOT NULL,
   `ca_id` int(11) NOT NULL,
   PRIMARY KEY (`p_id`),
@@ -219,7 +245,12 @@ INSERT INTO `produit` (`p_id`, `p_nom`, `p_photo`, `p_description`, `p_marque`, 
 (2, 'Novathrix - Shampooing Energisant Fortifiant', 'img-product/fortifiant.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non.', 'Phyto', 1),
 (3, 'Mystérieux Repulpant', 'img-product/repulpant.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non.', 'Garancia', 3),
 (4, 'Infusion Bonne Nuit', 'img-product/infusion.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non.', 'Juvamine', 2),
-(5, 'Gel Lavant Doux Corps et Cheveux pour nouveau née', 'img-product/gellavant.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non.', 'Mustela', 4);
+(5, 'Gel Lavant Doux Corps et Cheveux pour nouveau née', 'img-product/gellavant.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non.', 'Mustela', 4),
+(6, 'Shampooing Traitant Anti-Pelliculaire Sensitive', 'img-product/anti-pelliculaire-sensitive.jpg', 'Le soin Dercos shampooing anti-pelliculaire des laboratoires Vichy est destiné aux personnes souffrant de pellicules et ayant le cuir chevelu sensible. Convenant aux cheveux normaux, gras ou secs, ce soin des cheveux élimine les pellicules dans les cheveux et soulage les irritations du cuir chevelu.', 'Dercos', 1),
+(7, 'Après-Shampooing Régénérant', 'img-product/apres-shampooing-regenerant.jpg', 'L’après-shampoing à l’extrait d’avoine est formulé par les laboratoires Weleda. Très nutritif, il est utilisé pour prendre soin des cheveux fragiles. Après chaque application et un séchage délicat, la chevelure se coiffe plus facilement, elle est douce et brillante.', 'Weleda', 1),
+(8, 'Coloration Permanente 5.7 Châtain Clair Marron', 'img-product/coloration-permanente-57-chatain-clair-marron.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non.', 'Phyto', 1),
+(9, 'Pouxdoux shampooing', 'img-product/puressentiel-pouxdoux-shampooing-bio.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non.', 'Puressentiel', 1),
+(10, 'C\'zen Nuit', 'img-product/czen.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquam venenatis neque, quis pretium orci molestie non.', 'Mélanine', 2);
 
 -- --------------------------------------------------------
 
@@ -255,8 +286,8 @@ CREATE TABLE IF NOT EXISTS `unite` (
 INSERT INTO `unite` (`un_id`, `un_libelle`) VALUES
 (1, 'ml'),
 (2, 'sachets'),
-(3, 'comprimés'),
-(4, 'litre');
+(4, 'litre'),
+(5, 'comprimés');
 
 -- --------------------------------------------------------
 
