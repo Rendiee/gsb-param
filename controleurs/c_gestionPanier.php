@@ -3,6 +3,14 @@ $action = $_REQUEST['action'];
 $_SESSION['page'] = 'panier';
 switch ($action) {
 	case 'voirPanier': {
+			if (isset($_GET['produit'])) {//Changer quantité selectionnée du produit dans panier
+				$result = explode('|', $_GET['produit']); //$result[0] = id du produit - $result[1] = contenance du produit - $result[2] = quantite du produit a changé
+				$resultId = array_search($result[0], array_column($_SESSION['produits'], 0));
+				if($_SESSION['produits'][$resultId][1] == $result[1]){
+						$_SESSION['produits'][$resultId][2] = $result[2];
+				}
+				header('location: index.php?uc=gererPanier&action=voirPanier');
+			}
 			$n = nbProduitsDuPanier();
 			if ($n > 0) {
 				$desIdProduit = getLesIdProduitsDuPanier();

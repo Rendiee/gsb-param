@@ -1,8 +1,8 @@
 <div class="w-100 text-center h2 text-success fw-bold mb-3">
 	Produits de la catégorie : <span class="text-dark">
-	<?php
-	echo $nomCategorie['ca_libelle'];
-	?>
+		<?php
+		echo $nomCategorie['ca_libelle'];
+		?>
 	</span>
 </div>
 <div class="d-flex flex-wrap justify-content-center">
@@ -50,8 +50,7 @@
 				$avis = round(floatval(avisMoyenProduit($id)[0]));
 				$nbAvis = nbAvisProduit($id)[0];
 
-				$description = substr($description, 0, 80);
-				$description = $description . '...';
+				$description = mb_strimwidth($description, 0, 80, '...');
 				// affichage d'un produit avec ses informations
 			?>
 				<div class="col-xl-4 col-lg-6 col-md-5 col-sm-6 col-8">
@@ -62,16 +61,20 @@
 							<img class="img-product" src="<?php echo $image ?>" alt="image product">
 							<p class="card-text description-product"><?php echo $description ?></p>
 							<div class="d-flex justify-content-center pb-2 align-items-center">
-									<?php for($i=1;$i<=5;$i++){
-										if($avis != null && $avis >= $i){
-											?> <svg xmlns="http://www.w3.org/2000/svg" height="1rem" width="1rem" fill="var(--color-star-full, #ea7315)" viewBox="0 0 24 24"><path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z"/></svg>
-								  <?php }else{
-											?> <svg xmlns="http://www.w3.org/2000/svg" height="1rem" width="1rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24"><path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z"/></svg>
-								  <?php }
-									} 
-									echo '&nbsp<span class="text-decoration-underline small">'.$nbAvis.' avis</span>';
-									?>
-								</div>
+								<?php for ($i = 1; $i <= 5; $i++) {
+									if ($avis != null && $avis >= $i) {
+								?> <svg xmlns="http://www.w3.org/2000/svg" height="1rem" width="1rem" fill="var(--color-star-full, #ea7315)" viewBox="0 0 24 24">
+											<path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z" />
+										</svg>
+									<?php } else {
+									?> <svg xmlns="http://www.w3.org/2000/svg" height="1rem" width="1rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24">
+											<path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z" />
+										</svg>
+								<?php }
+								}
+								echo '&nbsp<span class="text-decoration-underline small">' . $nbAvis . ' avis</span>';
+								?>
+							</div>
 						</div>
 						<div class="card-footer d-flex justify-content-between align-items-center">
 							<div class="d-flex flex-column align-items-center">

@@ -61,8 +61,7 @@
 					$avis = round(floatval(avisMoyenProduit($id)[0]));
 					$nbAvis = nbAvisProduit($id)[0];
 
-					$description = substr($description, 0, 80);
-					$description = $description . '...';
+					$description = mb_strimwidth($description, 0, 80, '...');
 
 
 				?>

@@ -3,24 +3,24 @@
 
 	<?php
 	if (isset($lesProduitsDuPanier)) {
-	?> <div class="col-lg-8 col-12"> <?php
-										foreach ($lesProduitsDuPanier as $unProduit) {
-											// récupération des données d'un produit
-											$description = $unProduit['description'];
-											$image = "assets/" . $unProduit['photo'];
-											$nom = $unProduit['nom'];
-											$marque = $unProduit['marque'];
-											$id = $unProduit['id'];
-											$unite = $unProduit['unite'];
-											$contenance = $unProduit['contenance'];
-											$prix = $unProduit['prix'];
-											$qteMax = $unProduit['quantiteMax'];
-											$qte = $unProduit['quantite'];
-
-											$description = substr($description, 0, 80);
-											$description = $description . '...';
-											// affichage
-										?>
+	?> <div class="col-lg-8 col-12">
+			<?php
+			foreach ($lesProduitsDuPanier as $unProduit) {
+				// récupération des données d'un produit
+				$description = $unProduit['description'];
+				$image = "assets/" . $unProduit['photo'];
+				$nom = $unProduit['nom'];
+				$marque = $unProduit['marque'];
+				$id = $unProduit['id'];
+				$unite = $unProduit['unite'];
+				$contenance = $unProduit['contenance'];
+				$prix = $unProduit['prix'];
+				$qteMax = $unProduit['quantiteMax'];
+				$qte = $unProduit['quantite'];
+				
+				$description = mb_strimwidth($description, 0, 80, '...');
+				// affichage
+			?>
 				<div class="w-100 height325px border border-gris rounded my-2 py-2 bg-white">
 					<form class="h-100" method="POST" action="index.php?uc=gererPanier&action=supprimerUnProduit">
 						<div class="d-flex h-100">
@@ -38,7 +38,7 @@
 									</div>
 									<div class="small d-flex align-items-center">
 										<div class="me-1">Quantite :</div>
-										<select class="border border-success rounded p-1 qte" name="quantite">
+										<select class="border border-success rounded p-1 qte" name="quantite" id="<?php echo $id .'|'.$contenance ?>">
 											<?php
 											if ($qteMax > 10) {
 												$qteMax = 10;
@@ -63,7 +63,7 @@
 					</form>
 				</div>
 			<?php
-										} ?>
+			} ?>
 		</div>
 		<div class="col-lg-4 col-12 my-lg-2">
 			<div class="d-flex flex-column justify-content-between p-3 rounded ms-lg-1 sticky rounded height325px bg-white">
@@ -103,3 +103,9 @@
 	}
 	?>
 </div>
+<script>
+	$("select").on("change", function(){
+		id = $(this).attr('id') + '|' + $(this).children(":selected").val();
+		location = "index.php?uc=gererPanier&action=voirPanier&produit="+id
+	})
+</script>
