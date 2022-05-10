@@ -28,8 +28,14 @@ switch ($action) {
 			header('location: index.php?uc=gererPanier&action=voirPanier');
 			break;
 		}
-	case 'passerCommande':
+	case 'resumerCommande':
 		$n = nbProduitsDuPanier();
+		$info = infoProfil();
+		$idCommande = getLastIdCommande();
+		$desIdProduit = getLesIdProduitsDuPanier();
+		$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
+		$total = getTotalPanier($lesProduitsDuPanier);
+
 		if ($n > 0) {   // les variables suivantes servent à l'affectation des attributs value du formulaire
 			// ici le formulaire doit être vide, quand il est erroné, le formulaire sera réaffiché pré-rempli
 			$nom = '';
@@ -37,7 +43,7 @@ switch ($action) {
 			$ville = '';
 			$cp = '';
 			$mail = '';
-			include("vues/v_commande.php");
+			include("vues/v_resumerCommande.php");
 		} else {
 			$message = "Votre panier est vide !";
 			include("vues/v_panier.php");

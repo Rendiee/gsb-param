@@ -27,6 +27,9 @@
                 <input class="btn btn-success px-5" type="submit" value="Choisir ce produit" name="chooseproduct" id="chooseproduct">
             </div>
             <div class="button-form-center mt-3">
+                <input class="btn btn-success px-3" type="submit" value="Ajouter une contenance à ce produit" name="addContenance" id="addContenance">
+            </div>
+            <div class="button-form-center mt-3">
                 <input onclick="return confirm('Êtes vous sûr de vouloir supprimer le produit et toutes ses contenances ?');" class="btn btn-outline-danger px-3" type="submit" value="Supprimer ce produit et ses contenances" name="suppProduit" id="suppProduit">
             </div>
         </form>

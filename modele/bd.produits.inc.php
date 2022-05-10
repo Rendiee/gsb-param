@@ -835,7 +835,7 @@ function getMemeProduitAvecContenance($id)
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('SELECT p.p_id AS id, p.p_nom AS nom, u.un_id AS unId, u.un_libelle AS unite, cp.con_volume AS volume, cp.con_prixVente AS prix FROM produit p INNER JOIN contenant_produit cp ON p.p_id = cp.p_id INNER JOIN unite u ON u.un_id = cp.un_id WHERE p.p_id = :id ORDER BY :id;');
+		$req = $monPdo->prepare('SELECT p.p_id AS id, p.p_nom AS nom, u.un_id AS unId, u.un_libelle AS unite, cp.con_volume AS volume, cp.con_prixVente AS prix FROM produit p INNER JOIN contenant_produit cp ON p.p_id = cp.p_id INNER JOIN unite u ON u.un_id = cp.un_id WHERE p.p_id = :id ORDER BY p.p_id;');
 		$req->bindParam(':id', $id, PDO::PARAM_INT);
 		$req->execute();
 		$res = $req->fetchAll();

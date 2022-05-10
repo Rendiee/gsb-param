@@ -119,62 +119,6 @@ function retirerDuPanier($idProduit, $idContenance)
 		unset($_SESSION['produits'][$nb]);
 	}
 }
-/**
- * Retourne un tableau d'erreurs de saisie pour une commande
- *
- * @param string $nom  chaîne testée
- * @param  string $rue chaîne
- * @param string $ville chaîne
- * @param string $cp chaîne
- * @param string $mail  chaîne 
- * @return array $lesErreurs un tableau de chaînes d'erreurs
- */
-function getErreursSaisieCommande($nom, $prenom, $rue, $ville, $cp, $mail)
-{
-	$erreur = 'Champs manquants : ';
-	$lesErreurs = array();
-	if ($nom == "") {
-		$erreur += ' prénom';
-		$lesErreurs[] = "Il faut saisir un prénom";
-	}
-	if ($rue == "") {
-		$lesErreurs[] = "Il faut saisir le champ rue";
-	}
-	if ($ville == "") {
-		$lesErreurs[] = "Il faut saisir le champ ville";
-	}
-	if ($cp == "") {
-		$lesErreurs[] = "Il faut saisir le champ Code postal";
-	}
-	if ($mail == "") {
-		$lesErreurs[] = "Il faut saisir le champ mail";
-	}
-	return $lesErreurs;
-}
-
-function getErreursCommander($nom, $prenom, $rue, $ville, $cp, $mail){
-
-	$erreur = 'Champs manquants : ';
-	if ($nom == "") {
-		$erreur += ', nom';
-	}
-	if ($prenom == "") {
-		$erreur += ' prénom';
-	}
-	if ($rue == "") {
-		$erreur += ', rue';
-	}
-	if ($cp == "") {
-		$erreur += ', code postal';
-	}
-	if ($ville == "") {
-		$erreur += ', ville';
-	}
-	if ($mail == "") {
-		$erreur += ", email";
-	}
-	return $erreur;
-}
 
 function checkCommander($nom, $prenom, $rue, $ville, $cp, $mail){
 	$check = true;

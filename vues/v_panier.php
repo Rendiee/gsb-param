@@ -82,7 +82,7 @@
 					<div><?php echo sprintf("%.02f", $totalPanier) ?> €</div>
 				</div>
 				<div class="d-flex flex-row justify-content-center align-items-center fit mx-auto mt-4">
-					<a class="text-decoration-none fit me-2" href="index.php?uc=gererPanier&action=passerCommande">
+					<a class="text-decoration-none fit me-2" href="index.php?uc=gererPanier&action=resumerCommande">
 						<button type="button" class="btn btn-success">Commander</button>
 					</a>
 					<a class="ms-2" href="index.php?uc=gererPanier&action=videPanier">

@@ -76,10 +76,15 @@ switch ($action) {
 					unset($_POST['chooseproduct']);
 					include('./vues/v_choixProduitContenance.php');
 				}
-				// else{
-				// 	$_SESSION['messageErrorEditProduit'] = 'Un problème est survenu.';
-				// 	header('location: index.php?uc=administrer&action=editerProduit');
-				// }
+				else{
+					$_SESSION['messageErrorEditProduit'] = 'Un problème est survenu.';
+					header('location: index.php?uc=administrer&action=editerProduit');
+				}
+			} elseif (isset($_POST['addContenance'])) {
+				$lesUnites = getUniteContenance();				
+				$produitsContenance = getMemeProduitAvecContenance($_POST['list-edit-produit']);
+				var_dump($produitsContenance);
+				include('vues/v_ajouterContenanceProduit.php');
 			} else {
 				include('./vues/v_formEditerProduit.php');
 			}
