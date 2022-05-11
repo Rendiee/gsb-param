@@ -519,7 +519,7 @@ function getLesMarques()
 	try {
 
 		$monPdo = connexionPDO();
-		$req = 'SELECT p_marque FROM produit ORDER BY p_marque';
+		$req = 'SELECT DISTINCT(p_marque) FROM produit ORDER BY p_marque';
 		$res = $monPdo->query($req);
 		$result = $res->fetchAll();
 		return $result;
@@ -921,6 +921,37 @@ function getCommandesClient($idClient)
 		$req->execute();
 		$res = $req->fetchAll();
 		return $res;
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function ajoutContenanceProduit($idProduit, $idUnite, $volume, $prix, $stock){
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('INSERT INTO contenant_produit VALUES (:idProduit, :volume, :prix, :stock, :idUnite)');
+		$req->bindParam(':idProduit', $idProduit, PDO::PARAM_INT);
+		$req->bindParam(':idUnite', $idUnite, PDO::PARAM_INT);
+		$req->bindParam(':volume', $volume, PDO::PARAM_INT);
+		$req->bindParam(':prix', $prix, PDO::PARAM_STR);
+		$req->bindParam(':stock', $stock, PDO::PARAM_INT);
+		$req->execute();
+		
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function getUniteProduit($idProduit){
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT DISTINCT c.un_id, u.un_libelle FROM contenant_produit c JOIN unite u ON u.un_id = c.un_id WHERE `p_id` = :idProduit');
+		$req->bindParam(':idProduit', $idProduit, PDO::PARAM_INT);
+		$req->execute();
+		$res = $req->fetch();
+		return $res;		
 	} catch (PDOException $e) {
 		print "Erreur !: " . $e->getMessage();
 		die();

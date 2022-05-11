@@ -81,9 +81,13 @@ switch ($action) {
 					header('location: index.php?uc=administrer&action=editerProduit');
 				}
 			} elseif (isset($_POST['addContenance'])) {
-				$lesUnites = getUniteContenance();				
+				$id = $_POST['list-edit-produit'];
+				$unité = getUniteProduit($_POST['list-edit-produit']);				
 				$produitsContenance = getMemeProduitAvecContenance($_POST['list-edit-produit']);
 				var_dump($produitsContenance);
+				include('vues/v_ajouterContenanceProduit.php');
+			}elseif (isset($_POST['ajoutContenance'])) {
+				//ajoutContenanceProduit($);
 				include('vues/v_ajouterContenanceProduit.php');
 			} else {
 				include('./vues/v_formEditerProduit.php');
