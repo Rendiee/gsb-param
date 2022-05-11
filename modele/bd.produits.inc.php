@@ -244,11 +244,10 @@ function getLastIdCommande()
 	}
 }
 
-function creerCommande($montant, $utilisateurId, $lesIdProduit)
+function creerCommande($montant, $utilisateurId, $lesIdProduit, $lesProduitsDuPanier)
 {
 
 	$commandeId = getLastIdCommande();
-	var_dump($commandeId);
 	if (is_null($commandeId)) {
 		$commandeId = 0;
 	} else {
@@ -264,20 +263,18 @@ function creerCommande($montant, $utilisateurId, $lesIdProduit)
 		$req->bindParam(':date', $dateCommande, PDO::PARAM_STR);
 		$req->bindParam(':prix', $montant, PDO::PARAM_STR);
 		$req->bindParam(':uId', $utilisateurId, PDO::PARAM_INT);
-
-		// on récupère le dernier id de commande
-		//$req = 'select max(id) as maxi from commande';
-		$res = $monPdo->query($req);
-		$laLigne = $res->fetch();
-		$maxi = $laLigne['maxi']; // on place le dernier id de commande dans $maxi
-		$idCommande = $maxi + 1; // on augmente le dernier id de commande de 1 pour avoir le nouvel idCommande
-		$date = date('Y/m/d'); // récupération de la date système
-		//$req = "insert into commande values ('$idCommande','$date','$nom','$rue','$cp','$ville','$mail')";
-		$res = $monPdo->exec($req);
-		// insertion produits commandés
-		foreach ($lesIdProduit as $unIdProduit) {
-			$req = "insert into contenir values ('$idCommande','$unIdProduit')";
-			$res = $monPdo->exec($req);
+		$req->execute();
+		
+		$nbProduits = count($lesProduitsDuPanier);
+		if ($nbProduits != 0) {
+			foreach ($lesProduitsDuPanier as $unProduit) {
+				$req = $monPdo->prepare('INSERT INTO commander VALUES (:pId, :volume, :comId, :qte)');
+				$req->bindParam(':pId', $unProduit['id'], PDO::PARAM_INT);
+				$req->bindParam(':volume', $unProduit['contenance'], PDO::PARAM_STR);
+				$req->bindParam(':comId', $commandeId, PDO::PARAM_STR);
+				$req->bindParam(':qte', $unProduit['quantite'], PDO::PARAM_INT);
+				$req->execute();
+			}
 		}
 	} catch (PDOException $e) {
 		print "Erreur !: " . $e->getMessage();

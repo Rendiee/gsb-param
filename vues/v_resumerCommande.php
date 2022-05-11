@@ -27,14 +27,9 @@
             </ul>
          </div>
    </div>
-   <div class="d-flex flex-column col-5 justify-content-center align-items-center border p-4 mx-auto">
-      <div class="text-center text-success h4 pb-3">Code de réduction</div>
-      <div class="fit mx-auto">
-         <label class="mb-2">Code : </label>
-         <input class="form-control mb-3" type="text" name="code-reduc">
-      </div>
-      <input class="btn btn-success" type="submit" value="Appliquer">
-   </div>
+   <form class="pt-4 text-center" action="index.php?uc=gererPanier&action=confirmerCommande" method="POST">
+      <input class="btn btn-success" type="submit" name="commander">
+   </form>
 </div>
 
 <script>

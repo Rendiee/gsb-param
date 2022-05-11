@@ -34,15 +34,11 @@ switch ($action) {
 		$idCommande = getLastIdCommande();
 		$desIdProduit = getLesIdProduitsDuPanier();
 		$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
+		echo count($lesProduitsDuPanier);
+		var_dump($lesProduitsDuPanier);
 		$total = getTotalPanier($lesProduitsDuPanier);
 
-		if ($n > 0) {   // les variables suivantes servent à l'affectation des attributs value du formulaire
-			// ici le formulaire doit être vide, quand il est erroné, le formulaire sera réaffiché pré-rempli
-			$nom = '';
-			$rue = '';
-			$ville = '';
-			$cp = '';
-			$mail = '';
+		if ($n > 0) {
 			include("vues/v_resumerCommande.php");
 		} else {
 			$message = "Votre panier est vide !";
@@ -50,26 +46,9 @@ switch ($action) {
 		}
 		break;
 	case 'confirmerCommande': {
-			$nom = $_REQUEST['nom'];
-			$prenom = $_REQUEST['prenom'];
-			$rue = $_REQUEST['rue'];
-			$ville = $_REQUEST['ville'];
-			$cp = $_REQUEST['cp'];
-			$mail = $_REQUEST['mail'];
-
-			if (!checkCommander($nom, $prenom, $rue, $ville, $cp, $mail)) {
-				$msgError = 'Champ vide détecté !';
-				include("vues/v_erreurs.php");
-				include("vues/v_commande.php");
-			} else {
-				$desIdProduit = getLesIdProduitsDuPanier();
-				$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
-				$totalPanier = getTotalPanier($lesProduitsDuPanier);
-				// creerCommande($totalPanier, )
-				creerCommande($nom, $rue, $cp, $ville, $mail, $lesIdProduit);
-				$message = "Commande enregistrée";
-				supprimerPanier();
-				include("vues/v_panier.php");
+			$msg = '';
+			if(isset($_POST['commander'])){
+				creerCommande($total, $_SESSION['u_id'], $lesProduitsDuPanier, $lesProduitsDuPanier);
 			}
 			break;
 		}
