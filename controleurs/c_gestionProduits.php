@@ -84,11 +84,10 @@ switch ($action) {
 				$id = $_POST['list-edit-produit'];
 				$unité = getUniteProduit($_POST['list-edit-produit']);				
 				$produitsContenance = getMemeProduitAvecContenance($_POST['list-edit-produit']);
-				var_dump($produitsContenance);
 				include('vues/v_ajouterContenanceProduit.php');
 			}elseif (isset($_POST['ajoutContenance'])) {
-				//ajoutContenanceProduit($);
-				include('vues/v_ajouterContenanceProduit.php');
+				ajoutContenanceProduit($_REQUEST['produit'],$_REQUEST['unite'], $_POST['volume'], $_POST['prix'], $_POST['stock']);
+				header('location: index.php?uc=administrer&action=editerProduit');
 			} else {
 				include('./vues/v_formEditerProduit.php');
 			}

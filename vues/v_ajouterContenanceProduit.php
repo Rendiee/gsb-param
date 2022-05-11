@@ -1,8 +1,7 @@
 <div class="fit mx-auto bg-white rounded p-5 border shadow">
     <h3 class="text-center mb-5">Ajouter une contenance au produit<br />"<?php echo $produitsContenance[0][1] ?>"</h3>
-    <form action="index.php?uc=administrer&action=editerProduit" method="POST">
+    <form action="index.php?uc=administrer&action=editerProduit&produit=<?= $id?>&unite=<?= $unité['un_id'] ?>" method="POST">
         <div class="d-flex align-items-center">
-            <input disabled class="d-none" name="produit" id="produit" value="<?= $id ?>">
             <div class="w-50 me-1">
                 <label for="unite">Unité :</label>
                 <input disabled class="form-control" name="unite" id="unite" value="<?= $unité['un_libelle'] ?>">
