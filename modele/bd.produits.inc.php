@@ -244,10 +244,11 @@ function getLastIdCommande()
 	}
 }
 
-function creerCommande($montant, $utilisateurId, $lesIdProduit, $lesProduitsDuPanier)
+function creerCommande($montant, $utilisateurId, $lesProduitsDuPanier)
 {
 
 	$commandeId = getLastIdCommande();
+	$commandeId = intval($commandeId[0]);
 	if (is_null($commandeId)) {
 		$commandeId = 0;
 	} else {

@@ -29,26 +29,32 @@ switch ($action) {
 			break;
 		}
 	case 'resumerCommande':
-		$n = nbProduitsDuPanier();
-		$info = infoProfil();
-		$idCommande = getLastIdCommande();
-		$desIdProduit = getLesIdProduitsDuPanier();
-		$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
-		echo count($lesProduitsDuPanier);
-		var_dump($lesProduitsDuPanier);
-		$total = getTotalPanier($lesProduitsDuPanier);
-
-		if ($n > 0) {
-			include("vues/v_resumerCommande.php");
-		} else {
-			$message = "Votre panier est vide !";
-			include("vues/v_panier.php");
+		if(isset($_SESSION['u_id'])){
+			$n = nbProduitsDuPanier();
+			$info = infoProfil();
+			$idCommande = getLastIdCommande();
+			$desIdProduit = getLesIdProduitsDuPanier();
+			$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
+			$total = getTotalPanier($lesProduitsDuPanier);
+	
+			if ($n > 0) {
+				include("vues/v_resumerCommande.php");
+			} else {
+				$message = "Votre panier est vide !";
+				include("vues/v_panier.php");
+			}
+		}else{
+			header('location: index.php?uc=connexion&action=connexion');
 		}
 		break;
 	case 'confirmerCommande': {
-			$msg = '';
+			$desIdProduit = getLesIdProduitsDuPanier();
+			$lesProduitsDuPanier = getLesProduitsDuTableau($desIdProduit);
+			$totalPanier = getTotalPanier($lesProduitsDuPanier);
 			if(isset($_POST['commander'])){
-				creerCommande($total, $_SESSION['u_id'], $lesProduitsDuPanier, $lesProduitsDuPanier);
+				creerCommande($totalPanier, $_SESSION['u_id'], $lesProduitsDuPanier);
+				supprimerPanier();
+				header('location: index.php?uc=voirProduits&action=nosProduits');
 			}
 			break;
 		}

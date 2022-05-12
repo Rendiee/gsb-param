@@ -28,7 +28,7 @@
          </div>
    </div>
    <form class="pt-4 text-center" action="index.php?uc=gererPanier&action=confirmerCommande" method="POST">
-      <input class="btn btn-success" type="submit" name="commander">
+      <input class="btn btn-success" type="submit" name="commander" value="Valider la commande">
    </form>
 </div>
 
