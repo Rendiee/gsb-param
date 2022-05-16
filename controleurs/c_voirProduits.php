@@ -26,7 +26,11 @@ switch ($action) {
 			} else {
 				if ($_SESSION['page'] == 'panier') {
 					$value = "index.php?uc=gererPanier&action=voirPanier";
-				} else $value = "index.php?uc=voirProduits&action=nosProduits";
+				} elseif ($_SESSION['page'] == 'nosproduits') {
+					$value = "index.php?uc=voirProduits&action=nosProduits";
+				} else {
+					$value = "index.php?uc=connexion&action=profil";
+				}
 			}
 			$id = $_REQUEST['produit'];
 			$infoProduit = getInfoProduit($id);

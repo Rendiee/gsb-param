@@ -74,19 +74,18 @@ switch ($action) {
 				if (isset($_POST['list-edit-produit']) && $_POST['list-edit-produit'] != "") {
 					$produitsContenance = getMemeProduitAvecContenance($_POST['list-edit-produit']);
 					unset($_POST['chooseproduct']);
-					include('./vues/v_choixProduitContenance.php');
-				}
-				else{
+					include('./vues/v_formEditerContenance.php');
+				} else {
 					$_SESSION['messageErrorEditProduit'] = 'Un problème est survenu.';
 					header('location: index.php?uc=administrer&action=editerProduit');
 				}
 			} elseif (isset($_POST['addContenance'])) {
 				$id = $_POST['list-edit-produit'];
-				$unité = getUniteProduit($_POST['list-edit-produit']);				
+				$unité = getUniteProduit($_POST['list-edit-produit']);
 				$produitsContenance = getMemeProduitAvecContenance($_POST['list-edit-produit']);
 				include('vues/v_ajouterContenanceProduit.php');
-			}elseif (isset($_POST['ajoutContenance'])) {
-				ajoutContenanceProduit($_REQUEST['produit'],$_REQUEST['unite'], $_POST['volume'], $_POST['prix'], $_POST['stock']);
+			} elseif (isset($_POST['ajoutContenance'])) {
+				ajoutContenanceProduit($_REQUEST['produit'], $_REQUEST['unite'], $_POST['volume'], $_POST['prix'], $_POST['stock']);
 				header('location: index.php?uc=administrer&action=editerProduit');
 			} else {
 				include('./vues/v_formEditerProduit.php');

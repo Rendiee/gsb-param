@@ -24,10 +24,13 @@
                 </select>
             </div>
             <div class="button-form-center mt-3">
-                <input class="btn btn-success px-5" type="submit" value="Éditer le produit" name="editproduit" id="editproduit">
+                <input class="btn btn-success px-5" type="submit" value="Éditer la contenance" name="editproduit" id="editproduit">
             </div>
             <div class="button-form-center mt-3">
                 <input class="btn btn-outline-danger px-3 me-1" type="submit" value="Supprimer la contenance" name="suppContenance" id="suppContenance" onclick="return confirm('Voulez-vous vraiment supprimer la contenance ?');">
+            </div>
+            <div class="button-form-center mt-3">
+                <button class="btn btn-success px-3 me-1" type="button" onclick="location.href='index.php?uc=administrer&action=editerProduit'">Retour</button>
             </div>
         </form>
     </div>

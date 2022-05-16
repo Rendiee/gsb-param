@@ -88,7 +88,7 @@
                         <label class="form-label" for="list-contenance">Contenance</label>
                         <input type="number" placeholder="Contenance" class="form-control" id="list-contenance" name="list-contenance" min="0" value="0">
                     </div>
-                    <div id="newUnite" class="link-success text-decoration-underline pointer fit w-100">Ajouter une unité</div>
+                    <div id="newUnite" class="link-success text-decoration-underline pointer fit">Ajouter une unité</div>
                 </div>
             </div>
         </div>
@@ -172,7 +172,7 @@
             $('#newUnite').text("Autre unité").addClass("link-success").removeClass("link-danger");
         } else {
             $('.new').remove();
-            $('#newUnite').parent().append('<div class="col-6 new mt-1"><input  class="form-control" type="text" placeholder="Nom de l\'unité" id="nomUnite" name="nomUnite"></div>');
+            $('#newUnite').parent().append('<div class="new mt-1"><input class="w-50 form-control" type="text" placeholder="Nom de l\'unité" id="nomUnite" name="nomUnite"></div>');
             //$('#newUnite').parent().append('<div class="col-6 new mt-1"><input  class="form-control" type="number" placeholder="Contenance" id="nbContenance" name="nbContenance" min="0"></div>');
             $('#list-unite').attr("disabled", true);
             //$('#list-contenance').attr("disabled", true).removeClass("border-danger");

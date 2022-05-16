@@ -1,6 +1,6 @@
 <div class="fit mx-auto bg-white rounded p-5 border shadow">
     <h3 class="text-center mb-5">Ajouter une contenance au produit<br />"<?php echo $produitsContenance[0][1] ?>"</h3>
-    <form action="index.php?uc=administrer&action=editerProduit&produit=<?= $id?>&unite=<?= $unité['un_id'] ?>" method="POST">
+    <form action="index.php?uc=administrer&action=editerProduit&produit=<?= $id ?>&unite=<?= $unité['un_id'] ?>" method="POST">
         <div class="d-flex align-items-center">
             <div class="w-50 me-1">
                 <label for="unite">Unité :</label>
@@ -26,6 +26,9 @@
         </div>
         <div class="button-form-center mt-3">
             <input class="btn btn-success px-5" type="submit" value="Ajouter la contenance" name="ajoutContenance" id="ajoutContenance">
+        </div>
+        <div class="button-form-center mt-3">
+            <button class="btn btn-success px-3 me-1" type="button" onclick="location.href='index.php?uc=administrer&action=editerProduit'">Retour</button>
         </div>
     </form>
 </div>

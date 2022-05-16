@@ -31,12 +31,11 @@
         </div>
         <div class="tab-pane fade p-2 mt-3" id="commande" role="tabpanel" aria-labelledby="commande-tab">
             <div class="d-flex flex-column">
-                <?php
-                if (!empty($commande)) { ?>
+                <?php if (!empty($commande)) { ?>
                     <?php foreach ($commande as $uneCommande) { ?>
                         <?php if (!isset($idCommande)) {
                             $idCommande = $uneCommande['com_id']; ?>
-                            <div class="mx-auto h3">Commande du <?php echo $uneCommande['com_dateComande'] ?> d'un montant de <?php echo $uneCommande['com_totalPrix'] ?>€</div>
+                            <div class="mx-auto h3">Commande du <?php echo $uneCommande['concat_com_dateComande'] ?> d'un montant de <?php echo $uneCommande['com_totalPrix'] ?>€</div>
                             <div class="row border rounded bg-white justify-content-between shadow">
                                 <div class="d-flex align-items-center col-5 my-5">
                                     <img class="thumbnail fit" src="assets/<?php echo $uneCommande['p_photo'] ?>" alt="image product">
@@ -51,7 +50,7 @@
                             <?php } elseif ($idCommande != $uneCommande['com_id']) {
                             $idCommande = $uneCommande['com_id']; ?>
                             </div>
-                            <div class="mx-auto h3 mt-5">Commande du <?php echo $uneCommande['com_dateComande'] ?> d'un montant de <?php echo $uneCommande['com_totalPrix'] ?>€</div>
+                            <div class="mx-auto h3 mt-5">Commande du <?php echo $uneCommande['concat_com_dateComande'] ?> d'un montant de <?php echo $uneCommande['com_totalPrix'] ?>€</div>
                             <div class="row border rounded bg-white justify-content-between shadow">
                                 <div class="d-flex align-items-center col-5 my-5">
                                     <img class="thumbnail fit" src="assets/<?php echo $uneCommande['p_photo'] ?>" alt="image product">
@@ -80,10 +79,54 @@
                             </div>
                         <?php } else { ?>
                             <div class="mx-auto fit display-2">Oups !</div>
-                            <div class="mx-auto fit">Il semblerait qu'il n'y ait aucune commande...</div>
+                            <div class="mx-auto fit">Il semblerait que vous n'ayez aucune commande...</div>
                         <?php } ?>
             </div>
         </div>
-        <div class="tab-pane fade p-2 mt-3" id="avis" role="tabpanel" aria-labelledby="avis-tab">...</div>
+        <div class="tab-pane fade p-2 mt-3" id="avis" role="tabpanel" aria-labelledby="avis-tab">
+            <?php if (!empty($avis)) { ?>
+                <?php foreach ($avis as $unAvis) { ?>
+                    <div class="row border shadow rounded bg-white my-3">
+                        <div class="col-3 border-end d-flex flex-column align-items-center justify-content-between py-3">
+                            <div class="d-flex align-items-center">
+                                <img class="thumbnail" src="assets/<?= $unAvis['p_photo'] ?>" alt="">
+                                <div>
+                                    <a class="link-success" href="index.php?uc=voirProduits&produit=<?= $unAvis['p_id'] ?>&action=voirLeProduit">
+                                        <div><?= $unAvis['p_marque'] ?></div>
+                                        <div><?= $unAvis['p_nom'] ?></div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="fit">
+                                <?php for ($i = 1; $i <= 5; $i++) {
+                                    if ($i <= $unAvis['a_note']) { ?>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" width="1.5rem" fill="var(--color-star-full, #ea7315)" viewBox="0 0 24 24">
+                                            <path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z" />
+                                        </svg>
+                                    <?php } else { ?>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" width="1.5rem" fill="var(--color-star-empty, #d3d2d6)" viewBox="0 0 24 24">
+                                            <path d="M12 18.58 5.82 22 7 14.76 2 9.64l6.91-1.06L12 2l3.09 6.58L22 9.64l-5 5.12L18.18 22 12 18.58z" />
+                                        </svg>
+                                <?php }
+                                }
+                                ?>
+                            </div>
+                            <div class="fit">Avis déposé le <?= $unAvis['concat_a_date'] ?></div>
+                        </div>
+                        <div class="col-9 p-4 commentaireHeight">
+                            <div>
+                                Commentaire
+                            </div>
+                            <hr class="w-100">
+                            <div class="descriptionAvis"><?= $unAvis['a_description'] ?></div>
+                        </div>
+                    </div>
+                <?php } ?>
+        </div>
+    <?php } else { ?>
+        <div class="mx-auto fit display-2">Oups !</div>
+        <div class="mx-auto fit">Il semblerait que vous n'ayez aucun avis...</div>
+    <?php } ?>
     </div>
+</div>
 </div>

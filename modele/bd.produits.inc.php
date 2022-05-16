@@ -265,7 +265,7 @@ function creerCommande($montant, $utilisateurId, $lesProduitsDuPanier)
 		$req->bindParam(':prix', $montant, PDO::PARAM_STR);
 		$req->bindParam(':uId', $utilisateurId, PDO::PARAM_INT);
 		$req->execute();
-		
+
 		$nbProduits = count($lesProduitsDuPanier);
 		if ($nbProduits != 0) {
 			foreach ($lesProduitsDuPanier as $unProduit) {
@@ -914,7 +914,7 @@ function getCommandesClient($idClient)
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = $monPdo->prepare('SELECT c.com_id, c.u_id, concat(DAY(com_dateComande),\'/\',MONTH(com_dateComande),\'/\',YEAR(com_dateComande)) as com_dateComande, c.com_totalPrix, co.p_id, cp.con_volume, cp.con_prixVente, co.qte_produit, u.un_id, u.un_libelle, p.p_nom, p.p_photo, p.p_description, p.p_marque FROM `commander` co JOIN commande c ON c.com_id = co.com_id JOIN contenant_produit cp ON cp.p_id = co.p_id AND cp.con_volume = co.con_volume JOIN unite u ON u.un_id = cp.un_id JOIN produit p ON p.p_id = cp.p_id WHERE c.u_id = :idClient GROUP BY com_id, p_id ORDER BY com_dateComande DESC');
+		$req = $monPdo->prepare('SELECT c.com_id, c.u_id, concat(DAY(com_dateComande),\'/\',MONTH(com_dateComande),\'/\',YEAR(com_dateComande)) as concat_com_dateComande, com_dateComande, c.com_totalPrix, co.p_id, cp.con_volume, cp.con_prixVente, co.qte_produit, u.un_id, u.un_libelle, p.p_nom, p.p_photo, p.p_description, p.p_marque FROM `commander` co JOIN commande c ON c.com_id = co.com_id JOIN contenant_produit cp ON cp.p_id = co.p_id AND cp.con_volume = co.con_volume JOIN unite u ON u.un_id = cp.un_id JOIN produit p ON p.p_id = cp.p_id WHERE c.u_id = :idClient GROUP BY com_id, p_id ORDER BY com_dateComande DESC');
 		$req->bindParam(':idClient', $idClient, PDO::PARAM_INT);
 		$req->execute();
 		$res = $req->fetchAll();
@@ -925,7 +925,23 @@ function getCommandesClient($idClient)
 	}
 }
 
-function ajoutContenanceProduit($idProduit, $idUnite, $volume, $prix, $stock){
+function getAvisClient($idClient)
+{
+	try {
+		$monPdo = connexionPDO();
+		$req = $monPdo->prepare('SELECT a_id, a_description, concat(DAY(a_date),\'/\',MONTH(a_date),\'/\',YEAR(a_date)) as concat_a_date , a_date, a_note, u_id, a.p_id, p.p_nom, p.p_photo, p.p_description, p.p_marque FROM avis a JOIN produit p ON p.p_id = a.p_id WHERE u_id = :idClient ORDER BY a_date DESC');
+		$req->bindParam(':idClient', $idClient, PDO::PARAM_INT);
+		$req->execute();
+		$res = $req->fetchAll();
+		return $res;
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
+function ajoutContenanceProduit($idProduit, $idUnite, $volume, $prix, $stock)
+{
 	try {
 		$monPdo = connexionPDO();
 		$req = $monPdo->prepare('INSERT INTO contenant_produit VALUES (:idProduit, :volume, :prix, :stock, :idUnite)');
@@ -935,21 +951,21 @@ function ajoutContenanceProduit($idProduit, $idUnite, $volume, $prix, $stock){
 		$req->bindParam(':prix', $prix, PDO::PARAM_STR);
 		$req->bindParam(':stock', $stock, PDO::PARAM_INT);
 		$req->execute();
-		
 	} catch (PDOException $e) {
 		print "Erreur !: " . $e->getMessage();
 		die();
 	}
 }
 
-function getUniteProduit($idProduit){
+function getUniteProduit($idProduit)
+{
 	try {
 		$monPdo = connexionPDO();
 		$req = $monPdo->prepare('SELECT DISTINCT c.un_id, u.un_libelle FROM contenant_produit c JOIN unite u ON u.un_id = c.un_id WHERE `p_id` = :idProduit');
 		$req->bindParam(':idProduit', $idProduit, PDO::PARAM_INT);
 		$req->execute();
 		$res = $req->fetch();
-		return $res;		
+		return $res;
 	} catch (PDOException $e) {
 		print "Erreur !: " . $e->getMessage();
 		die();
