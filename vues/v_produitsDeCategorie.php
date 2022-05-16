@@ -7,7 +7,7 @@
 </div>
 <div class="d-flex flex-wrap justify-content-center">
 	<div class="col-xl-3 col-lg-4 col-md-6 col-9 p-1">
-		<div class="filtre filtre-sticky rounded p-2 bg-white shadow-sm me-1 height-filtre-categorie">
+		<div class="filtre filtre-sticky rounded p-2 bg-white shadow-sm me-lg-1 height-filtre-categorie">
 			<h4 class="filtre-title">Filtre</h4>
 			<hr>
 			<div class="d-flex flex-column m-auto">
@@ -53,7 +53,7 @@
 				$description = mb_strimwidth($description, 0, 80, '...');
 				// affichage d'un produit avec ses informations
 			?>
-				<div class="col-xl-4 col-lg-6 col-md-5 col-sm-6 col-8">
+				<div class="col-xl-4 col-lg-6 col-md-6 col-9">
 					<div class="card m-1">
 						<div class="d-flex flex-column justify-content-center pb-1 height325px">
 							<p class="card-title marque-product"><?php echo $marque ?></p>

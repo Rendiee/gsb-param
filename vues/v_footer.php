@@ -4,7 +4,7 @@
                     <a class="navbar-brand m-auto fit" href="index.php?uc=accueil">
                         <span class="text-light h5"><u>Projet GSB</u></span>
                     </a>
-                    <p class="text-light text-center my-2 m-auto col-5">
+                    <p class="text-light text-center my-2 m-auto col-11 col-lg-7 col-md-9 col-xl-5">
                         Projet de BTS SIO 2ème année : boutique de produit pharmaceutique avec un système de commande de produits sous forme d'un site Web pour l'entreprise GSB avec base de donnée et des comptes utilisateurs ainsi que des habilitations.
                     </p>
                 </div>

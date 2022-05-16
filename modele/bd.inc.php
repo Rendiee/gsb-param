@@ -37,7 +37,7 @@ function connexionPDO()
 // {
 //     $login = 'george';
 //     $mdp = 'george';
-//     $bd = 'GsbParam';
+//     $bd = 'gsbparamv4';
 //     $serveur = 'localhost;port=8889';
 
 //     try {

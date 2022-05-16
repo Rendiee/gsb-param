@@ -89,7 +89,7 @@
                     <div class="row border shadow rounded bg-white my-3">
                         <div class="col-3 border-end d-flex flex-column align-items-center justify-content-between py-3">
                             <div class="d-flex align-items-center">
-                                <img class="thumbnail" src="assets/<?= $unAvis['p_photo'] ?>" alt="">
+                                <img class="thumbnail d-none d-lg-block" src="assets/<?= $unAvis['p_photo'] ?>" alt="">
                                 <div>
                                     <a class="link-success" href="index.php?uc=voirProduits&produit=<?= $unAvis['p_id'] ?>&action=voirLeProduit">
                                         <div><?= $unAvis['p_marque'] ?></div>
