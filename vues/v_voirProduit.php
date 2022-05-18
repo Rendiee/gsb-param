@@ -112,7 +112,12 @@ unset($_SESSION['message']) ?>
         $(document).ready(function() {
             if ($("#list-contenance").children(":selected").attr("id") > 0) {
                 var quantite = $("#list-contenance").children(":selected").attr("id")
-                $("#prix").append('<small id="stock" class="text-success pt-2 opacity-75"> - En Stock (' + quantite + ')</small>');
+                $("#prix").append('<small id="stock" class="text-success pt-2 opacity-75"> - En Stock </small>');
+                if ($("#list-contenance").children(":selected").attr("id") > 10) {
+                    $("#stock").append('(' + quantite + ')');
+                } else {
+                    $("#stock").append('<small class="text-danger">(plus que ' + quantite + ')</small>');
+                }
             } else {
                 $("#prix").append('<small id="stock" class="text-danger pt-2 opacity-75"> - Rupture de Stock</small>');
                 $("#ajoutPanier").attr("disabled", true);

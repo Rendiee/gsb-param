@@ -1,4 +1,8 @@
 <div class="w-100 text-center h2 text-success fw-bold mb-3">Tous les produits</div>
+<?php if (isset($_SESSION['message'])) {
+	echo $_SESSION['message'];
+	unset($_SESSION['message']);
+} ?>
 <div class="d-flex flex-wrap justify-content-center">
 	<div class="col-xl-3 col-lg-4 col-md-6 col-9 p-1">
 		<div class="sticky rounded p-2 bg-white shadow-sm me-lg-1">

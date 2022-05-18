@@ -21,12 +21,15 @@ function checkStock() {
 	$("#stock").remove();
 	if ($("select").children(":selected").attr("id") > 0) {
 		var qte = $("#list-contenance").children(":selected").attr("id");
-		$("#prix").append('<small id="stock" class="text-success pt-2 opacity-75"> - En Stock (' + qte + ")</small></div>");
+		$("#prix").append('<small id="stock" class="text-success pt-2 opacity-75"> - En Stock </small>');
+		if ($("select").children(":selected").attr("id") > 10) {
+			$("#stock").append('(' + qte + ')');
+		}else{
+			$("#stock").append('<small class="text-danger">(plus que ' + qte + ')</small>');			
+		}
 		$("#ajoutPanier").attr("disabled", false);
 	} else {
-		$("#prix").append(
-			'<small id="stock" id="rupture" class="text-danger pt-2 opacity-75"> - Rupture de Stock</small></div>'
-		);
+		$("#prix").append('<small id="stock" id="rupture" class="text-danger pt-2 opacity-75"> - Rupture de Stock</small>');
 		$("#ajoutPanier").attr("disabled", true);
 		$("#nbProduit").remove();
 	}
@@ -49,7 +52,6 @@ function checkQte(item) {
 
 //Check le prix du produit dans la vue voirLeProduit
 function checkPrix(item) {
-	console.log($("select").children(":selected").attr("value"));
 	if ($("select").children(":selected").attr("value") == item["volume"]) {
 		unPrix = item["prix"];
 		$("#prix span").remove();

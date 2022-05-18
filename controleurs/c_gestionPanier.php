@@ -53,7 +53,9 @@ switch ($action) {
 			$totalPanier = getTotalPanier($lesProduitsDuPanier);
 			if(isset($_POST['commander'])){
 				creerCommande($totalPanier, $_SESSION['u_id'], $lesProduitsDuPanier);
+				diminuerQteProduitCommander($desIdProduit);
 				supprimerPanier();
+				$_SESSION['message'] = '<div class="alert alert-success fit mx-auto">Votre commande a bien été effectuer</div>';
 				header('location: index.php?uc=voirProduits&action=nosProduits');
 			}
 			break;

@@ -283,11 +283,26 @@ function creerCommande($montant, $utilisateurId, $lesProduitsDuPanier)
 	}
 }
 
+function diminuerQteProduitCommander($qteProduits)
+{
+	try {
+		$monPdo = connexionPDO();
+
+		foreach ($qteProduits as $uneQuantite) {
+			$req = 'UPDATE contenant_produit SET con_qteStock = con_qteStock - ' . $uneQuantite[2] . ' WHERE p_id = ' . $uneQuantite[0] . ' AND con_volume = ' . $uneQuantite[1] . '';
+			$monPdo->query($req);
+		}
+	} catch (PDOException $e) {
+		print "Erreur !: " . $e->getMessage();
+		die();
+	}
+}
+
 function getLesCommandesDuMois($mois, $an)
 {
 	try {
 		$monPdo = connexionPDO();
-		$req = 'select id, dateCommande, nomPrenomClient, adresseRueClient, cpClient, villeClient, mailClient from commande where YEAR(dateCommande)= ' . $an . ' AND MONTH(dateCommande)=' . $mois;
+		$req = 'SELECT id, dateCommande, nomPrenomClient, adresseRueClient, cpClient, villeClient, mailClient from commande where YEAR(dateCommande)= ' . $an . ' AND MONTH(dateCommande)=' . $mois;
 		$res = $monPdo->query($req);
 		$lesCommandes = $res->fetchAll();
 		return $lesCommandes;

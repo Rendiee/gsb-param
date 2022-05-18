@@ -38,7 +38,7 @@
                             <div class="mx-auto h3">Commande du <?php echo $uneCommande['concat_com_dateComande'] ?> d'un montant de <?php echo $uneCommande['com_totalPrix'] ?>€</div>
                             <div class="row border rounded bg-white justify-content-between shadow">
                                 <div class="d-flex align-items-center col-5 my-5">
-                                    <img class="thumbnail fit" src="assets/<?php echo $uneCommande['p_photo'] ?>" alt="image product">
+                                    <img class="thumbnail" src="assets/<?php echo $uneCommande['p_photo'] ?>" alt="image product">
                                     <div class="d-flex flex-column">
                                         <div><?php echo $uneCommande['p_nom'] ?></div>
                                         <div><?php echo $uneCommande['p_marque'] ?></div>
@@ -53,7 +53,7 @@
                             <div class="mx-auto h3 mt-5">Commande du <?php echo $uneCommande['concat_com_dateComande'] ?> d'un montant de <?php echo $uneCommande['com_totalPrix'] ?>€</div>
                             <div class="row border rounded bg-white justify-content-between shadow">
                                 <div class="d-flex align-items-center col-5 my-5">
-                                    <img class="thumbnail fit" src="assets/<?php echo $uneCommande['p_photo'] ?>" alt="image product">
+                                    <img class="thumbnail" src="assets/<?php echo $uneCommande['p_photo'] ?>" alt="image product">
                                     <div class="d-flex flex-column">
                                         <div><?php echo $uneCommande['p_nom'] ?></div>
                                         <div><?php echo $uneCommande['p_marque'] ?></div>
@@ -64,7 +64,7 @@
                                 </div>
                             <?php } else { ?>
                                 <div class="d-flex align-items-center col-5 my-5">
-                                    <img class="thumbnail fit" src="assets/<?php echo $uneCommande['p_photo'] ?>" alt="image product">
+                                    <img class="thumbnail" src="assets/<?php echo $uneCommande['p_photo'] ?>" alt="image product">
                                     <div class="d-flex flex-column">
                                         <div><?php echo $uneCommande['p_nom'] ?></div>
                                         <div><?php echo $uneCommande['p_marque'] ?></div>
