@@ -48,6 +48,7 @@ switch ($action) {
 			} else {
 				$info = infoProfil();
 				$commande = getCommandesClient($_SESSION['u_id']);
+				var_dump($commande);
 				$avis = getAvisClient($_SESSION['u_id']);
 				include("vues/v_profil.php");
 			}
