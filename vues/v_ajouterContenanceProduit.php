@@ -8,20 +8,20 @@
             </div>
             <div class="w-50 ms-1">
                 <label for="volume">Volume :</label>
-                <input type="text" placeholder="Volume" class="form-control mx-auto" name="volume" id="volume">
+                <input required type="text" placeholder="Volume" class="form-control mx-auto" name="volume" id="volume">
             </div>
         </div>
         <div class="d-flex align-items-center mt-2">
             <div class="w-50 me-1">
                 <label for="prix">Prix :</label>
                 <div class="input-group">
-                    <input type="number" name="prix" id="prix" value="0" min="0" step="0.01" class="form-control">
+                    <input required type="number" name="prix" id="prix" placeholder="0" min="0" step="0.01" class="form-control">
                     <span class="input-group-text"><i class="bi bi-currency-euro"></i></span>
                 </div>
             </div>
             <div class="w-50 ms-1">
                 <label for="stock">Stock :</label>
-                <input type="number" name="stock" id="stock" value="0" min="0" class="form-control">
+                <input required type="number" name="stock" id="stock" placeholder="0" min="0" class="form-control">
             </div>
         </div>
         <div class="button-form-center mt-3">

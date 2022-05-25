@@ -9,7 +9,7 @@ switch ($action) {
 				if($_SESSION['produits'][$resultId][1] == $result[1]){
 						$_SESSION['produits'][$resultId][2] = $result[2];
 				}
-				header('location: index.php?uc=gererPanier&action=voirPanier');
+				//header('location: index.php?uc=gererPanier&action=voirPanier');
 			}
 			$n = nbProduitsDuPanier();
 			if ($n > 0) {

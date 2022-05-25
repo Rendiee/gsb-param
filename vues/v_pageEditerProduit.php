@@ -84,12 +84,11 @@
                         <label class="form-label" for="list-contenance">Contenance</label>
                         <input type="number" placeholder="Contenance" class="form-control" id="list-contenance" name="list-contenance" min="0" value="<?php echo $leProduit['volume'] ?>">
                     </div>
-                    <!-- <div id="newUnite" class="link-success text-decoration-underline pointer fit w-100 text-center">Ajouter une unité</div> -->
                 </div>
             </div>
         </div>
         <div class="button-form-center mt-3">
-            <input class="btn btn-success px-3 w-25 ms-1" type="submit" value="Modifier le produit" name="modif-product" id="modif-product">
+            <input class="btn btn-success px-3 w-25 ms-1" type="submit" value="Modifier contenance" name="modif-product" id="modif-product">
         </div>
         <div class="button-form-center mt-3">
             <input class="btn btn-success px-5" type="submit" value="Retour" name="modif-product-retour" id="modif-product-retour">

@@ -33,13 +33,6 @@
                       <li><a class="dropdown-item" href="index.php?uc=administrer&action=ajouterProduit">Ajouter un produit</a></li>
                       <li><a class="dropdown-item" href="index.php?uc=administrer&action=editerProduit">Éditer un produit</a></li>
                       <li><a class="dropdown-item" href="index.php?uc=administrer&action=editerCategorie">Éditer une catégorie</a></li>
-                      <?php
-                      if ($_SESSION['u_hab'] == 2) {
-                      ?>
-                        <li><a class="dropdown-item" href="index.php?uc=administrer&action=gererStock">Gérer les stocks</a></li>
-                      <?php
-                      }
-                      ?>
                     </ul>
                   </li>
               <?php
