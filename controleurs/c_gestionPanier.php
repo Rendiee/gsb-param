@@ -15,7 +15,6 @@ switch ($action) {
 					}
 					$count++;
 				}
-				var_dump($count);
 				$_SESSION['produits'][$count][2] = $result[2];
 				//header('location: index.php?uc=gererPanier&action=voirPanier');
 			}
