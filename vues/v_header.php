@@ -25,7 +25,15 @@
               <li><a id="nosproduits" href="index.php?uc=voirProduits&action=nosProduits" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Nos produits</a></li>
               <li><a id="categories" href="index.php?uc=voirProduits&categorie=CH&action=produitsCategorie" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Produits par catégorie</a></li>
               <li><a id="panier" href="index.php?uc=gererPanier&action=voirPanier" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Mon panier</a></li>
+
+
+              <!-- lien dans le header a changé pour l'exam en fonction des vues a créer -->
+              <li><a id="test1" href="index.php?uc=exam&action=test1" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Test 1</a></li>
+              <li><a id="test2" href="index.php?uc=exam&action=test2" class="nav-link rounded-pill px-3 mx-1 fw-bold link-dark">Test 2</a></li>
+
+
               <?php if (isset($_SESSION['u_hab'])) {
+                
                 if ($_SESSION['u_hab'] != 1) {
               ?>
                   <li class="dropdown"><a href="#" class="dropdown-toggle nav-link rounded-pill px-3 mx-1 fw-bold link-dark" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown">Administration</a>

@@ -46,6 +46,15 @@ switch ($uc) {
 			}
 			break;
 		}
+
+
+	//accès au controleur pour l'exam
+	case 'exam': {
+		include("controleurs/c_exam.php");
+		break;
+	}
+
+
 	default: {
 			header('location: index.php?uc=accueil');
 			break;
