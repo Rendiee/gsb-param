@@ -3,6 +3,8 @@
 
 <!-- CHANGER LE NOM DES CHAMPS POUR LES RECUPERER DANS LE CONTROLEUR -->
 
+<!-- CHANGER L'ACTION DU FORMULAIRE -->
+
 <form action="index.php?uc=connexion&action=connexion" method="POST" id="formConnexion">
     <div>
         <label for="number">Nombre</label>
@@ -14,7 +16,7 @@
     </div>
     <div>
         <label for="liste">Liste déroulante</label>
-        <select id="list-edit-categorie" name="list-edit-categorie" required>
+        <select id="list-edit-categorie" name="list-edit-categorie">
             <option selected disabled value="">- Changer le titre -</option>
             <?php
 
